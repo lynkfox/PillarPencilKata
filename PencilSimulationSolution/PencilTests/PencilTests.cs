@@ -7,7 +7,7 @@ namespace PencilTests
     public class PencilTests
     {
         [TestMethod]
-        public void PencilObjectCreate()
+        public void IsThisAPencilTest()
         {
             Pencil pencilTest = new Pencil();
             Assert.IsInstanceOfType(pencilTest, Pencil);
