@@ -7,11 +7,11 @@ namespace PencilTests
     public class PencilTests
     {
         [TestMethod]
-        public void PencilDurabilityIs20()
+        public void PencilTipDurabilityIs20()
         {
             int durability = 20;
             Pencil pencil = new Pencil(durability);
-            Assert.AreEqual(durability, pencil.durability);
+            Assert.AreEqual(durability, pencil.tip);
         }
     }
 }
