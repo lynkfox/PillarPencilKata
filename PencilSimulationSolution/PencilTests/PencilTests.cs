@@ -1,5 +1,5 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-
+using PencilLib;
 
 namespace PencilTests
 {
@@ -7,10 +7,11 @@ namespace PencilTests
     public class PencilTests
     {
         [TestMethod]
-        public void IsThisAPencilTest()
+        public void PencilDurabilityIs20()
         {
-            Pencil pencilTest = new Pencil();
-            Assert.IsInstanceOfType(pencilTest, Pencil);
+            int durability = 20;
+            Pencil pencil = new Pencil(durability);
+            Assert.AreEqual(durability, pencil.durability);
         }
     }
 }
