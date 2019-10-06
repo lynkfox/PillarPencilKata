@@ -2,7 +2,7 @@
 
 namespace PencilLib
 {
-    public class Class1
+    public class Pencil
     {
     }
 }
