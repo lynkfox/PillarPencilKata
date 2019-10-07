@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28922.388
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PencilSimulation", "PencilSimulation\PencilSimulation.csproj", "{3AAFD5F8-03B9-4EFA-8878-4A0E25FB2D75}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PencilSimulation", "PencilSimulation\PencilSimulation.csproj", "{3AAFD5F8-03B9-4EFA-8878-4A0E25FB2D75}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PencilLib", "PencilLib\PencilLib.csproj", "{39752A48-A026-4A68-AC15-34EF42417595}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PencilLib", "PencilLib\PencilLib.csproj", "{39752A48-A026-4A68-AC15-34EF42417595}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PencilTests", "PencilTests\PencilTests.csproj", "{12520939-4C69-46CA-8AB0-940ABB2DE159}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PencilSimulationTests", "PencilTests\PencilSimulationTests.csproj", "{12520939-4C69-46CA-8AB0-940ABB2DE159}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
