@@ -228,5 +228,14 @@ namespace PencilTests
             Assert.AreEqual(expected, actual);
 
         }
+
+        [TestMethod]
+        public void PencilEraseReturnsTheWordThatNeedsToBeErased()
+        {
+            Pencil pencil = new Pencil();
+            string expected = testInput;
+            string actual = pencil.Erase(testInput);
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
