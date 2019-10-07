@@ -21,6 +21,10 @@ namespace PencilLib
             this.tip = tipStartingValue;
         }
 
+        public string write(string word)
+        {
+            return word;
+        }
     }
 
 
