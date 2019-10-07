@@ -131,6 +131,11 @@ namespace PencilLib
             }
             return durabilityPoints;
         }
+
+        public void Erase(string input)
+        {
+            this.Eraser = this.Eraser - EraserDurabilityLoss(input);
+        }
     }
 
 
