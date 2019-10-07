@@ -17,13 +17,15 @@ namespace PencilTests
             Assert.AreEqual(20, pencil.tip);
         }
 
-          [TestMethod]
-          public void PencilWriteReturnsString()
+        [TestMethod]
+        public void PencilWriteReturnsString()
         {
             string input = "Test";
             
             Assert.AreEqual("Test", pencil.write(input));
 
         }
+
+        
     }
 }
