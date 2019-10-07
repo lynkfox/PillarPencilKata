@@ -4,15 +4,20 @@ namespace PencilLib
 {
     public class Pencil
     {
+        /* CONST default vaules of Pencil
+         */
+
+        private const int LENGTH = 40;
+        private const int TIP = 20;
         /* Private Internal variables
          */
         private int maxDurability;
-       
 
         /* Public Variables
          */
 
         public int Tip { get; set; }
+        public int Length { get; set; }
 
 
 
@@ -21,6 +26,13 @@ namespace PencilLib
         {
             maxDurability = tipStartingValue;
             this.Tip = maxDurability;
+            this.Length = LENGTH;
+        }
+
+        public Pencil(int tipDurability, int length)
+        {
+            this.maxDurability= tipDurability;
+            this.Length = length;
         }
 
         public string Write(string word)
