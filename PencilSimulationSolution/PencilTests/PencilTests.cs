@@ -91,6 +91,21 @@ namespace PencilTests
             Assert.AreEqual(expected, actual);
         }
 
+        [TestMethod]
+        public void PencilWriteReturnsWhiteSpaceifDurabilityRunsOut()
+        {
+            int lowDurability = 2;
+            Pencil pencilLowTip = new Pencil(lowDurability);
+
+            string actual = pencilLowTip.Write(testInput);
+
+            // test input is 5 durability. First letter is a capital, requires 2 durability.
+            // expected should be "T   " (3 white spaces)
+
+            string expected = "T   ";
+            Assert.AreEqual(expected, actual);
+        }
+
 
         /* Pencil Sharpen  Tests */
         [TestMethod]
