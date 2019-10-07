@@ -11,6 +11,7 @@ namespace PencilTests
         public static int length = 500;
         public static int tipDurability = 20;
         public static int eraser = 10;
+        
 
 
         /* Pencil Tip Tests
@@ -159,6 +160,21 @@ namespace PencilTests
             int actual = pencil.EraserDurabilityLoss(input);
 
             Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void PencilEraseRemovesEraserDurabilityEqualToInputCost()
+        {
+            string input = "Test";
+            Pencil pencil = new Pencil(tipDurability, length, eraser);
+            int expected = eraser - pencil.EraserDurabilityLoss(input); // The Starting Eraser value - the cost of the erase
+
+            pencil.Erase(input);
+
+            int actual = pencil.Eraser;
+
+            Assert.AreEqual(expected, actual);
+
         }
     }
 }
