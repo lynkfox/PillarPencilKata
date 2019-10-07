@@ -95,7 +95,7 @@ namespace PencilTests
         public void PencilLengthCanBeReturnedAsInitialized()
         {
 
-            int length = 40;
+            
             Pencil lengthPencil = new Pencil(tipDurability, length);
             int actual = lengthPencil.Length;
             int expected = length;
@@ -106,7 +106,7 @@ namespace PencilTests
         [TestMethod]
         public void SharpenReducesPencilLengthBy1()
         {
-            int length = 40;
+            
             Pencil lengthPencil = new Pencil(tipDurability, length);
             lengthPencil.Sharpen();
             int actual = lengthPencil.Length;
