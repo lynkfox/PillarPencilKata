@@ -11,6 +11,9 @@ namespace PencilTests
         public static int length = 500;
         public static int tipDurability = 20;
         public static int eraser = 10;
+
+        public static string testInput = "Test";
+        public static string phaseInput = "This is Phrase";
         
 
 
@@ -31,9 +34,8 @@ namespace PencilTests
         public void DurabilityOfWordTestIs5()
         {
             Pencil pencil = new Pencil(tipDurability, length);
-            string input = "Test";
             int expected = 5;
-            int actual = pencil.TipDurabilityLoss(input);
+            int actual = pencil.TipDurabilityLoss(testInput);
 
             Assert.AreEqual(expected, actual);
         }
@@ -68,9 +70,9 @@ namespace PencilTests
         public void PencilWriteReturnsString()
         {
             Pencil pencil = new Pencil(tipDurability, length);
-            string input = "Test";
+            
 
-            Assert.AreEqual("Test", pencil.Write(input));
+            Assert.AreEqual("Test", pencil.Write(testInput));
 
         }
 
@@ -94,7 +96,7 @@ namespace PencilTests
             Random random = new Random();
             int expected = random.Next(0, 100);
             Pencil randomPencil = new Pencil(expected);
-            randomPencil.Write("Test");
+            randomPencil.Write(testInput);
             randomPencil.Sharpen();
             int actual = randomPencil.Tip;
 
@@ -142,10 +144,10 @@ namespace PencilTests
         public void DetermineEraserDurabilityLossOfWord()
         {
             
-            string input = "Test";
+            
             Pencil pencil = new Pencil(tipDurability, length, eraser);
             int expected = 4; // 4 letters 1 point for each letter
-            int actual = pencil.EraserDurabilityLoss(input);
+            int actual = pencil.EraserDurabilityLoss(testInput);
 
             Assert.AreEqual(expected, actual);
             
@@ -165,11 +167,11 @@ namespace PencilTests
         [TestMethod]
         public void PencilEraseRemovesEraserDurabilityEqualToInputCost()
         {
-            string input = "Test";
+            
             Pencil pencil = new Pencil(tipDurability, length, eraser);
-            int expected = eraser - pencil.EraserDurabilityLoss(input); // The Starting Eraser value - the cost of the erase
+            int expected = eraser - pencil.EraserDurabilityLoss(testInput); // The Starting Eraser value - the cost of the erase
 
-            pencil.Erase(input);
+            pencil.Erase(testInput);
 
             int actual = pencil.Eraser;
 
