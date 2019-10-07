@@ -23,6 +23,7 @@ namespace PencilLib
 
         public string write(string word)
         {
+            this.tip -= tipDruabilityLoss(word);
             return word;
         }
 
