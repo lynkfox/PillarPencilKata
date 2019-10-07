@@ -13,7 +13,7 @@ namespace PencilTests
         public static int eraser = 10;
 
         public static string testInput = "Test";
-        public static string phaseInput = "This is Phrase";
+        public static string phraseInput = "This is Phrase";
         
 
 
@@ -65,6 +65,8 @@ namespace PencilTests
             Assert.AreEqual(expectedRemainingDurabilityFrom20, actual);
         }
 
+
+       
         /* Pencil Write Tests */
         [TestMethod]
         public void PencilWriteReturnsString()
@@ -74,6 +76,19 @@ namespace PencilTests
 
             Assert.AreEqual("Test", pencil.Write(testInput));
 
+        }
+
+        [TestMethod]
+        public void PencilWriteStopsAt0Durabilility()
+        {
+            Pencil pencil = new Pencil(tipDurability, length, eraser);
+            // tip durability is 20. testPhrase costs 14. Run twice
+            pencil.Write(phraseInput);  // expected 6 durability left
+            pencil.Write(phraseInput); // expected 0 durability, as 6-14 is less than 0
+
+            int expected = 0;
+            int actual = pencil.Tip;
+            Assert.AreEqual(expected, actual);
         }
 
 
