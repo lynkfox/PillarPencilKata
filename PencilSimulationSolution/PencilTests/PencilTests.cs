@@ -125,5 +125,18 @@ namespace PencilTests
 
             Assert.AreEqual(expected, actual);
         }
+
+        [TestMethod]
+        public void DetermineEraserDurabilityLossOfWord()
+        {
+            int eraser = 10;
+            string input = "Test";
+            Pencil pencil = new Pencil(tipDurability, length, eraser);
+            int expected = 4; // 4 letters 1 point for each letter
+            int actual = pencil.EraserDurabilityLoss(input);
+
+            Assert.AreEqual(expected, actual);
+            
+        }
     }
 }
