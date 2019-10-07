@@ -91,5 +91,17 @@ namespace PencilTests
 
             Assert.AreEqual(expected, actual);
         }
+
+        [TestMethod]
+        public void SharpenReducesPencilLengthBy1()
+        {
+            int length = 40;
+            Pencil lengthPencil = new Pencil(tipDurability, length);
+            lengthPencil.Sharpen();
+            int actual = lengthPencil.Length;
+            int expected = length-1;
+
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
