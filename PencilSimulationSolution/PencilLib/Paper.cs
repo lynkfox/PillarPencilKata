@@ -4,7 +4,23 @@ using System.Text;
 
 namespace PencilLib
 {
-    class Paper
+    public class Paper
     {
+        /*Constants*/
+
+
+        /*Internal Private Variables */
+
+
+
+        /*External Public Variables */
+
+        public string Content { get; set; }
+
+        /*Constructors*/
+        public Paper()
+        {
+
+        }
     }
 }
