@@ -111,6 +111,21 @@ namespace PencilTests
             Assert.AreEqual(expected, actual);
         }
 
+        [TestMethod]
+        public void PenciWriteAdjustsDurabilityCorrectilyForWhiteSpaceWithMoreLettersThanDurabilityLeft()
+        {
+            Pencil pencil = new Pencil(tipDurability);
+            string longPhrase = "This Phrase Is More Than Twenty Durability"; //43 total durability
+            string expectedPhrase = "This Phrase Is More                       "; //20 written durability, 26 white spaces (3 no durability white spaces)
+            int expectedTip = 0;
+
+            string actualPhrase = pencil.Write(longPhrase);
+            int actualTip = pencil.Tip;
+
+            Assert.AreEqual(expectedPhrase, actualPhrase);
+            Assert.AreEqual(expectedTip, actualTip);
+        }
+
 
         /* Pencil Sharpen  Tests */
         [TestMethod]
