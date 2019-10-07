@@ -46,5 +46,16 @@ namespace PencilTests
             Assert.AreEqual(expected, actual);
                 
         }
+
+        [TestMethod]
+        public void WriteWordReducesTipDurability()
+        {
+            string phrase = "Run Run Run";
+            int expectedRemainingDurabilityFrom20 = 8;
+            pencil.write(phrase);
+            int actual = pencil.tip;
+
+            Assert.AreEqual(expectedRemainingDurabilityFrom20, actual);
+        }
     }
 }
