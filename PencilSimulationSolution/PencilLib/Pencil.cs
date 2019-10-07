@@ -12,7 +12,7 @@ namespace PencilLib
         /* Public Variables
          */
 
-        public int tip { get; set; }
+        public int Tip { get; set; }
 
 
 
@@ -20,16 +20,16 @@ namespace PencilLib
         public Pencil(int tipStartingValue)
         {
             maxDurability = tipStartingValue;
-            this.tip = maxDurability;
+            this.Tip = maxDurability;
         }
 
-        public string write(string word)
+        public string Write(string word)
         {
-            this.tip -= tipDruabilityLoss(word);
+            this.Tip -= TipDurabilityLoss(word);
             return word;
         }
 
-        public int tipDruabilityLoss(string input)
+        public int TipDurabilityLoss(string input)
         {
             int totalDurabilityCost = 0;
             foreach(char letter in input)
@@ -50,7 +50,7 @@ namespace PencilLib
 
         public void Sharpen()
         {
-            tip = maxDurability;
+            Tip = maxDurability;
         }
     }
 

@@ -14,7 +14,7 @@ namespace PencilTests
         [TestMethod]
         public void PencilTipDurabilityIs20()
         {
-            Assert.AreEqual(20, pencil.tip);
+            Assert.AreEqual(20, pencil.Tip);
         }
 
         [TestMethod]
@@ -22,7 +22,7 @@ namespace PencilTests
         {
             string input = "Test";
             
-            Assert.AreEqual("Test", pencil.write(input));
+            Assert.AreEqual("Test", pencil.Write(input));
 
         }
 
@@ -31,7 +31,7 @@ namespace PencilTests
         {
             string input = "Test";
             int expected = 5;
-            int actual = pencil.tipDruabilityLoss(input);
+            int actual = pencil.TipDurabilityLoss(input);
 
             Assert.AreEqual(expected, actual);
         }
@@ -41,7 +41,7 @@ namespace PencilTests
         {
             string phrase = "She sells sea shells";
             int expected = 18;
-            int actual = pencil.tipDruabilityLoss(phrase);
+            int actual = pencil.TipDurabilityLoss(phrase);
 
             Assert.AreEqual(expected, actual);
                 
@@ -52,8 +52,8 @@ namespace PencilTests
         {
             string phrase = "Run Run Run";
             int expectedRemainingDurabilityFrom20 = 8;
-            pencil.write(phrase);
-            int actual = pencil.tip;
+            pencil.Write(phrase);
+            int actual = pencil.Tip;
 
             Assert.AreEqual(expectedRemainingDurabilityFrom20, actual);
         }
@@ -63,7 +63,7 @@ namespace PencilTests
         {
             int expected = tipDurability; // the starting tipDurability is 20.
             pencil.Sharpen();
-            int actual = pencil.tip;
+            int actual = pencil.Tip;
 
             Assert.AreEqual(expected, actual);
         }
@@ -74,9 +74,9 @@ namespace PencilTests
             Random random = new Random();
             int expected = random.Next(0, 100);
             Pencil randomPencil = new Pencil(expected);
-            randomPencil.write("Test");
+            randomPencil.Write("Test");
             randomPencil.Sharpen();
-            int actual = randomPencil.tip;
+            int actual = randomPencil.Tip;
 
             Assert.AreEqual(expected, actual);
         }
