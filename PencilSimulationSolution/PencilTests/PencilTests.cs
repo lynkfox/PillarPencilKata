@@ -80,5 +80,16 @@ namespace PencilTests
 
             Assert.AreEqual(expected, actual);
         }
+
+        [TestMethod]
+        public void PencilLengthCanBeReturnedAsInitialized()
+        {
+            int length = 40;
+            Pencil lengthPencil = new Pencil(tipDurability, length);
+            int actual = lengthPencil.Length;
+            int expected = length;
+
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
