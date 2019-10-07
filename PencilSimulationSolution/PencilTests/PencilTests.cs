@@ -114,5 +114,16 @@ namespace PencilTests
 
             Assert.AreEqual(expected, actual);
         }
+
+        [TestMethod]
+        public void PenciEraserReturnsDurability()
+        {
+            int eraser = 10;
+            Pencil pencil = new Pencil(tipDurability, length, eraser);
+            int expected = eraser;
+            int actual = pencil.Eraser;
+
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
