@@ -18,6 +18,7 @@ namespace PencilLib
 
         public int Tip { get; set; }
         public int Length { get; set; }
+        public int Eraser { get; set; }
 
 
 
@@ -34,6 +35,14 @@ namespace PencilLib
             this.maxDurability= tipDurability;
             this.Tip = this.maxDurability;
             this.Length = length;
+        }
+
+        public Pencil(int tipDurability, int length, int eraserDurability)
+        {
+            this.maxDurability = tipDurability;
+            this.Tip = this.maxDurability;
+            this.Length = length;
+            this.Eraser = eraserDurability;
         }
 
         public string Write(string word)
