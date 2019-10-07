@@ -32,6 +32,7 @@ namespace PencilLib
         public Pencil(int tipDurability, int length)
         {
             this.maxDurability= tipDurability;
+            this.Tip = this.maxDurability;
             this.Length = length;
         }
 

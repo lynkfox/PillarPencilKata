@@ -7,19 +7,23 @@ namespace PencilTests
     [TestClass]
     public class PencilTests
     {
-
+        public static int length = 500;
         public static int tipDurability = 20;
-        public static Pencil pencil = new Pencil(tipDurability);
+        
 
         [TestMethod]
         public void PencilTipDurabilityIs20()
         {
-            Assert.AreEqual(20, pencil.Tip);
+            Pencil pencil = new Pencil(tipDurability, length);
+            int expected = tipDurability;
+            int actual = pencil.Tip;
+            Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
         public void PencilWriteReturnsString()
         {
+            Pencil pencil = new Pencil(tipDurability, length);
             string input = "Test";
             
             Assert.AreEqual("Test", pencil.Write(input));
@@ -29,6 +33,7 @@ namespace PencilTests
         [TestMethod]
         public void DurabilityOfWordTestIs5()
         {
+            Pencil pencil = new Pencil(tipDurability, length);
             string input = "Test";
             int expected = 5;
             int actual = pencil.TipDurabilityLoss(input);
@@ -39,6 +44,7 @@ namespace PencilTests
         [TestMethod]
         public void DurabiliytofPhraseIs18()
         {
+            Pencil pencil = new Pencil(tipDurability, length);
             string phrase = "She sells sea shells";
             int expected = 18;
             int actual = pencil.TipDurabilityLoss(phrase);
@@ -50,6 +56,7 @@ namespace PencilTests
         [TestMethod]
         public void WriteWordReducesTipDurability()
         {
+            Pencil pencil = new Pencil(tipDurability, length);
             //oops - bad test because of refactoring!!
             string phrase = "Run Run Run";
             int expectedRemainingDurabilityFrom20 = pencil.Tip - pencil.TipDurabilityLoss(phrase);
@@ -62,6 +69,7 @@ namespace PencilTests
         [TestMethod]
         public void SharpenReturnsToMaxValue()
         {
+            Pencil pencil = new Pencil(tipDurability, length);
             int expected = tipDurability; // the starting tipDurability is 20.
             pencil.Sharpen();
             int actual = pencil.Tip;
@@ -72,6 +80,7 @@ namespace PencilTests
         [TestMethod]
         public void SharpenReturnsToMaxValueWithRandomDurabilityAfterWrite()
         {
+
             Random random = new Random();
             int expected = random.Next(0, 100);
             Pencil randomPencil = new Pencil(expected);
@@ -85,6 +94,7 @@ namespace PencilTests
         [TestMethod]
         public void PencilLengthCanBeReturnedAsInitialized()
         {
+
             int length = 40;
             Pencil lengthPencil = new Pencil(tipDurability, length);
             int actual = lengthPencil.Length;
