@@ -57,5 +57,15 @@ namespace PencilTests
 
             Assert.AreEqual(expectedRemainingDurabilityFrom20, actual);
         }
+
+        [TestMethod]
+        public void SharpenReturnsToMaxValue()
+        {
+            int expected = tipDurability; // the starting tipDurability is 20.
+            pencil.Sharpen();
+            int actual = pencil.tip;
+
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
