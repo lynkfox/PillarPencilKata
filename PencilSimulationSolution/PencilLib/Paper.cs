@@ -22,5 +22,11 @@ namespace PencilLib
         {
 
         }
+
+        public void Prose(string testInput)
+        {
+            this.Content += " ";
+            this.Content += testInput;
+        }
     }
 }
