@@ -19,5 +19,22 @@ namespace PencilSimulationTests
             Assert.AreEqual(expected, actual);
 
         }
+
+        [TestMethod]
+        public void TestPaperProseAddsToCurrentContent()
+        {
+            string testInput = "This is a Test";
+            Paper paper = new Paper();
+            paper.Content = testInput;
+            string expected = testInput + " " + testInput;
+
+            paper.Prose(testInput);
+
+            string actual = paper.Content;
+
+            Assert.AreEqual(expected, actual);
+            
+        }
+
     }
 }
