@@ -35,5 +35,16 @@ namespace PencilTests
 
             Assert.AreEqual(expected, actual);
         }
+
+        [TestMethod]
+        public void DurabiliytofPhraseIs18()
+        {
+            string phrase = "She sells sea shells";
+            int expected = 18;
+            int actual = pencil.tipDruabilityLoss(phrase);
+
+            Assert.AreEqual(expected, actual);
+                
+        }
     }
 }
