@@ -7,10 +7,14 @@ namespace PencilTests
     [TestClass]
     public class PencilTests
     {
+        /* Setup Variables */
         public static int length = 500;
         public static int tipDurability = 20;
         public static int eraser = 10;
 
+
+        /* Pencil Tip Tests
+         */
         [TestMethod]
         public void PencilTipDurabilityIs20()
         {
@@ -20,15 +24,7 @@ namespace PencilTests
             Assert.AreEqual(expected, actual);
         }
 
-        [TestMethod]
-        public void PencilWriteReturnsString()
-        {
-            Pencil pencil = new Pencil(tipDurability, length);
-            string input = "Test";
-            
-            Assert.AreEqual("Test", pencil.Write(input));
-
-        }
+        
 
         [TestMethod]
         public void DurabilityOfWordTestIs5()
@@ -66,6 +62,19 @@ namespace PencilTests
             Assert.AreEqual(expectedRemainingDurabilityFrom20, actual);
         }
 
+        /* Pencil Write Tests */
+        [TestMethod]
+        public void PencilWriteReturnsString()
+        {
+            Pencil pencil = new Pencil(tipDurability, length);
+            string input = "Test";
+
+            Assert.AreEqual("Test", pencil.Write(input));
+
+        }
+
+
+        /* Pencil Sharpen  Tests */
         [TestMethod]
         public void SharpenReturnsToMaxValue()
         {
@@ -126,6 +135,8 @@ namespace PencilTests
             Assert.AreEqual(expected, actual);
         }
 
+        
+        /* Pencil Eraser Tests*/
         [TestMethod]
         public void DetermineEraserDurabilityLossOfWord()
         {
