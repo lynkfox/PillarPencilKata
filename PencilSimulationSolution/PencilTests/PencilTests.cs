@@ -26,6 +26,14 @@ namespace PencilTests
 
         }
 
-        
+        [TestMethod]
+        public void DurabilityOfWordTestIs5()
+        {
+            string input = "Test";
+            int expected = 5;
+            int actual = pencil.tipDruabilityLoss(input);
+
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
