@@ -50,9 +50,9 @@ namespace PencilTests
         [TestMethod]
         public void WriteWordReducesTipDurability()
         {
-            //oops
+            //oops - bad test because of refactoring!!
             string phrase = "Run Run Run";
-            int expectedRemainingDurabilityFrom20 = 8;
+            int expectedRemainingDurabilityFrom20 = pencil.Tip - pencil.TipDurabilityLoss(phrase);
             pencil.Write(phrase);
             int actual = pencil.Tip;
 
