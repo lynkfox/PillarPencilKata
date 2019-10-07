@@ -28,7 +28,21 @@ namespace PencilLib
 
         public int tipDruabilityLoss(string input)
         {
-            return 5;
+            int totalDurabilityCost = 0;
+            foreach(char letter in input)
+            {
+                if(char.IsUpper(letter))
+                {
+                    //Capital Letters increase durability cost by 1
+                    totalDurabilityCost += 2;
+                }else if (letter != ' ' )
+                {
+                    // do nothing if it is a white space, but otherwise increase durability cost by 1
+                    totalDurabilityCost++;
+                }
+            }
+
+            return totalDurabilityCost;
         }
     }
 
