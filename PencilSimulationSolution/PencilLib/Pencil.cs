@@ -67,6 +67,10 @@ namespace PencilLib
         public string Write(string word)
         {
             this.Tip -= TipDurabilityLoss(word);
+            if(this.Tip < 0)
+            {
+                this.Tip = 0;
+            }
             return word;
         }
 
