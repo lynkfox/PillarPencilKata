@@ -62,16 +62,64 @@ namespace PencilLib
          * 
          * Returns the word for use later.
          * 
-         * TO DO : What if Tip does not have enough durability?
+         * If the tip does not have enough durability, return a word that has enough white space for each letter.
          */
         public string Write(string word)
         {
-            this.Tip -= TipDurabilityLoss(word);
-            if(this.Tip < 0)
+           
+            
+
+            string outputPhrase = "";
+
+            
+            foreach (char letter in word)
+            {
+
+                /* Requirements for Kata do not state what to do if the letter is a Capital (2 points loss)
+                    * and there is only 1 point of durability lost. 
+                    * 
+                    * As of this commit (10/7/19, late morning) I sent an email to request clarification (as one would do with a client in this situation)
+                    * 
+                    * Until then, continuing code by writting letter first (above) and then subtracting the durability.
+                    * 
+                    * If it it should return a blank space , then the if check will need to be adjusted to be AFTER the tip reduction.
+                    */
+
+
+                if (this.Tip > 0)
+                {
+                    outputPhrase += letter;
+
+                    if (char.IsUpper(letter))
+                    {
+
+                        this.Tip -= 2;
+
+                    }
+                    else if (letter != ' ') //should covr all lower case and symbols.
+                    {
+
+                        this.Tip -= 1;
+                    }
+                }else
+                {
+                    outputPhrase += " ";
+                }
+                
+
+                
+            }
+            
+            
+            //With New Test - do we still need this? Refactor check next step.
+
+            if (this.Tip < 0)
             {
                 this.Tip = 0;
             }
-            return word;
+
+            
+            return outputPhrase;
         }
 
         /* Function: Determines the Durability Cost of Writing using the following requriements:
