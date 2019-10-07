@@ -74,9 +74,9 @@ namespace PencilTests
             Random random = new Random();
             int expected = random.Next(0, 100);
             Pencil randomPencil = new Pencil(expected);
-            pencil.write("Test");
-            pencil.Sharpen();
-            int actual = pencil.tip;
+            randomPencil.write("Test");
+            randomPencil.Sharpen();
+            int actual = randomPencil.tip;
 
             Assert.AreEqual(expected, actual);
         }

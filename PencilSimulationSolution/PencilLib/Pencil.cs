@@ -6,6 +6,7 @@ namespace PencilLib
     {
         /* Private Internal variables
          */
+        private int maxDurability;
        
 
         /* Public Variables
@@ -18,7 +19,8 @@ namespace PencilLib
 
         public Pencil(int tipStartingValue)
         {
-            this.tip = tipStartingValue;
+            maxDurability = tipStartingValue;
+            this.tip = maxDurability;
         }
 
         public string write(string word)
@@ -48,7 +50,7 @@ namespace PencilLib
 
         public void Sharpen()
         {
-            tip = 20;
+            tip = maxDurability;
         }
     }
 
