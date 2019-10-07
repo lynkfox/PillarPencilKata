@@ -45,6 +45,11 @@ namespace PencilLib
 
             return totalDurabilityCost;
         }
+
+        public void Sharpen()
+        {
+            tip = 20;
+        }
     }
 
 
