@@ -62,6 +62,7 @@ namespace PencilLib
 
         public void Sharpen()
         {
+            this.Length -= 1;
             Tip = maxDurability;
         }
     }
