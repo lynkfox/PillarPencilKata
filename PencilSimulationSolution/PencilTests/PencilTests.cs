@@ -29,7 +29,11 @@ namespace PencilTests
         }
 
         
-
+        /* Depreciated Tests
+         * 
+         * This method was combined into Write with a refactor. May be pulled out for Clean Code later, but these
+         * tests will not be needed for it as it will be a private internal function and these tests will be covered
+         * by other Write Tests
         [TestMethod]
         public void DurabilityOfWordTestIs5()
         {
@@ -51,6 +55,7 @@ namespace PencilTests
             Assert.AreEqual(expected, actual);
                 
         }
+        */
 
         [TestMethod]
         public void WriteWordReducesTipDurability()
@@ -58,7 +63,7 @@ namespace PencilTests
             Pencil pencil = new Pencil(tipDurability, length);
             //oops - bad test because of refactoring!!
             string phrase = "Run Run Run";
-            int expectedRemainingDurabilityFrom20 = pencil.Tip - pencil.TipDurabilityLoss(phrase);
+            int expectedRemainingDurabilityFrom20 = 8; //12 points for Run Run Run, 20-12 = 8.
             pencil.Write(phrase);
             int actual = pencil.Tip;
 

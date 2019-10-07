@@ -25,28 +25,17 @@ namespace PencilLib
         public int Eraser { get; set; }
 
 
-        public Pencil()
+        /* Constructors */
+        public Pencil() : this(TIP, LENGTH, ERASER)
         {
-            this.maxDurability = TIP;
-            this.Tip = TIP;
-            this.Length = LENGTH;
-            this.Eraser = ERASER;
         }
 
-        public Pencil(int tipStartingValue)
+        public Pencil(int tipStartingValue) : this(tipStartingValue, LENGTH, ERASER)
         {
-            maxDurability = tipStartingValue;
-            this.Tip = maxDurability;
-            this.Length = LENGTH;
-            this.Eraser = ERASER;
         }
 
-        public Pencil(int tipDurability, int length)
+        public Pencil(int tipDurability, int length) : this(tipDurability,length, ERASER)
         {
-            this.maxDurability= tipDurability;
-            this.Tip = this.maxDurability;
-            this.Length = length;
-            this.Eraser = ERASER;
         }
 
         public Pencil(int tipDurability, int length, int eraserDurability)
@@ -66,12 +55,8 @@ namespace PencilLib
          */
         public string Write(string word)
         {
-           
-            
-
             string outputPhrase = "";
 
-            
             foreach (char letter in word)
             {
 
@@ -80,9 +65,13 @@ namespace PencilLib
                     * 
                     * As of this commit (10/7/19, late morning) I sent an email to request clarification (as one would do with a client in this situation)
                     * 
-                    * Until then, continuing code by writting letter first (above) and then subtracting the durability.
+                    * Until then, continuing code by writting letter first (above) and then subtracting the durability. (so a Capital can still be written with 1 pt of durability)
                     * 
-                    * If it it should return a blank space , then the if check will need to be adjusted to be AFTER the tip reduction.
+                    * If it it should return a blank space , then the add a letter will need to be adjusted to be AFTER the tip reduction, in its own if statement.
+                    * 
+                    * OR
+                    * 
+                    * the if check will need to check if the tip-the expected druabiliy loss will be less than 0.
                     */
 
 
@@ -111,7 +100,11 @@ namespace PencilLib
             }
             
             
-            //With New Test - do we still need this? Refactor check next step.
+            /*This is a nice little safety valve, due to current understanding of requirements.
+             * 
+             * if there is a capital letter (2pts) attempted to be wrote with just 1 durability pt left, it 
+             * currently still writes, and will be at -1 durability afterward. This fixes that.
+             */
 
             if (this.Tip < 0)
             {
@@ -120,35 +113,6 @@ namespace PencilLib
 
             
             return outputPhrase;
-        }
-
-        /* Function: Determines the Durability Cost of Writing using the following requriements:
-         * 
-         * Capital Letter - 2pts
-         * Lower Case Letter - 1pt
-         * White Space = 0pts
-         * 
-         * Other Characters = 1pt;
-         * 
-         * TO DO: Move to Private function (not Needed outside of Pencil)
-         */
-        public int TipDurabilityLoss(string input)
-        {
-            int totalDurabilityCost = 0;
-            foreach(char letter in input)
-            {
-                if(char.IsUpper(letter))
-                {
-                    //Capital Letters increase durability cost by 2
-                    totalDurabilityCost += 2;
-                }else if (letter != ' ' )
-                {
-                    // do nothing if it is a white space, but otherwise increase durability cost by 1
-                    totalDurabilityCost++;
-                }
-            }
-
-            return totalDurabilityCost;
         }
 
 
@@ -191,4 +155,37 @@ namespace PencilLib
     }
 
 
+    /* DEPRECIATED - No longer needed 
+     * 
+     * (working it into .Write() was more effecient for determining white space after tip is gone)
+     * 
+     * Function: Determines the Durability Cost of Writing using the following requriements:
+     * 
+     * Capital Letter - 2pts
+     * Lower Case Letter - 1pt
+     * White Space = 0pts
+     * 
+     * Other Characters = 1pt;
+     * 
+     *
+    public int TipDurabilityLoss(string input)
+    {
+        int totalDurabilityCost = 0;
+        foreach(char letter in input)
+        {
+            if(char.IsUpper(letter))
+            {
+                //Capital Letters increase durability cost by 2
+                totalDurabilityCost += 2;
+            }else if (letter != ' ' )
+            {
+                // do nothing if it is a white space, but otherwise increase durability cost by 1
+                totalDurabilityCost++;
+            }
+        }
+
+        return totalDurabilityCost;
+    }
+
+        */
 }
