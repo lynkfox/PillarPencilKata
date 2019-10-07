@@ -67,5 +67,18 @@ namespace PencilTests
 
             Assert.AreEqual(expected, actual);
         }
+
+        [TestMethod]
+        public void SharpenReturnsToMaxValueWithRandomDurabilityAfterWrite()
+        {
+            Random random = new Random();
+            int expected = random.Next(0, 100);
+            Pencil randomPencil = new Pencil(expected);
+            pencil.write("Test");
+            pencil.Sharpen();
+            int actual = pencil.tip;
+
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
