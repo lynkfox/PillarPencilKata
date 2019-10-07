@@ -75,6 +75,11 @@ namespace PencilLib
             this.Length -= 1;
             Tip = maxDurability;
         }
+
+        public int EraserDurabilityLoss(string input)
+        {
+            return input.Length;
+        }
     }
 
 
