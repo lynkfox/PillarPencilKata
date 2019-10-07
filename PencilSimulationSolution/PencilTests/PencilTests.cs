@@ -9,7 +9,7 @@ namespace PencilTests
     {
         public static int length = 500;
         public static int tipDurability = 20;
-        
+        public static int eraser = 10;
 
         [TestMethod]
         public void PencilTipDurabilityIs20()
@@ -118,7 +118,7 @@ namespace PencilTests
         [TestMethod]
         public void PenciEraserReturnsDurability()
         {
-            int eraser = 10;
+            
             Pencil pencil = new Pencil(tipDurability, length, eraser);
             int expected = eraser;
             int actual = pencil.Eraser;
@@ -129,7 +129,7 @@ namespace PencilTests
         [TestMethod]
         public void DetermineEraserDurabilityLossOfWord()
         {
-            int eraser = 10;
+            
             string input = "Test";
             Pencil pencil = new Pencil(tipDurability, length, eraser);
             int expected = 4; // 4 letters 1 point for each letter
