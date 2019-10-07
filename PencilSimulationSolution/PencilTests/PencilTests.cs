@@ -50,6 +50,7 @@ namespace PencilTests
         [TestMethod]
         public void WriteWordReducesTipDurability()
         {
+            //oops
             string phrase = "Run Run Run";
             int expectedRemainingDurabilityFrom20 = 8;
             pencil.Write(phrase);
