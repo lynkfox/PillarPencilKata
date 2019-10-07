@@ -7,5 +7,17 @@ namespace PencilSimulationTests
     [TestClass]
     public class PaperTests
     {
+        [TestMethod]
+        public void TestPaperObjectCanContainContentOnIt()
+        {
+            string testInput = "This is a Test";
+            Paper paper = new Paper();
+            paper.Content = testInput;
+            string expected = testInput;
+            string actual = paper.Content;
+
+            Assert.AreEqual(expected, actual);
+
+        }
     }
 }
