@@ -78,7 +78,15 @@ namespace PencilLib
 
         public int EraserDurabilityLoss(string input)
         {
-            return input.Length;
+            int durabilityPoints = 0;
+            foreach(char letter in input)
+            {
+                if (letter != ' ')
+                {
+                    durabilityPoints++;
+                }
+            }
+            return durabilityPoints;
         }
     }
 
