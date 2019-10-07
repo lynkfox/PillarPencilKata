@@ -25,6 +25,11 @@ namespace PencilLib
         {
             return word;
         }
+
+        public int tipDruabilityLoss(string input)
+        {
+            return 5;
+        }
     }
 
 
