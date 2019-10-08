@@ -7,10 +7,13 @@ namespace PencilSimulationTests
     [TestClass]
     public class PaperTests
     {
+
+        string testInput = "This is a Test";
+
         [TestMethod]
         public void TestPaperObjectCanContainContentOnIt()
         {
-            string testInput = "This is a Test";
+            
             Paper paper = new Paper();
             paper.Content = testInput;
             string expected = testInput;
@@ -23,7 +26,7 @@ namespace PencilSimulationTests
         [TestMethod]
         public void TestPaperProseAddsToCurrentContent()
         {
-            string testInput = "This is a Test";
+            
             Paper paper = new Paper();
             paper.Content = testInput;
             string expected = testInput + " " + testInput;
@@ -35,6 +38,8 @@ namespace PencilSimulationTests
             Assert.AreEqual(expected, actual);
             
         }
+
+
 
     }
 }
