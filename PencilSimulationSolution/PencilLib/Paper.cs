@@ -23,15 +23,14 @@ namespace PencilLib
 
         }
 
-        public void Prose(string testInput)
+        public void Prose(string writtenContent)
         {
             if(string.IsNullOrEmpty(this.Content) || this.Content == " ")
             {
-                this.Content += testInput;
+                this.Content += writtenContent;
             }else
             {
-                this.Content += " ";
-                this.Content += testInput;
+                this.Content += " " + writtenContent;
             }
             
         }
