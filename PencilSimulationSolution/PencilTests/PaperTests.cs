@@ -39,6 +39,16 @@ namespace PencilSimulationTests
             
         }
 
+        [TestMethod]
+        public void TestPaperProseProperlyAddsFirstProseWithoutWhitespace()
+        {
+            Paper paper = new Paper();
+            paper.Prose(testInput);
+            string expected = testInput;
+            string actual = paper.Content;
+
+            Assert.AreEqual(expected, actual);
+        }
 
 
     }
