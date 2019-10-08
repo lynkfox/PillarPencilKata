@@ -49,6 +49,20 @@ namespace PencilSimulationTests
 
             Assert.AreEqual(expected, actual);
         }
+        [TestMethod]
+        public void TestPaperDeleteRemovesLastInstanceInContentAndLeavesWhiteSpace()
+        {
+            Paper paper = new Paper();
+            paper.Prose(testInput);
+            string wordToErase = "Test";
+            string expected = "This is a     "; //1 whitespace space, 4 white space for T E S T
+
+            paper.Delete(wordToErase);
+            string actual = paper.Content;
+
+            Assert.AreEqual(expected, actual);
+
+        }
 
 
     }
