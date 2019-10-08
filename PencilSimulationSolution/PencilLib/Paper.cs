@@ -34,5 +34,18 @@ namespace PencilLib
             }
             
         }
+
+        public void Delete(string wordToErase)
+        {
+            int wordLength = wordToErase.Length;
+            string whiteSpaceReplace = "";
+            
+            for(int i=0; i< wordLength; i++)
+            {
+                whiteSpaceReplace += " ";
+            }
+
+            this.Content = this.Content.Replace(wordToErase, whiteSpaceReplace);
+        }
     }
 }
