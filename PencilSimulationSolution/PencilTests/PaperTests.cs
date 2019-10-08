@@ -64,6 +64,22 @@ namespace PencilSimulationTests
 
         }
 
+        [TestMethod]
+        public void TestPaperDeleteRemovesLastInstanceInContentIfDuplicates()
+        {
+            Paper paper = new Paper();
+            paper.Prose(testInput);
+            string duplicateWord = "Test";
+            paper.Prose(duplicateWord);
+            string wordToErase = "Test";
+            string expected = "This is a Test     "; // 1 whitespace space, 4 white space for T E S T
+
+            paper.Delete(duplicateWord);
+            string actual = paper.Content;
+
+            Assert.AreEqual(expected, actual);
+        }
+
 
     }
 }
