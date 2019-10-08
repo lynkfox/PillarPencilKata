@@ -74,11 +74,13 @@ namespace PencilSimulationTests
             string wordToErase = "Test";
             string expected = "This is a Test     "; // 1 whitespace space, 4 white space for T E S T
 
-            paper.Delete(duplicateWord);
+            paper.Delete(wordToErase);
             string actual = paper.Content;
 
             Assert.AreEqual(expected, actual);
         }
+
+        
 
 
     }
