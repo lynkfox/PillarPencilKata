@@ -80,7 +80,21 @@ namespace PencilSimulationTests
             Assert.AreEqual(expected, actual);
         }
 
-        
+        [TestMethod]
+        public void ReturnSameStringIfWordToEraseIsNotInPaperContent()
+        {
+            Paper paper = new Paper();
+            paper.Prose(testInput);
+            string wordToErase = "NotHere";
+
+            string expected = testInput;
+
+
+            paper.Delete(wordToErase);
+            string actual = paper.Content;
+
+            Assert.AreEqual(expected, actual);
+        }
 
 
     }
