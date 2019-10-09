@@ -10,7 +10,8 @@ namespace PencilLib
 
 
         /*Internal Private Variables */
-
+        private Queue<int> indexOfDeletes = new Queue<int>();
+        private Queue<int> lengthOfDeletedWords = new Queue<int>();
 
         /*External Public Variables */
 
@@ -51,13 +52,15 @@ namespace PencilLib
             if(indexOfLastOccurance != -1) //-1 being returned if not found
             {
                 this.Content = this.Content.Remove(indexOfLastOccurance, wordLength).Insert(indexOfLastOccurance, whiteSpaceReplace);
+                indexOfDeletes.Enqueue(indexOfLastOccurance);
+                lengthOfDeletedWords.Enqueue(wordLength);
             }
-
-
             
-            
+        }
 
-            
+        public void Edit(string replacementWord)
+        {
+            this.Content = this.Content.Remove(indexOfDeletes.Peek(), lengthOfDeletedWords.Dequeue()).Insert(indexOfDeletes.Dequeue(), replacementWord);
         }
     }
 }
