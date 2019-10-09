@@ -11,15 +11,23 @@ namespace PencilSimulationTests
         string testInput = "This is a Test";
         string testInputMinusTest = "This is a     "; //1 whitespace space, 4 white space for T E S T
         string wordToErase= "Test";
+        Paper paper = new Paper();
+
+        string actual, expected;
+
+        private void CleanPaper()
+        {
+            paper.Content = null; //Make sure paper has nothing on it
+        }
 
         [TestMethod]
         public void TestPaperObjectCanContainContentOnIt()
         {
-            
-            Paper paper = new Paper();
+
+            CleanPaper();
             paper.Content = testInput;
-            string expected = testInput;
-            string actual = paper.Content;
+            expected = testInput;
+            actual = paper.Content;
 
             Assert.AreEqual(expected, actual);
 
@@ -28,14 +36,16 @@ namespace PencilSimulationTests
         [TestMethod]
         public void TestPaperProseAddsToCurrentContent()
         {
-            
-            Paper paper = new Paper();
+
+
+            CleanPaper();
+
             paper.Content = testInput;
-            string expected = testInput + " " + testInput;
+            expected = testInput + " " + testInput;
 
             paper.Prose(testInput);
 
-            string actual = paper.Content;
+            actual = paper.Content;
 
             Assert.AreEqual(expected, actual);
             
@@ -44,22 +54,22 @@ namespace PencilSimulationTests
         [TestMethod]
         public void TestPaperProseProperlyAddsFirstProseWithoutWhitespace()
         {
-            Paper paper = new Paper();
+            CleanPaper();
             paper.Prose(testInput);
-            string expected = testInput;
-            string actual = paper.Content;
+            expected = testInput;
+            actual = paper.Content;
 
             Assert.AreEqual(expected, actual);
         }
         [TestMethod]
         public void TestPaperDeleteRemovesLastInstanceInContentAndLeavesWhiteSpace()
         {
-            Paper paper = new Paper();
+            CleanPaper();
             paper.Prose(testInput);
-            string expected = testInputMinusTest;
+            expected = testInputMinusTest;
 
             paper.Delete(wordToErase);
-            string actual = paper.Content;
+            actual = paper.Content;
 
             Assert.AreEqual(expected, actual);
 
@@ -68,14 +78,14 @@ namespace PencilSimulationTests
         [TestMethod]
         public void TestPaperDeleteRemovesLastInstanceInContentIfDuplicates()
         {
-            Paper paper = new Paper();
+            CleanPaper();
             paper.Prose(testInput);
             string duplicateWord = wordToErase;
             paper.Prose(duplicateWord);
-            string expected = "This is a Test     ";
+            expected = "This is a Test     ";
 
             paper.Delete(wordToErase);
-            string actual = paper.Content;
+            actual = paper.Content;
 
             Assert.AreEqual(expected, actual);
         }
@@ -83,15 +93,15 @@ namespace PencilSimulationTests
         [TestMethod]
         public void ReturnSameStringIfWordToEraseIsNotInPaperContent()
         {
-            Paper paper = new Paper();
+            CleanPaper();
             paper.Prose(testInput);
             string wordToEraseNotInContent = "NotHere";
 
-            string expected = testInput;
+            expected = testInput;
 
 
             paper.Delete(wordToEraseNotInContent);
-            string actual = paper.Content;
+            actual = paper.Content;
 
             Assert.AreEqual(expected, actual);
         }
@@ -99,16 +109,15 @@ namespace PencilSimulationTests
         [TestMethod]
         public void MultipleUsesOfDeleteContinueToLeaveWhiteSpace()
         {
-            Paper paper = new Paper();
+            CleanPaper();
             paper.Prose(testInput);
-            string wordToErase = "Test";
             string secondToErase = "This";
 
-            string expected = "     is a     ";
+             expected = "     is a     ";
 
             paper.Delete(wordToErase);
             paper.Delete(secondToErase);
-            string actual = paper.Content;
+            actual = paper.Content;
 
             Assert.AreEqual(expected, actual);
         }
