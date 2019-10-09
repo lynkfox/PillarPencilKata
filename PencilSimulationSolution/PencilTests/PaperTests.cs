@@ -11,6 +11,7 @@ namespace PencilSimulationTests
         string testInput = "This is a Test";
         string testInputMinusTest = "This is a     "; //1 whitespace space, 4 white space for T E S T
         string wordToErase= "Test";
+        string eraseThis = "This";
         Paper paper = new Paper();
 
         string actual, expected;
@@ -108,12 +109,10 @@ namespace PencilSimulationTests
         {
             paper.NewSheet();
             paper.Prose(testInput);
-            string secondToErase = "This";
-
-             expected = "     is a     ";
+            expected = "     is a     ";
 
             paper.Delete(wordToErase);
-            paper.Delete(secondToErase);
+            paper.Delete(eraseThis);
             actual = paper.Content;
 
             Assert.AreEqual(expected, actual);
@@ -124,7 +123,7 @@ namespace PencilSimulationTests
         {
             paper.NewSheet();
             paper.Prose(testInput);
-            string eraseThis = "This";
+            
             paper.Delete(eraseThis);
 
             expected = "Word is a Test";
@@ -135,9 +134,6 @@ namespace PencilSimulationTests
             Assert.AreEqual(expected, actual);
         }
 
-
-
         
-
     }
 }
