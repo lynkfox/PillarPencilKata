@@ -23,6 +23,13 @@ namespace PencilLib
 
         }
 
+        public void NewSheet()
+        {
+            this.Content = null;
+            indexOfDeletes.Clear();
+            lengthOfDeletedWords.Clear();
+        }
+
         public void Prose(string writtenContent)
         {
             if(string.IsNullOrEmpty(this.Content) || this.Content == " ")

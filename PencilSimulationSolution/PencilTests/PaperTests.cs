@@ -15,16 +15,13 @@ namespace PencilSimulationTests
 
         string actual, expected;
 
-        private void CleanPaper()
-        {
-            paper.Content = null; //Make sure paper has nothing on it
-        }
+      
 
         [TestMethod]
         public void TestPaperObjectCanContainContentOnIt()
         {
 
-            CleanPaper();
+            paper.NewSheet();
             paper.Content = testInput;
             expected = testInput;
             actual = paper.Content;
@@ -38,7 +35,7 @@ namespace PencilSimulationTests
         {
 
 
-            CleanPaper();
+            paper.NewSheet();
 
             paper.Content = testInput;
             expected = testInput + " " + testInput;
@@ -54,7 +51,7 @@ namespace PencilSimulationTests
         [TestMethod]
         public void TestPaperProseProperlyAddsFirstProseWithoutWhitespace()
         {
-            CleanPaper();
+            paper.NewSheet();
             paper.Prose(testInput);
             expected = testInput;
             actual = paper.Content;
@@ -64,7 +61,7 @@ namespace PencilSimulationTests
         [TestMethod]
         public void TestPaperDeleteRemovesLastInstanceInContentAndLeavesWhiteSpace()
         {
-            CleanPaper();
+            paper.NewSheet();
             paper.Prose(testInput);
             expected = testInputMinusTest;
 
@@ -78,7 +75,7 @@ namespace PencilSimulationTests
         [TestMethod]
         public void TestPaperDeleteRemovesLastInstanceInContentIfDuplicates()
         {
-            CleanPaper();
+            paper.NewSheet();
             paper.Prose(testInput);
             string duplicateWord = wordToErase;
             paper.Prose(duplicateWord);
@@ -93,7 +90,7 @@ namespace PencilSimulationTests
         [TestMethod]
         public void ReturnSameStringIfWordToEraseIsNotInPaperContent()
         {
-            CleanPaper();
+            paper.NewSheet();
             paper.Prose(testInput);
             string wordToEraseNotInContent = "NotHere";
 
@@ -109,7 +106,7 @@ namespace PencilSimulationTests
         [TestMethod]
         public void MultipleUsesOfDeleteContinueToLeaveWhiteSpace()
         {
-            CleanPaper();
+            paper.NewSheet();
             paper.Prose(testInput);
             string secondToErase = "This";
 
@@ -125,7 +122,7 @@ namespace PencilSimulationTests
         [TestMethod]
         public void TestThatPaperEditAddsWordToFirstWhiteSpaceInList()
         {
-            CleanPaper();
+            paper.NewSheet();
             paper.Prose(testInput);
             string eraseThis = "This";
             paper.Delete(eraseThis);
@@ -137,6 +134,10 @@ namespace PencilSimulationTests
             actual = paper.Content;
             Assert.AreEqual(expected, actual);
         }
+
+
+
+        
 
     }
 }
