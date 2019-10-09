@@ -9,6 +9,8 @@ namespace PencilSimulationTests
     {
 
         string testInput = "This is a Test";
+        string testInputMinusTest = "This is a     "; //1 whitespace space, 4 white space for T E S T
+        string wordToErase= "Test";
 
         [TestMethod]
         public void TestPaperObjectCanContainContentOnIt()
@@ -54,8 +56,7 @@ namespace PencilSimulationTests
         {
             Paper paper = new Paper();
             paper.Prose(testInput);
-            string wordToErase = "Test";
-            string expected = "This is a     "; //1 whitespace space, 4 white space for T E S T
+            string expected = testInputMinusTest;
 
             paper.Delete(wordToErase);
             string actual = paper.Content;
@@ -69,10 +70,9 @@ namespace PencilSimulationTests
         {
             Paper paper = new Paper();
             paper.Prose(testInput);
-            string duplicateWord = "Test";
+            string duplicateWord = wordToErase;
             paper.Prose(duplicateWord);
-            string wordToErase = "Test";
-            string expected = "This is a Test     "; // 1 whitespace space, 4 white space for T E S T
+            string expected = "This is a Test     ";
 
             paper.Delete(wordToErase);
             string actual = paper.Content;
@@ -85,12 +85,12 @@ namespace PencilSimulationTests
         {
             Paper paper = new Paper();
             paper.Prose(testInput);
-            string wordToErase = "NotHere";
+            string wordToEraseNotInContent = "NotHere";
 
             string expected = testInput;
 
 
-            paper.Delete(wordToErase);
+            paper.Delete(wordToEraseNotInContent);
             string actual = paper.Content;
 
             Assert.AreEqual(expected, actual);
