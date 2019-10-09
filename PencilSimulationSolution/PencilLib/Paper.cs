@@ -71,40 +71,37 @@ namespace PencilLib
             int lengthOfNextWhiteSpace = lengthOfDeletedWords.Dequeue();
             int startIndexOfDelete = indexOfDeletes.Dequeue();
             
-            while(replacementLength < lengthOfNextWhiteSpace)
+            /*add White space to fill if the replacement word is less than what
+             * is recorded of the last deleted space
+             */
+            while(replacementLength<lengthOfNextWhiteSpace)
             {
                 replacementWord += " ";
                 replacementLength++;
             }
 
-            if(replacementLength > lengthOfNextWhiteSpace)
-            {
-                int lengthOfDifference = replacementLength - lengthOfNextWhiteSpace;
-                int indexOfNextSection = startIndexOfDelete + lengthOfNextWhiteSpace;
-
-                string substringOfReplacementWord = replacementWord.Substring(replacementWord.Length-lengthOfDifference, lengthOfDifference);
-
-
-                string substringToBeWrittenOver = this.Content.Substring(indexOfNextSection, lengthOfDifference);
-
-                StringBuilder sb = new StringBuilder(this.Content);
-
-                for (int i=0; i<lengthOfDifference; i++)
-                {
-                    if(char.IsWhiteSpace(substringToBeWrittenOver[i]))
-                    {
-                        sb[i + indexOfNextSection] = substringOfReplacementWord[i];
-                        
-                    }else
-                    {
-                        sb[i + indexOfNextSection] = '@';
-                    }
-                }
-                this.Content = sb.ToString();
-                replacementWord = replacementWord.Substring(0, lengthOfNextWhiteSpace);
-            }
                 
-            this.Content = this.Content.Remove(startIndexOfDelete, lengthOfNextWhiteSpace).Insert(startIndexOfDelete, replacementWord);
+            StringBuilder sb = new StringBuilder(this.Content);
+
+            for (int i=0; i<replacementLength; i++)
+            {
+                if(i< lengthOfNextWhiteSpace)
+                {
+                    sb[startIndexOfDelete + i] = replacementWord[i];
+                }else if(char.IsWhiteSpace(sb[startIndexOfDelete + i]))
+                {
+                    sb[i + startIndexOfDelete] = replacementWord[i];
+                        
+                }else
+                {
+                    sb[i + startIndexOfDelete] = '@';
+                }
+            }
+            this.Content = sb.ToString();
+                
+            
+                
+            
         }
     }
 }
