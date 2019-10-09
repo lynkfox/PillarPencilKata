@@ -67,7 +67,17 @@ namespace PencilLib
 
         public void Edit(string replacementWord)
         {
-            this.Content = this.Content.Remove(indexOfDeletes.Peek(), lengthOfDeletedWords.Dequeue()).Insert(indexOfDeletes.Dequeue(), replacementWord);
+            int replacementLength = replacementWord.Length;
+            int lengthOfNextWhiteSpace = lengthOfDeletedWords.Dequeue();
+
+            
+            while(replacementLength < lengthOfNextWhiteSpace)
+            {
+                replacementWord += " ";
+                replacementLength++;
+            }
+                
+            this.Content = this.Content.Remove(indexOfDeletes.Peek(), lengthOfNextWhiteSpace).Insert(indexOfDeletes.Dequeue(), replacementWord);
         }
     }
 }
