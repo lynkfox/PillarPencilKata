@@ -63,15 +63,12 @@ namespace PencilLib
                 /* Requirements for Kata do not state what to do if the letter is a Capital (2 points loss)
                     * and there is only 1 point of durability lost. 
                     * 
-                    * As of this commit (10/7/19, late morning) I sent an email to request clarification (as one would do with a client in this situation)
+                    * After Discussing this with the "Client" it was returned to me to "Do what you think is best"
                     * 
-                    * Until then, continuing code by writting letter first (above) and then subtracting the durability. (so a Capital can still be written with 1 pt of durability)
+                    * So the letter will be written, even if it costs more than the available points
                     * 
-                    * If it it should return a blank space , then the add a letter will need to be adjusted to be AFTER the tip reduction, in its own if statement.
-                    * 
-                    * OR
-                    * 
-                    * the if check will need to check if the tip-the expected druabiliy loss will be less than 0.
+                    * Reasoning: better to fail upward - That is, better to produce expected results then leave the
+                    * user wondering why it did not work.
                     */
 
 
@@ -85,7 +82,7 @@ namespace PencilLib
                         this.Tip -= 2;
 
                     }
-                    else if (letter != ' ') //should covr all lower case and symbols.
+                    else if (letter != ' ') //should cover all lower case and symbols.
                     {
 
                         this.Tip -= 1;
@@ -118,7 +115,11 @@ namespace PencilLib
 
         /* Function - Returns Pencil to max Sharpness while reducing Length.
          * 
-         * TO DO : What if Length == 0?
+         * If Length == 0 this function simply does not sharpen the pencil anymore.
+         * 
+         * This can be assumed to be a nub of a pencil, that is just Tip+Eraser with nothing left
+         * to give if sharpening continues. Once this pencil runs out of durability there is no
+         * choice but to "purchase an additional pencil"
          */
         public void Sharpen()
         {
@@ -127,6 +128,7 @@ namespace PencilLib
                 this.Length -= 1;
                 Tip = maxDurability;
             }
+
             
         }
 

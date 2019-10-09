@@ -264,5 +264,7 @@ namespace PencilSimulationTests
             string actual = pencil.Erase(testInput);
             Assert.AreEqual(expected, actual);
         }
+
+        
     }
 }
