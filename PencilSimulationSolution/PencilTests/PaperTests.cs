@@ -122,6 +122,21 @@ namespace PencilSimulationTests
             Assert.AreEqual(expected, actual);
         }
 
+        [TestMethod]
+        public void TestThatPaperEditAddsWordToFirstWhiteSpaceInList()
+        {
+            CleanPaper();
+            paper.Prose(testInput);
+            string eraseThis = "This";
+            paper.Delete(eraseThis);
+
+            expected = "Word is a Test";
+
+            paper.Edit("Word");
+
+            actual = paper.Content;
+            Assert.AreEqual(expected, actual);
+        }
 
     }
 }
