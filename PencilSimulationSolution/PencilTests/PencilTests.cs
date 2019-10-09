@@ -12,8 +12,12 @@ namespace PencilSimulationTests
         public static int tipDurability = 20;
         public static int eraser = 10;
 
-        public static string testInput = "Test";
-        public static string phraseInput = "This is Phrase";
+        public static string testInput = "Test"; 
+        /* "Test" has a Durability cost of 5 to write, 4 to erase
+         */
+        public static string phraseInput = "This is Phrase"; 
+        /* "This is Phrase" has a Durability cost of 14 to write 12 to erase
+         */
 
         int expected, actual;
 
@@ -179,6 +183,28 @@ namespace PencilSimulationTests
         }
 
         [TestMethod]
+        public void SharpenPencilWithZeroLengthDoesNotReturnTipToMaximum()
+        {
+            int zeroPencilLength = 0; 
+            /*Objectivly this is a nub that is fully sharpened but has no length left so is OK
+             * in terms of Pencil
+             */
+            Pencil pencil = new Pencil(tipDurability, zeroPencilLength, eraser);
+            pencil.Write(testInput); 
+            expected = 15;
+
+            pencil.Sharpen();
+
+            actual = pencil.Tip;
+
+            Assert.AreEqual(expected, actual);
+        }
+
+
+
+
+        /* Pencil Eraser Tests*/
+        [TestMethod]
         public void PenciEraserReturnsDurability()
         {
             
@@ -190,7 +216,7 @@ namespace PencilSimulationTests
         }
 
         
-        /* Pencil Eraser Tests*/
+        
         [TestMethod]
         public void DetermineEraserDurabilityLossOfWord()
         {
