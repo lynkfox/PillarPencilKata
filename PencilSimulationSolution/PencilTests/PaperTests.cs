@@ -168,5 +168,21 @@ namespace PencilSimulationTests
 
             Assert.AreEqual(expected, actual);
         }
+
+        [TestMethod]
+        public void IfEditWordIsLongerThanDeletedSpaceReplaceCharactersAsNeeded()
+        {
+            paper.NewSheet();
+            paper.Prose(testInput);
+            paper.Delete(eraseThis);
+
+            expected = "ABCDE@s a Test";
+
+            paper.Edit("ABCDEF");
+
+            actual = paper.Content;
+
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
