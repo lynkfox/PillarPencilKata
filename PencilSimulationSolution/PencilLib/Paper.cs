@@ -69,15 +69,42 @@ namespace PencilLib
         {
             int replacementLength = replacementWord.Length;
             int lengthOfNextWhiteSpace = lengthOfDeletedWords.Dequeue();
-
+            int startIndexOfDelete = indexOfDeletes.Dequeue();
             
             while(replacementLength < lengthOfNextWhiteSpace)
             {
                 replacementWord += " ";
                 replacementLength++;
             }
+
+            if(replacementLength > lengthOfNextWhiteSpace)
+            {
+                int lengthOfDifference = replacementLength - lengthOfNextWhiteSpace;
+                int indexOfNextSection = startIndexOfDelete + lengthOfNextWhiteSpace;
+
+                string substringOfReplacementWord = replacementWord.Substring(replacementWord.Length-lengthOfDifference, lengthOfDifference);
+
+
+                string substringToBeWrittenOver = this.Content.Substring(indexOfNextSection, lengthOfDifference);
+
+                StringBuilder sb = new StringBuilder(this.Content);
+
+                for (int i=0; i<lengthOfDifference; i++)
+                {
+                    if(char.IsWhiteSpace(substringToBeWrittenOver[i]))
+                    {
+                        sb[i + indexOfNextSection] = substringOfReplacementWord[i];
+                        
+                    }else
+                    {
+                        sb[i + indexOfNextSection] = '@';
+                    }
+                }
+                this.Content = sb.ToString();
+                replacementWord = replacementWord.Substring(0, lengthOfNextWhiteSpace);
+            }
                 
-            this.Content = this.Content.Remove(indexOfDeletes.Peek(), lengthOfNextWhiteSpace).Insert(indexOfDeletes.Dequeue(), replacementWord);
+            this.Content = this.Content.Remove(startIndexOfDelete, lengthOfNextWhiteSpace).Insert(startIndexOfDelete, replacementWord);
         }
     }
 }
