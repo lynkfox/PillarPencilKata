@@ -134,6 +134,23 @@ namespace PencilSimulationTests
             Assert.AreEqual(expected, actual);
         }
 
-        
+        [TestMethod]
+        public void TestMultipleDeletesAndEditAtOnce()
+        {
+            paper.NewSheet();
+            paper.Prose(testInput);
+            paper.Delete(eraseThis);
+            paper.Delete(wordToErase);
+
+            expected = "Word is a ABCD";
+
+            paper.Edit("Word");
+            paper.Edit("ABCD");
+
+            actual = paper.Content;
+
+            Assert.AreEqual(expected, actual);
+
+        }
     }
 }
