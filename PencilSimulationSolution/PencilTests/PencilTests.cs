@@ -265,6 +265,15 @@ namespace PencilSimulationTests
             Assert.AreEqual(expected, actual);
         }
 
-        
+        [TestMethod]
+        public void IfPencilEraserIsZeroReturnNothingToBeErased()
+        {
+            int zeroEraserDurability = 0;
+            Pencil pencil = new Pencil(tipDurability, length, zeroEraserDurability);
+            string expected = "";
+            string actual = pencil.Erase(testInput);
+            Assert.AreEqual(expected, actual);
+
+        }
     }
 }
