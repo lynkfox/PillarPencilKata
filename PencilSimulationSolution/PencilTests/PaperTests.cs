@@ -96,6 +96,23 @@ namespace PencilSimulationTests
             Assert.AreEqual(expected, actual);
         }
 
+        [TestMethod]
+        public void MultipleUsesOfDeleteContinueToLeaveWhiteSpace()
+        {
+            Paper paper = new Paper();
+            paper.Prose(testInput);
+            string wordToErase = "Test";
+            string secondToErase = "This";
+
+            string expected = "     is a     ";
+
+            paper.Delete(wordToErase);
+            paper.Delete(secondToErase);
+            string actual = paper.Content;
+
+            Assert.AreEqual(expected, actual);
+        }
+
 
     }
 }
