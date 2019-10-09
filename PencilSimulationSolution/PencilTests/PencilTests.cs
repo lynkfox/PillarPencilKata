@@ -14,7 +14,8 @@ namespace PencilSimulationTests
 
         public static string testInput = "Test";
         public static string phraseInput = "This is Phrase";
-        
+
+        int expected, actual;
 
 
         /* Pencil Tip Tests
@@ -23,8 +24,8 @@ namespace PencilSimulationTests
         public void PencilTipDurabilityIs20()
         {
             Pencil pencil = new Pencil(tipDurability, length);
-            int expected = tipDurability;
-            int actual = pencil.Tip;
+            expected = tipDurability;
+            actual = pencil.Tip;
             Assert.AreEqual(expected, actual);
         }
 
@@ -63,11 +64,11 @@ namespace PencilSimulationTests
             Pencil pencil = new Pencil(tipDurability, length);
             //oops - bad test because of refactoring!!
             string phrase = "Run Run Run";
-            int expectedRemainingDurabilityFrom20 = 8; //12 points for Run Run Run, 20-12 = 8.
+            expected = 8; //12 points for Run Run Run, 20-12 = 8.
             pencil.Write(phrase);
-            int actual = pencil.Tip;
+            actual = pencil.Tip;
 
-            Assert.AreEqual(expectedRemainingDurabilityFrom20, actual);
+            Assert.AreEqual(expected, actual);
         }
 
 
@@ -91,8 +92,8 @@ namespace PencilSimulationTests
             pencil.Write(phraseInput);  // expected 6 durability left
             pencil.Write(phraseInput); // expected 0 durability, as 6-14 is less than 0
 
-            int expected = 0;
-            int actual = pencil.Tip;
+            expected = 0;
+            actual = pencil.Tip;
             Assert.AreEqual(expected, actual);
         }
 
@@ -132,9 +133,9 @@ namespace PencilSimulationTests
         public void SharpenReturnsToMaxValue()
         {
             Pencil pencil = new Pencil(tipDurability, length);
-            int expected = tipDurability; // the starting tipDurability is 20.
+            expected = tipDurability; // the starting tipDurability is 20.
             pencil.Sharpen();
-            int actual = pencil.Tip;
+            actual = pencil.Tip;
 
             Assert.AreEqual(expected, actual);
         }
@@ -144,11 +145,11 @@ namespace PencilSimulationTests
         {
 
             Random random = new Random();
-            int expected = random.Next(0, 100);
+            expected = random.Next(0, 100);
             Pencil randomPencil = new Pencil(expected);
             randomPencil.Write(testInput);
             randomPencil.Sharpen();
-            int actual = randomPencil.Tip;
+            actual = randomPencil.Tip;
 
             Assert.AreEqual(expected, actual);
         }
@@ -159,8 +160,8 @@ namespace PencilSimulationTests
 
             
             Pencil lengthPencil = new Pencil(tipDurability, length);
-            int actual = lengthPencil.Length;
-            int expected = length;
+            actual = lengthPencil.Length;
+            expected = length;
 
             Assert.AreEqual(expected, actual);
         }
@@ -171,8 +172,8 @@ namespace PencilSimulationTests
             
             Pencil lengthPencil = new Pencil(tipDurability, length);
             lengthPencil.Sharpen();
-            int actual = lengthPencil.Length;
-            int expected = length-1;
+            actual = lengthPencil.Length;
+            expected = length-1;
 
             Assert.AreEqual(expected, actual);
         }
@@ -182,8 +183,8 @@ namespace PencilSimulationTests
         {
             
             Pencil pencil = new Pencil(tipDurability, length, eraser);
-            int expected = eraser;
-            int actual = pencil.Eraser;
+            expected = eraser;
+            actual = pencil.Eraser;
 
             Assert.AreEqual(expected, actual);
         }
@@ -196,8 +197,8 @@ namespace PencilSimulationTests
             
             
             Pencil pencil = new Pencil(tipDurability, length, eraser);
-            int expected = 4; // 4 letters 1 point for each letter
-            int actual = pencil.EraserDurabilityLoss(testInput);
+            expected = 4; // 4 letters 1 point for each letter
+            actual = pencil.EraserDurabilityLoss(testInput);
 
             Assert.AreEqual(expected, actual);
             
@@ -208,8 +209,8 @@ namespace PencilSimulationTests
         {
             string input = "This Test";
             Pencil pencil = new Pencil(tipDurability, length, eraser);
-            int expected = 8; // 8 letters, 1 point for each letter, no  cost for white space
-            int actual = pencil.EraserDurabilityLoss(input);
+            expected = 8; // 8 letters, 1 point for each letter, no  cost for white space
+            actual = pencil.EraserDurabilityLoss(input);
 
             Assert.AreEqual(expected, actual);
         }
@@ -219,11 +220,11 @@ namespace PencilSimulationTests
         {
             
             Pencil pencil = new Pencil(tipDurability, length, eraser);
-            int expected = eraser - pencil.EraserDurabilityLoss(testInput); // The Starting Eraser value - the cost of the erase
+            expected = eraser - pencil.EraserDurabilityLoss(testInput); // The Starting Eraser value - the cost of the erase
 
             pencil.Erase(testInput);
 
-            int actual = pencil.Eraser;
+            actual = pencil.Eraser;
 
             Assert.AreEqual(expected, actual);
 
