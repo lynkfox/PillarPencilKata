@@ -156,9 +156,16 @@ namespace PencilLib
 
         public string Erase(string input)
         {
-            this.Eraser = this.Eraser - EraserDurabilityLoss(input);
+            if(this.Eraser > 0)
+            {
+                this.Eraser = this.Eraser - EraserDurabilityLoss(input);
 
-            return input;
+                return input;
+            } else
+            {
+                return "";
+            }
+            
         }
     }
 
