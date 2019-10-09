@@ -152,5 +152,21 @@ namespace PencilSimulationTests
             Assert.AreEqual(expected, actual);
 
         }
+
+        [TestMethod]
+        public void TestSmallerWordThanDeletedWordInEdit()
+        {
+            paper.NewSheet();
+            paper.Prose(testInput);
+            paper.Delete(eraseThis);
+            
+            expected = "A    is a Test";
+
+            paper.Edit("A");
+
+            actual = paper.Content;
+
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
