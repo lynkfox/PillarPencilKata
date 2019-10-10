@@ -349,11 +349,13 @@ namespace PencilSimulationTests
         }
 
         [TestMethod]
-        public void EraseErasesBackwardFromEndOfInputAndLeavesWhiteSpaceBehind()
+        public void EraseErasesBackwardFromEndOfInputAndLeavesWhiteSpaceOnWhat()
         {
             int eraserWithTwoDurability = 2;
             Pencil pencil = new Pencil(tipDurability, length, eraserWithTwoDurability);
-            string expected = "Te  "; // Test has 4 durability, 2 durability eraser will erase s and t from the end.
+            string expected = "st"; 
+            // Test has 4 durability, 2 durability eraser will erase s and t from the end
+
             string actual = pencil.Erase(testInput);
 
             Assert.AreEqual(expected, actual);

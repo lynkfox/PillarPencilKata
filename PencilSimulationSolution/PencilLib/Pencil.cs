@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace PencilLib
 {
@@ -153,13 +154,27 @@ namespace PencilLib
             return durabilityPoints;
         }
 
-        public string Erase(string input)
+        public string Erase(string erasedWord)
         {
-            if(this.Eraser > 0)
-            {
-                this.Eraser = this.Eraser - EraserDurabilityLoss(input);
+            StringBuilder sb = new StringBuilder(erasedWord);
+            int erasedLength = erasedWord.Length;
 
-                return input;
+            if (this.Eraser > 0)
+            {
+                for(int i = erasedLength; i>0; i--)
+                {
+                    if(this.Eraser == 0)
+                    {
+                        sb.Remove(0, i);
+                        i = 0;
+                    }else
+                    {
+                        this.Eraser--;
+                    }
+                }
+                return sb.ToString(); ;
+
+
             } else
             {
                 return "";
