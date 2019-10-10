@@ -345,6 +345,21 @@ namespace PencilSimulationTests
             Assert.AreEqual(expected, actual);
         }
 
+        [TestMethod]
+        public void ProseWhenGivenNothingProperlyDoesNothingWrong()
+        {
+            paper.NewSheet();
+            expected = paper.Content;
+            string nullString = null;
+
+            paper.Prose(nullString);
+
+            actual = paper.Content;
+
+            Assert.AreEqual(expected, actual);
+
+        }
+
 
     }
 }
