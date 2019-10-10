@@ -67,7 +67,10 @@ namespace PencilSimulation
                     case 6: //Read
                         NewPencil();
                         break;
-                    case 7: //Quit
+                    case 7: //Read
+                        Sharpen();
+                        break;
+                    case 8: //Quit
                         Quit();
                         break;
                 }
@@ -160,7 +163,7 @@ namespace PencilSimulation
             void BigPencil()
             {
                 pencil = new Pencil(80, 10, 20);
-                Console.WriteLine("Small pencil can write between 40 and 80 characters, be sharpened 10 times, and erase 20 characters. Go write!");
+                Console.WriteLine("A Big pencil can write between 40 and 80 characters, be sharpened 10 times, and erase 20 characters. Go write!");
 
             }
 
@@ -215,6 +218,12 @@ namespace PencilSimulation
                 return number;
             }
 
+            void Sharpen()
+            {
+                pencil.Sharpen();
+                Console.Write("... ... ... Pencil Sharpened! Tip durability is once again " + pencil.Tip+ ". \r\n");
+            }
+
             void Write()
             {
                 Console.WriteLine("What do you want to write on your paper?");
@@ -239,7 +248,7 @@ namespace PencilSimulation
 
         private static void PencilActionMenu(out int optionSelect, out bool validOption)
         {
-            Console.WriteLine("Now what would you like do now?\r\n1. Write\r\n2. Erase\r\n3. Edit\r\n4. Read\r\n5.New Paper (Will trash current page!)\r\n6.New Pencil\r\n7. Quit\r\n\r\n\r\n");
+            Console.WriteLine("Now what would you like do now?\r\n1. Write\r\n2. Erase\r\n3. Edit\r\n4. Read\r\n5. New Paper (Will trash current page!)\r\n6.Sharpen Pencil\r\n7. New Pencil\r\n8. Quit\r\n\r\n\r\n");
             validOption = validOption = int.TryParse(Console.ReadLine(), out optionSelect);
         }
 
