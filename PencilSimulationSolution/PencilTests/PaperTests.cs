@@ -19,7 +19,7 @@ namespace PencilSimulationTests
       
 
         [TestMethod]
-        public void TestPaperObjectCanContainContentOnIt()
+        public void ContentCanContainInformation()
         {
 
             paper.NewSheet();
@@ -32,7 +32,7 @@ namespace PencilSimulationTests
         }
 
         [TestMethod]
-        public void TestPaperProseAddsToCurrentContent()
+        public void ProseAddsToCurrentContent()
         {
 
 
@@ -50,7 +50,7 @@ namespace PencilSimulationTests
         }
 
         [TestMethod]
-        public void TestPaperProseProperlyAddsFirstProseWithoutWhitespace()
+        public void ProseProperlyAddsFirstProseWithoutWhitespace()
         {
             paper.NewSheet();
             paper.Prose(testInput);
@@ -60,7 +60,7 @@ namespace PencilSimulationTests
             Assert.AreEqual(expected, actual);
         }
         [TestMethod]
-        public void TestPaperDeleteRemovesLastInstanceInContentAndLeavesWhiteSpace()
+        public void DeleteRemovesLastInstanceInContentAndLeavesWhiteSpace()
         {
             paper.NewSheet();
             paper.Prose(testInput);
@@ -74,7 +74,7 @@ namespace PencilSimulationTests
         }
 
         [TestMethod]
-        public void TestPaperDeleteRemovesLastInstanceInContentIfDuplicates()
+        public void DeleteRemovesLastInstanceInContentIfDuplicates()
         {
             paper.NewSheet();
             paper.Prose(testInput);
@@ -89,7 +89,7 @@ namespace PencilSimulationTests
         }
 
         [TestMethod]
-        public void ReturnSameStringIfWordToEraseIsNotInPaperContent()
+        public void EraseReturnSameStringIfNotInPaperContent()
         {
             paper.NewSheet();
             paper.Prose(testInput);
@@ -105,7 +105,7 @@ namespace PencilSimulationTests
         }
 
         [TestMethod]
-        public void MultipleUsesOfDeleteContinueToLeaveWhiteSpace()
+        public void DeleteMultipleUsesContinueToLeaveWhiteSpace()
         {
             paper.NewSheet();
             paper.Prose(testInput);
@@ -119,7 +119,7 @@ namespace PencilSimulationTests
         }
 
         [TestMethod]
-        public void TestThatPaperEditAddsWordToFirstWhiteSpaceInList()
+        public void EditAddsWordToFirstWhiteSpaceInList()
         {
             paper.NewSheet();
             paper.Prose(testInput);
@@ -135,7 +135,7 @@ namespace PencilSimulationTests
         }
 
         [TestMethod]
-        public void TestMultipleDeletesAndEditAtOnce()
+        public void DeletesAndMultipleEditAtOnceReplaceInProperSpotsWithJustTwo()
         {
             paper.NewSheet();
             paper.Prose(testInput);
@@ -154,7 +154,7 @@ namespace PencilSimulationTests
         }
 
         [TestMethod]
-        public void TestSmallerWordThanDeletedWordInEdit()
+        public void EditInWordThatIsSmallerThanWhiteSpaceAvailable()
         {
             paper.NewSheet();
             paper.Prose(testInput);
@@ -170,7 +170,7 @@ namespace PencilSimulationTests
         }
 
         [TestMethod]
-        public void IfEditWordIsLongerThanDeletedSpaceReplaceCharactersAsNeeded()
+        public void EditWordIsLongerThanDeletedSpaceReplaceCharactersAsNeeded()
         {
             paper.NewSheet();
             paper.Prose(testInput);
