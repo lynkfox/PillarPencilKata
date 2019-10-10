@@ -41,8 +41,17 @@ namespace PencilLib
 
         public Pencil(int tipDurability, int length, int eraserDurability)
         {
-            this.maxDurability = tipDurability;
-            this.Tip = this.maxDurability;
+            if (tipDurability <= 0)
+            {
+                throw new ArgumentOutOfRangeException("PencilTipLessThan1", "Pencil Cannot Have Zero or Negative Tip");
+            }
+            else
+            {
+                this.maxDurability = tipDurability;
+                this.Tip = this.maxDurability;
+            }
+
+            
             if(length <0)
             {
                 throw new ArgumentOutOfRangeException("PencilLengthNegative","Pencil Cannot Have Negitive Length");

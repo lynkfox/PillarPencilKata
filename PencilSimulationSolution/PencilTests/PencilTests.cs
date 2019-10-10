@@ -400,5 +400,15 @@ namespace PencilSimulationTests
 
             //Assert Is Exception Thrown
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void ConstructorThrowsExceptionOnPencilWithZeroOrNegTip()
+        {
+            int zeroTip = 0;
+            Pencil pencil = new Pencil(zeroTip);
+
+            //Assert is Exception Thrown
+        }
     }
 }
