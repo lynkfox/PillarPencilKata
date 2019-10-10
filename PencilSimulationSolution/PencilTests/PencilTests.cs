@@ -24,8 +24,11 @@ namespace PencilSimulationTests
 
         /* Pencil Tip Tests
          */
+
+            /* This test determines that the Pencil Tip is retained
+             */
         [TestMethod]
-        public void PencilTipDurabilityIs20()
+        public void TipDurabilityIs20()
         {
             Pencil pencil = new Pencil(tipDurability, length);
             expected = tipDurability;
@@ -39,6 +42,8 @@ namespace PencilSimulationTests
          * This method was combined into Write with a refactor. May be pulled out for Clean Code later, but these
          * tests will not be needed for it as it will be a private internal function and these tests will be covered
          * by other Write Tests
+         * 
+         * 
         [TestMethod]
         public void DurabilityOfWordTestIs5()
         {
@@ -62,11 +67,15 @@ namespace PencilSimulationTests
         }
         */
 
+            /* This test determines if Writing a word properly reduces tip Durability based on requirements
+             *  2pts per capital
+             *  1pt per rest of characters
+             *  0pt for whitespace
+             */
         [TestMethod]
         public void WriteWordReducesTipDurability()
         {
             Pencil pencil = new Pencil(tipDurability, length);
-            //oops - bad test because of refactoring!!
             string phrase = "Run Run Run";
             expected = 8; //12 points for Run Run Run, 20-12 = 8.
             pencil.Write(phrase);
@@ -78,18 +87,27 @@ namespace PencilSimulationTests
 
        
         /* Pencil Write Tests */
+
+            /*Pencil.Write returns a string because conceptually, a pencil does not store what it is
+             * writing, it just writes it down.
+             * 
+             * This test makes sure Pencil.Write returns what it is writing for the object that will store it
+             */
         [TestMethod]
-        public void PencilWriteReturnsString()
+        public void WriteReturnsString()
         {
             Pencil pencil = new Pencil(tipDurability, length);
             
-
             Assert.AreEqual("Test", pencil.Write(testInput));
 
         }
 
+        /* This test makes sure that Tip Durability does not go below 0 when it runs out and Write has
+         * more characters to write
+         */
+
         [TestMethod]
-        public void PencilWriteStopsAt0Durabilility()
+        public void WriteStopsAt0Durabilility()
         {
             Pencil pencil = new Pencil(tipDurability, length, eraser);
             // tip durability is 20. testPhrase costs 14. Run twice
@@ -101,8 +119,13 @@ namespace PencilSimulationTests
             Assert.AreEqual(expected, actual);
         }
 
+        /* This test determines that when Writing, if Tip Durability runs out, proper white
+         * space is returned for all missing characters that did not have enough durability to write afterward
+         * 
+         * this test does not test if Capital (2pts) is written with 1pt left
+         */
         [TestMethod]
-        public void PencilWriteReturnsWhiteSpaceifDurabilityRunsOut()
+        public void WriteReturnsWhiteSpaceifDurabilityRunsOut()
         {
             int lowDurability = 2;
             Pencil pencilLowTip = new Pencil(lowDurability);
@@ -116,8 +139,11 @@ namespace PencilSimulationTests
             Assert.AreEqual(expected, actual);
         }
 
+
+        /* This test is practically the same as above, but on a larger scale
+         */
         [TestMethod]
-        public void PenciWriteAdjustsDurabilityCorrectilyForWhiteSpaceWithMoreLettersThanDurabilityLeft()
+        public void WriteAdjustsDurabilityCorrectilyForWhiteSpaceWithMoreLettersThanDurabilityLeft()
         {
             Pencil pencil = new Pencil(tipDurability);
             string longPhrase = "This Phrase Is More Than Twenty Durability"; //43 total durability
@@ -133,6 +159,9 @@ namespace PencilSimulationTests
 
 
         /* Pencil Sharpen  Tests */
+
+            /*This test determines if Sharpen brings the pencil back to the durability it was first set with
+             */
         [TestMethod]
         public void SharpenReturnsToMaxValue()
         {
@@ -144,6 +173,8 @@ namespace PencilSimulationTests
             Assert.AreEqual(expected, actual);
         }
 
+        /* This test makes sure it works with any tip durability level
+         */
         [TestMethod]
         public void SharpenReturnsToMaxValueWithRandomDurabilityAfterWrite()
         {
@@ -158,8 +189,11 @@ namespace PencilSimulationTests
             Assert.AreEqual(expected, actual);
         }
 
+        /*This test makes sure that the Pencil Length is stored in the pencil
+         */
+
         [TestMethod]
-        public void PencilLengthCanBeReturnedAsInitialized()
+        public void LengthCanBeReturnedAsInitialized()
         {
 
             
@@ -170,6 +204,8 @@ namespace PencilSimulationTests
             Assert.AreEqual(expected, actual);
         }
 
+        /*This test makes sure that Sharpen properly reduces pencil length
+         */
         [TestMethod]
         public void SharpenReducesPencilLengthBy1()
         {
@@ -182,6 +218,9 @@ namespace PencilSimulationTests
             Assert.AreEqual(expected, actual);
         }
 
+
+        /*This test makes sure that Tip Durability does not change if there is no length left
+         */
         [TestMethod]
         public void SharpenPencilWithZeroLengthDoesNotReturnTipToMaximum()
         {
@@ -204,8 +243,11 @@ namespace PencilSimulationTests
 
 
         /* Pencil Eraser Tests*/
+
+            /*This determines if eraser durability is saved
+             */
         [TestMethod]
-        public void PenciEraserReturnsDurability()
+        public void EraserReturnsDurability()
         {
             
             Pencil pencil = new Pencil(tipDurability, length, eraser);
@@ -215,7 +257,8 @@ namespace PencilSimulationTests
             Assert.AreEqual(expected, actual);
         }
 
-        
+        /* These two tests are depreciated because this function is now private. Other tests should 
+         * properly cover it
         
         [TestMethod]
         public void DetermineEraserDurabilityLossOfWord()
@@ -229,6 +272,7 @@ namespace PencilSimulationTests
             Assert.AreEqual(expected, actual);
             
         }
+        
 
         [TestMethod]
         public void DetermineEraserDurabilityLossOfPhrase()
@@ -240,6 +284,8 @@ namespace PencilSimulationTests
 
             Assert.AreEqual(expected, actual);
         }
+
+        
 
         [TestMethod]
         public void PencilEraseRemovesEraserDurabilityEqualToInputCost()
@@ -255,9 +301,15 @@ namespace PencilSimulationTests
             Assert.AreEqual(expected, actual);
 
         }
+        */
 
+
+        /* This test is similar to the pencil.write test that returns the word passed to it, because again
+         * Pencils do not store what they write, they only write it or erase it. Storing it is for another object
+         * 
+         */
         [TestMethod]
-        public void PencilEraseReturnsTheWordThatNeedsToBeErased()
+        public void EraseReturnsTheWordThatNeedsToBeErased()
         {
             Pencil pencil = new Pencil();
             string expected = testInput;
@@ -265,8 +317,11 @@ namespace PencilSimulationTests
             Assert.AreEqual(expected, actual);
         }
 
+
+        /*If there is no Eraser, Don't erase anything!
+         */
         [TestMethod]
-        public void IfPencilEraserIsZeroReturnNothingToBeErased()
+        public void EraserIsZeroReturnNothingToBeErased()
         {
             int zeroEraserDurability = 0;
             Pencil pencil = new Pencil(tipDurability, length, zeroEraserDurability);

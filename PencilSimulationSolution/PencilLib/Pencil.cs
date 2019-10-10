@@ -139,9 +139,8 @@ namespace PencilLib
          * White Space - 0pt
          * All other Characters - 1pt
          *
-         * To Do : Make Private (Not Needed outside of Pencil)
          */
-        public int EraserDurabilityLoss(string input)
+        private int EraserDurabilityLoss(string input)
         {
             int durabilityPoints = 0;
             foreach(char letter in input)
