@@ -134,13 +134,15 @@ namespace PencilLib
         }
 
 
-        /* Function : Determines the Durability loss of input for Erasing a word based on the following criteria:
+        /* Depreciated function
+         * 
+         * Function : Determines the Durability loss of input for Erasing a word based on the following criteria:
          * 
          * Letter (Capital or Lower) - 1pt
          * White Space - 0pt
          * All other Characters - 1pt
          *
-         */
+         
         private int EraserDurabilityLoss(string input)
         {
             int durabilityPoints = 0;
@@ -153,6 +155,8 @@ namespace PencilLib
             }
             return durabilityPoints;
         }
+        */
+
 
         public string Erase(string erasedWord)
         {
