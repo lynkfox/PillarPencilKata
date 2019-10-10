@@ -260,6 +260,18 @@ namespace PencilSimulationTests
             Assert.AreEqual(expected, actual);
         }
 
-        
+        [TestMethod]
+        public void ProseAcceptsFrontLoadedWhiteSpaceAddedToContent()
+        {
+            paper.NewSheet();
+            string input = "   Front Loaded White";
+            expected = input;
+
+            paper.Prose(input);
+            actual = paper.Content;
+
+            Assert.AreEqual(expected, actual);
+
+        }
     }
 }
