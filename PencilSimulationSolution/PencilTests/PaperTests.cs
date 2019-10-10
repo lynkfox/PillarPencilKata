@@ -275,7 +275,9 @@ namespace PencilSimulationTests
         }
 
         /*Error Handling Tests*/
-
+        /* If there is no white space in the middle of content, then simply add the Edit to to the
+         * end of Content
+         */
         [TestMethod]
         public void EditWithNoWhiteSpaceAddsToEndOfContent()
         {
@@ -289,6 +291,28 @@ namespace PencilSimulationTests
             Assert.AreEqual(expected, actual);
 
             
+        }
+
+        [TestMethod]
+        
+        public void DeleteNotFindingValueOfDeleteReturnsExceptionMessageForDisplay()
+        {
+            paper.NewSheet();
+            string notInInput = "ABCDE";
+            paper.Prose(testInput);
+
+            expected = "There is no place on your paper that has that to be erased";
+
+            try
+            {
+                paper.Delete(notInInput);
+            }catch(Exception e)
+            {
+                actual = e.Message;
+            }
+
+            Assert.AreEqual(expected, actual);
+
         }
 
 
