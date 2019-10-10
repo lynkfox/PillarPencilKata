@@ -320,6 +320,31 @@ namespace PencilSimulationTests
 
         }
 
+        /*New test to repeat what depreciated test used to test for
+         * 
+         */
+
+        [TestMethod]
+        public void DeleteIfItDoesNotFindWordDoesNotModifyContent()
+        {
+            paper.NewSheet();
+            paper.Prose(testInput);
+            expected = paper.Content;
+            string wordNotInContent = "ABCDE";
+
+            try
+            {
+                paper.Delete(wordNotInContent);
+            }catch
+            {
+                //Doing nothing with exception;
+            }
+
+            actual = paper.Content;
+
+            Assert.AreEqual(expected, actual);
+        }
+
 
     }
 }
