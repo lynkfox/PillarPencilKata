@@ -105,41 +105,50 @@ namespace PencilLib
         public void Edit(string replacementWord)
         {
 
-            
-            int replacementLength = replacementWord.Length;
-            int lengthOfNextWhiteSpace = lengthOfDeletedWords.Pop();
-            int startIndexOfDelete = indexOfDeletes.Pop();
-            
-            /*add White space to fill if the replacement word is less than what
-             * is recorded of the last deleted space
-             */
-            while(replacementLength<lengthOfNextWhiteSpace)
+            if(indexOfDeletes.Count == 0 || indexOfDeletes is null)
             {
-                replacementWord += " ";
-                replacementLength++;
-            }
-
+                Prose(replacementWord);
                 
-            StringBuilder sb = new StringBuilder(this.Content);
 
-            for (int i=0; i<replacementLength; i++)
+            }else
             {
-                int currentIndexInProcess = i + startIndexOfDelete;
+                int replacementLength = replacementWord.Length;
+                int lengthOfNextWhiteSpace = lengthOfDeletedWords.Pop();
+                int startIndexOfDelete = indexOfDeletes.Pop();
 
-                if(i< lengthOfNextWhiteSpace)
+                /*add White space to fill if the replacement word is less than what
+                 * is recorded of the last deleted space
+                 */
+                while (replacementLength < lengthOfNextWhiteSpace)
                 {
-                    sb[currentIndexInProcess] = replacementWord[i];
+                    replacementWord += " ";
+                    replacementLength++;
                 }
-                else if(char.IsWhiteSpace(sb[currentIndexInProcess]))
+
+
+                StringBuilder sb = new StringBuilder(this.Content);
+
+                for (int i = 0; i < replacementLength; i++)
                 {
-                    sb[currentIndexInProcess] = replacementWord[i];
-                        
-                }else
-                {
-                    sb[currentIndexInProcess] = '@';
+                    int currentIndexInProcess = i + startIndexOfDelete;
+
+                    if (i < lengthOfNextWhiteSpace)
+                    {
+                        sb[currentIndexInProcess] = replacementWord[i];
+                    }
+                    else if (char.IsWhiteSpace(sb[currentIndexInProcess]))
+                    {
+                        sb[currentIndexInProcess] = replacementWord[i];
+
+                    }
+                    else
+                    {
+                        sb[currentIndexInProcess] = '@';
+                    }
                 }
+                this.Content = sb.ToString();
             }
-            this.Content = sb.ToString();
+            
                 
             
                 
