@@ -39,6 +39,15 @@ namespace PencilSimulation
             }
 
 
+            Console.WriteLine("Now what would you like do now?\r\n1. Write\r\n2. Erase\r\n3. Edit\r\n4. Read\r\n5. Quit");
+
+            while (!(int.TryParse(Console.ReadLine(), out optionSelect)) || optionSelect < 1 || optionSelect > 5)
+            {
+                Console.WriteLine("Invalid Selection. Please try again.");
+                Console.WriteLine("Now what would you like do now?\r\n1. Write\r\n2. Erase\r\n3. Edit\r\n4. Read\r\n5. Quit");
+
+            }
+
 
 
 
