@@ -43,7 +43,14 @@ namespace PencilLib
         {
             this.maxDurability = tipDurability;
             this.Tip = this.maxDurability;
-            this.Length = length;
+            if(length <0)
+            {
+                throw new ArgumentOutOfRangeException("Pencil Cannot Have Negitive Length");
+            }else
+            {
+                this.Length = length;
+            }
+            
             this.Eraser = eraserDurability;
         }
 
