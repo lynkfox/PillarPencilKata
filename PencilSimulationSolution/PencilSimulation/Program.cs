@@ -24,7 +24,7 @@ namespace PencilSimulation
 
             while (!validOption || optionSelect < 1 || optionSelect > 2)
             {
-                Console.WriteLine("Invalid Selection. Please try again.");
+                WriteInvalidInput();
                 Console.WriteLine("1. New Paper\r\n2. Quit");
                 validOption = int.TryParse(Console.ReadLine(), out optionSelect);
             }
@@ -40,13 +40,13 @@ namespace PencilSimulation
             }
 
             PencilActionMenu(out optionSelect, out validOption);
-            while (!validOption || optionSelect < 1 || optionSelect > 5)
+            while (!validOption || optionSelect < 1 || optionSelect > 8)
             {
-                Console.WriteLine("Invalid Selection. Please try again.");
+                WriteInvalidInput();
                 PencilActionMenu(out optionSelect, out validOption);
             }
 
-            while (optionSelect != 5)
+            while (optionSelect != 8)
             {
                 switch (optionSelect)
                 {
@@ -65,10 +65,10 @@ namespace PencilSimulation
                         NewPaper();
                         break;
                     case 6: //Read
-                        NewPencil();
+                        Sharpen();
                         break;
                     case 7: //Read
-                        Sharpen();
+                        NewPencil();
                         break;
                     case 8: //Quit
                         Quit();
@@ -76,9 +76,9 @@ namespace PencilSimulation
                 }
 
                 PencilActionMenu(out optionSelect, out validOption);
-                while (!validOption || optionSelect < 1 || optionSelect > 5)
+                while (!validOption || optionSelect < 1 || optionSelect > 8)
                 {
-                    Console.WriteLine("Invalid Selection. Please try again.");
+                    WriteInvalidInput();
                     PencilActionMenu(out optionSelect, out validOption);
                 }
             }
@@ -116,12 +116,12 @@ namespace PencilSimulation
              */
             void NewPencil()
             {
-
+                Console.Write("\r\n");
                 int newPencilOption;
                 Console.WriteLine("What Kind of Pencil would you like? ");
                 Console.Write("\n\r\n\r");
                 Console.WriteLine("Select from the following list of options: ");
-                Console.WriteLine("1. Small Pencil\r\n2. Big Pencil\r\n3. Custom Pencil\r\n4.Quit");
+                Console.WriteLine("1. Small Pencil\r\n2. Big Pencil\r\n3. Custom Pencil\r\n4.Quit\r\n");
 
 
 
@@ -156,14 +156,14 @@ namespace PencilSimulation
             void SmallPencil()
             {
                 pencil = new Pencil(40, 5, 10);
-                Console.WriteLine("Small pencil can write between 20 and 40 characters, be sharpened 5 times, and erase 10 characters. Go write!");
+                Console.WriteLine("Small pencil can write between 20 and 40 characters, be sharpened 5 times, and erase 10 characters. Go write!\r\n\r\n");
 
             }
 
             void BigPencil()
             {
                 pencil = new Pencil(80, 10, 20);
-                Console.WriteLine("A Big pencil can write between 40 and 80 characters, be sharpened 10 times, and erase 20 characters. Go write!");
+                Console.WriteLine("A Big pencil can write between 40 and 80 characters, be sharpened 10 times, and erase 20 characters. Go write!\r\n\r\n");
 
             }
 
@@ -189,7 +189,7 @@ namespace PencilSimulation
                 eraser = ErrorHandle(input);
 
 
-                Console.WriteLine("Allright. Pencil created with " + tip + " tip durability, " + eraser + " eraser durability, and a lenght of " + length);
+                Console.WriteLine("Allright. Pencil created with " + tip + " tip durability, " + eraser + " eraser durability, and a length of " + length +"\r\n\r\n");
 
                 pencil = new Pencil(tip, length, eraser);
 
@@ -207,6 +207,7 @@ namespace PencilSimulation
                 bool NaN = int.TryParse(value, out int number);
                 while (!NaN || number <= 0)
                 {
+                    Console.Write("\r\n");
                     Console.WriteLine("Sorry! That is not a valid input. Please enter a number above 0!");
                     value = Console.ReadLine();
 
@@ -218,37 +219,49 @@ namespace PencilSimulation
                 return number;
             }
 
+            void WriteInvalidInput()
+            {
+                Console.Write("\r\n");
+                Console.WriteLine("Invalid Selection. Please try again.");
+            }
+
             void Sharpen()
             {
+                Console.Write("\r\n");
                 pencil.Sharpen();
-                Console.Write("... ... ... Pencil Sharpened! Tip durability is once again " + pencil.Tip+ ". \r\n");
+                Console.Write("... ... ... Pencil Sharpened! Tip durability is once again " + pencil.Tip+ ". You have "+pencil.Length+" length of pencil left. \r\n");
+                Console.Write("\r\n");
             }
 
             void Write()
             {
+                Console.Write("\r\n");
                 Console.WriteLine("What do you want to write on your paper?");
                 string input = Console.ReadLine();
                 paper.Prose(pencil.Write(input));
-                
+                Console.Write("\r\n");
             }
 
             void Read()
             {
+                Console.Write("\r\n --- Your Paper -- \r\n");
                 Console.WriteLine(paper.Content);
                 Console.Write("\r\n");
             }
 
             void Erase()
             {
+                Console.Write("\r\n");
                 Console.WriteLine("What would you like to erase?");
                 string input = Console.ReadLine();
                 paper.Delete(pencil.Erase(input));
+                Console.Write("\r\n");
             }
         }
 
         private static void PencilActionMenu(out int optionSelect, out bool validOption)
         {
-            Console.WriteLine("Now what would you like do now?\r\n1. Write\r\n2. Erase\r\n3. Edit\r\n4. Read\r\n5. New Paper (Will trash current page!)\r\n6.Sharpen Pencil\r\n7. New Pencil\r\n8. Quit\r\n\r\n\r\n");
+            Console.WriteLine("Now what would you like do now?\r\n1. Write\r\n2. Erase\r\n3. Edit\r\n4. Read\r\n5. New Paper (Will trash current page!)\r\n6. Sharpen Pencil\r\n7. New Pencil\r\n8. Quit\r\n");
             validOption = validOption = int.TryParse(Console.ReadLine(), out optionSelect);
         }
 
