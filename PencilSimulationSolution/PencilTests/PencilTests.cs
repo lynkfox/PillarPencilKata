@@ -365,5 +365,25 @@ namespace PencilSimulationTests
 
             Assert.AreEqual(expected, actual);
         }
+
+        /* This test makes sure whitespace does not cause a durability loss on Erase
+         * 
+         * This is replacing depreciated tests
+         * 
+         */
+        [TestMethod]
+        public void EraseDoesNotLooseDurabilityOnWhiteSpace()
+        {
+            int eraserWith15Durability = 15; // More than enough durability to get through the testPhrase
+            Pencil pencil = new Pencil(tipDurability, length, eraserWith15Durability);
+
+            expected = 3;
+            pencil.Erase(phraseInput);
+            actual = pencil.Eraser;
+
+            Assert.AreEqual(expected, actual);
+            
+
+        }
     }
 }
