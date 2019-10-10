@@ -23,6 +23,12 @@ namespace PencilLib
 
         }
 
+
+        /* This function sets the Paper to a New Sheet. 
+         * 
+         * Kind of a misnomer, but if we want to save the paper working on should be done in a
+         * new object
+         */
         public void NewSheet()
         {
             this.Content = null;
@@ -30,6 +36,8 @@ namespace PencilLib
             lengthOfDeletedWords.Clear();
         }
 
+        /*This function adds new content to the Page, at the end of existing content
+         */
         public void Prose(string writtenContent)
         {
             if(string.IsNullOrEmpty(this.Content) || this.Content == " ")
@@ -43,6 +51,12 @@ namespace PencilLib
             
         }
 
+        /* This function removes the last instance of the input from the current content, leaving
+         * a white space behind of the same length.
+         * 
+         * it then adds that length of white space and the location of it in the content to a 
+         * set of queues to be found later for edit
+         */
         public void Delete(string wordToErase)
         {
             int wordLength = wordToErase.Length;
@@ -65,6 +79,12 @@ namespace PencilLib
             
         }
 
+
+        /* Edit follows the Queue philosophy of editing.
+         * 
+         * It fills in the Last White Space created, and moving back in order they are created
+         * 
+         */
         public void Edit(string replacementWord)
         {
             int replacementLength = replacementWord.Length;
@@ -85,16 +105,20 @@ namespace PencilLib
 
             for (int i=0; i<replacementLength; i++)
             {
+                int currentIndexInProcess = i + startIndexOfDelete;
+
                 if(i< lengthOfNextWhiteSpace)
                 {
-                    sb[startIndexOfDelete + i] = replacementWord[i];
-                }else if(char.IsWhiteSpace(sb[startIndexOfDelete + i]))
+                    sb[currentIndexInProcess] = replacementWord[i];
+                }
+                else if(char.IsWhiteSpace(sb[currentIndexInProcess]))
                 {
-                    sb[i + startIndexOfDelete] = replacementWord[i];
+                    sb[currentIndexInProcess] = replacementWord[i];
                         
-                }else
+                }
+                else
                 {
-                    sb[i + startIndexOfDelete] = '@';
+                    sb[currentIndexInProcess] = '@';
                 }
             }
             this.Content = sb.ToString();
