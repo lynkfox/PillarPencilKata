@@ -360,6 +360,21 @@ namespace PencilSimulationTests
 
         }
 
+        [TestMethod]
+        public void DeleteWhenGivenSomeCharactersOfAWordDeletesThemAppropriately()
+        {
+            paper.NewSheet();
+            paper.Prose(testInput);
+            string notFullWordDelete = "es";
+            expected = "This is a T  t";
+
+            paper.Delete(notFullWordDelete);
+
+            actual = paper.Content;
+
+            Assert.AreEqual(expected, actual);
+        }
+
 
     }
 }
