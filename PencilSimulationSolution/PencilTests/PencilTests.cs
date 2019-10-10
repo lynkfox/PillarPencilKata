@@ -330,5 +330,22 @@ namespace PencilSimulationTests
             Assert.AreEqual(expected, actual);
 
         }
+
+        /*This test determines if Pencil.Erase proprely removes durability 
+         * 
+         * (Replacing durability tests above)
+         */
+
+        [TestMethod]
+        public void EraseProperlyRemovesDurabilityOfErasedItem()
+        {
+            Pencil pencil = new Pencil(tipDurability, length, eraser);
+            
+            expected = 6; //10 eraser, Test is 4 cost, 6 remainder
+            pencil.Erase(testInput);
+            actual = pencil.Eraser;
+
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
