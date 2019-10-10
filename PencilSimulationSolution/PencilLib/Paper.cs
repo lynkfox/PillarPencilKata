@@ -41,17 +41,20 @@ namespace PencilLib
         public void Prose(string writtenContent)
         {
             
+           if(!string.IsNullOrEmpty(writtenContent))
+           {
+                StringBuilder sb = new StringBuilder(writtenContent);
+                int contentLength = writtenContent.Length;
+                while (char.IsWhiteSpace(sb[contentLength - 1]))
+                {
+                    sb.Remove(contentLength - 1, 1);
+                    contentLength--;
 
+                }
+                writtenContent = sb.ToString();
+           }
             
-            StringBuilder sb = new StringBuilder(writtenContent);
-            int contentLength = writtenContent.Length;
-            while (char.IsWhiteSpace(sb[contentLength - 1]))
-            {
-                sb.Remove(contentLength - 1, 1);
-                contentLength--;
-
-            }
-            writtenContent = sb.ToString();
+            
             
             
 

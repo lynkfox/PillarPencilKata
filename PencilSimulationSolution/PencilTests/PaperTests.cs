@@ -349,7 +349,7 @@ namespace PencilSimulationTests
         public void ProseWhenGivenNothingProperlyDoesNothingWrong()
         {
             paper.NewSheet();
-            expected = paper.Content;
+            expected = "";
             string nullString = null;
 
             paper.Prose(nullString);
