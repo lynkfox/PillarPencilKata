@@ -385,5 +385,20 @@ namespace PencilSimulationTests
             
 
         }
+
+        /* Error Handling Tests */
+
+        /*This test makes sure that an Error is thrown when negative Length is given (0 length is acceptable)
+         */
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void ConstructorThrowsExceptionOnPencilWithNegativeLength()
+        {
+            int negativeLength = -1;
+
+            Pencil pencil = new Pencil(tipDurability, negativeLength);
+
+            //Assert Is Exception Thrown
+        }
     }
 }
