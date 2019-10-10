@@ -104,6 +104,8 @@ namespace PencilLib
          */
         public void Edit(string replacementWord)
         {
+
+            
             int replacementLength = replacementWord.Length;
             int lengthOfNextWhiteSpace = lengthOfDeletedWords.Pop();
             int startIndexOfDelete = indexOfDeletes.Pop();

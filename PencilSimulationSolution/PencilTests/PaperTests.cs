@@ -273,5 +273,24 @@ namespace PencilSimulationTests
             Assert.AreEqual(expected, actual);
 
         }
+
+        /*Error Handling Tests*/
+
+        [TestMethod]
+        public void EditWithNoWhiteSpaceAddsToEndOfContent()
+        {
+            paper.NewSheet();
+            expected = testInput;
+
+            paper.Edit(testInput);
+
+            actual = paper.Content;
+
+            Assert.AreEqual(expected, actual);
+
+            
+        }
+
+
     }
 }
