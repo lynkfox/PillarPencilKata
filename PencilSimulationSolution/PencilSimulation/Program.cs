@@ -58,6 +58,7 @@ namespace PencilSimulation
                     case 3: //Edit
                         break;
                     case 4: //Read
+                        Read();
                         break;
                     case 5: //Quit
                         Quit();
@@ -212,7 +213,12 @@ namespace PencilSimulation
                 Console.WriteLine("What do you want to write on your paper?");
                 string input = Console.ReadLine();
                 paper.Prose(pencil.Write(input));
-                optionSelect = -1;
+                
+            }
+
+            void Read()
+            {
+                Console.WriteLine(paper.Content);
             }
         }
 
