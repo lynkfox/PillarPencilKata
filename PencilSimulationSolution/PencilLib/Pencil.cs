@@ -171,9 +171,13 @@ namespace PencilLib
                     {
                         sb.Remove(0, i);
                         i = 0;
-                    }else
+                    }
+                    else if(!char.IsWhiteSpace(sb[i-1]))
                     {
+                        
                         this.Eraser--;
+                        
+                        
                     }
                 }
                 return sb.ToString(); ;
