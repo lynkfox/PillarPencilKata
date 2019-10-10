@@ -54,13 +54,20 @@ namespace PencilSimulation
                         Write();
                         break;
                     case 2: //Erase
+                        Erase();
                         break;
                     case 3: //Edit
                         break;
                     case 4: //Read
                         Read();
                         break;
-                    case 5: //Quit
+                    case 5: //Read
+                        NewPaper();
+                        break;
+                    case 6: //Read
+                        NewPencil();
+                        break;
+                    case 7: //Quit
                         Quit();
                         break;
                 }
@@ -219,12 +226,20 @@ namespace PencilSimulation
             void Read()
             {
                 Console.WriteLine(paper.Content);
+                Console.Write("\r\n");
+            }
+
+            void Erase()
+            {
+                Console.WriteLine("What would you like to erase?");
+                string input = Console.ReadLine();
+                paper.Delete(pencil.Erase(input));
             }
         }
 
         private static void PencilActionMenu(out int optionSelect, out bool validOption)
         {
-            Console.WriteLine("Now what would you like do now?\r\n1. Write\r\n2. Erase\r\n3. Edit\r\n4. Read\r\n5. Quit");
+            Console.WriteLine("Now what would you like do now?\r\n1. Write\r\n2. Erase\r\n3. Edit\r\n4. Read\r\n5.New Paper (Will trash current page!)\r\n6.New Pencil\r\n7. Quit\r\n\r\n\r\n");
             validOption = validOption = int.TryParse(Console.ReadLine(), out optionSelect);
         }
 
