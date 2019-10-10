@@ -40,6 +40,24 @@ namespace PencilLib
          */
         public void Prose(string writtenContent)
         {
+            
+
+            if(!(this.Content is null))
+            {
+                StringBuilder sb = new StringBuilder(this.Content);
+                int contentLength = this.Content.Length;
+                while (char.IsWhiteSpace(sb[contentLength - 1]))
+                {
+                    sb.Remove(contentLength - 1, 1);
+                    contentLength--;
+
+                }
+                this.Content = sb.ToString();
+            }
+            
+
+            
+
             if(string.IsNullOrEmpty(this.Content) || this.Content == " ")
             {
                 this.Content += writtenContent;
