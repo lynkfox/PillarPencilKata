@@ -240,6 +240,26 @@ namespace PencilSimulationTests
 
         }
 
+
+        /*This test is for the combination of Pencil.Write and Paper.Edit - 
+         * 
+         * pencil.write will return white space if there is not enough durability. But no one would want
+         * to leave that blank white space there, so if a phrase comes in with any whitespace at the end,
+         * we want to ensure that it does not enter  paper.content
+         */
+        [TestMethod]
+        public void ProseWillNotIncludeTrailingWhitespaceAddedToContent()
+        {
+            paper.NewSheet();
+            string input = "Test Phrase With White    ";
+            expected = "Test Phrase With White";
+
+            paper.Prose(input);
+            actual = paper.Content;
+
+            Assert.AreEqual(expected, actual);
+        }
+
         
     }
 }
