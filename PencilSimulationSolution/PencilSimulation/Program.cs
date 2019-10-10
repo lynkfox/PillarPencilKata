@@ -19,13 +19,14 @@ namespace PencilSimulation
             Console.WriteLine("Select from the following list of options: ");
             Console.WriteLine("1. New Paper\r\n2. Quit");
 
-            
+            bool validOption = int.TryParse(Console.ReadLine(), out optionSelect);
 
 
-            while (!(int.TryParse(Console.ReadLine(), out optionSelect)) || optionSelect<1 || optionSelect>2)
+            while (!validOption || optionSelect<1 || optionSelect>2)
             {
                 Console.WriteLine("Invalid Selection. Please try again.");
                 Console.WriteLine("1. New Paper\r\n2. Quit");
+                validOption = int.TryParse(Console.ReadLine(), out optionSelect);
             }
 
             switch(optionSelect)
@@ -40,12 +41,12 @@ namespace PencilSimulation
 
 
             Console.WriteLine("Now what would you like do now?\r\n1. Write\r\n2. Erase\r\n3. Edit\r\n4. Read\r\n5. Quit");
-
-            while (!(int.TryParse(Console.ReadLine(), out optionSelect)) || optionSelect < 1 || optionSelect > 5)
+            validOption = validOption = int.TryParse(Console.ReadLine(), out optionSelect);
+            while (!validOption || optionSelect < 1 || optionSelect > 5)
             {
                 Console.WriteLine("Invalid Selection. Please try again.");
                 Console.WriteLine("Now what would you like do now?\r\n1. Write\r\n2. Erase\r\n3. Edit\r\n4. Read\r\n5. Quit");
-
+                validOption = int.TryParse(Console.ReadLine(), out optionSelect);
             }
 
             while(optionSelect!=5)
@@ -64,6 +65,15 @@ namespace PencilSimulation
                     case 5: //Quit
                         Quit();
                         break;
+                }
+
+                Console.WriteLine("Now what would you like do now?\r\n1. Write\r\n2. Erase\r\n3. Edit\r\n4. Read\r\n5. Quit");
+                validOption = int.TryParse(Console.ReadLine(), out optionSelect);
+                while (!validOption || optionSelect < 1 || optionSelect > 5)
+                {
+                    Console.WriteLine("Invalid Selection. Please try again.");
+                    Console.WriteLine("Now what would you like do now?\r\n1. Write\r\n2. Erase\r\n3. Edit\r\n4. Read\r\n5. Quit");
+                    validOption = int.TryParse(Console.ReadLine(), out optionSelect);
                 }
             }
 
@@ -207,6 +217,7 @@ namespace PencilSimulation
                 Console.WriteLine("What do you want to write on your paper?");
                 string input = Console.ReadLine();
                 paper.Prose(pencil.Write(input));
+                optionSelect = -1;
             }
         }
 
