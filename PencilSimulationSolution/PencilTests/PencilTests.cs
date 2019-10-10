@@ -388,7 +388,9 @@ namespace PencilSimulationTests
 
         /* Error Handling Tests */
 
-        /*This test makes sure that an Error is thrown when negative Length is given (0 length is acceptable)
+        /*These tests makes sure that an Error is thrown when negative Length is given (0 length is acceptable)
+         * or a negative eraser (again, zero is acceptible for an eraser)
+         * or <1 for tip (a zero tip is not acceptible)
          */
         [TestMethod]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
@@ -413,10 +415,10 @@ namespace PencilSimulationTests
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentOutOfRangeException))]
-        public void ConstructorThrowsExceptionOnPencilWithZeroOrNegEraser()
+        public void ConstructorThrowsExceptionOnPencilWithNegEraser()
         {
-            int zeroEraser = 0;
-            Pencil pencil = new Pencil(tipDurability,length,zeroEraser);
+            int negativeEraser = -1;
+            Pencil pencil = new Pencil(tipDurability,length,negativeEraser);
 
             //Assert is Exception Thrown
         }

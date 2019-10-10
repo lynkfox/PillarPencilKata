@@ -59,8 +59,17 @@ namespace PencilLib
             {
                 this.Length = length;
             }
+
+            if (eraserDurability < 0)
+            {
+                throw new ArgumentOutOfRangeException("PencilEraserNegative", "Pencil Cannot Have Negative Eraser");
+            }
+            else
+            {
+                this.Eraser = eraserDurability;
+            }
+
             
-            this.Eraser = eraserDurability;
         }
 
 
