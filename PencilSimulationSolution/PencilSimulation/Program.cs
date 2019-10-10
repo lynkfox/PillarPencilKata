@@ -22,14 +22,14 @@ namespace PencilSimulation
             bool validOption = int.TryParse(Console.ReadLine(), out optionSelect);
 
 
-            while (!validOption || optionSelect<1 || optionSelect>2)
+            while (!validOption || optionSelect < 1 || optionSelect > 2)
             {
                 Console.WriteLine("Invalid Selection. Please try again.");
                 Console.WriteLine("1. New Paper\r\n2. Quit");
                 validOption = int.TryParse(Console.ReadLine(), out optionSelect);
             }
 
-            switch(optionSelect)
+            switch (optionSelect)
             {
                 case 1:
                     NewPaper();
@@ -39,19 +39,16 @@ namespace PencilSimulation
                     break;
             }
 
-
-            Console.WriteLine("Now what would you like do now?\r\n1. Write\r\n2. Erase\r\n3. Edit\r\n4. Read\r\n5. Quit");
-            validOption = validOption = int.TryParse(Console.ReadLine(), out optionSelect);
+            PencilActionMenu(out optionSelect, out validOption);
             while (!validOption || optionSelect < 1 || optionSelect > 5)
             {
                 Console.WriteLine("Invalid Selection. Please try again.");
-                Console.WriteLine("Now what would you like do now?\r\n1. Write\r\n2. Erase\r\n3. Edit\r\n4. Read\r\n5. Quit");
-                validOption = int.TryParse(Console.ReadLine(), out optionSelect);
+                PencilActionMenu(out optionSelect, out validOption);
             }
 
-            while(optionSelect!=5)
+            while (optionSelect != 5)
             {
-                switch(optionSelect)
+                switch (optionSelect)
                 {
                     case 1: //Write
                         Write();
@@ -67,13 +64,11 @@ namespace PencilSimulation
                         break;
                 }
 
-                Console.WriteLine("Now what would you like do now?\r\n1. Write\r\n2. Erase\r\n3. Edit\r\n4. Read\r\n5. Quit");
-                validOption = int.TryParse(Console.ReadLine(), out optionSelect);
+                PencilActionMenu(out optionSelect, out validOption);
                 while (!validOption || optionSelect < 1 || optionSelect > 5)
                 {
                     Console.WriteLine("Invalid Selection. Please try again.");
-                    Console.WriteLine("Now what would you like do now?\r\n1. Write\r\n2. Erase\r\n3. Edit\r\n4. Read\r\n5. Quit");
-                    validOption = int.TryParse(Console.ReadLine(), out optionSelect);
+                    PencilActionMenu(out optionSelect, out validOption);
                 }
             }
 
@@ -117,7 +112,7 @@ namespace PencilSimulation
                 Console.WriteLine("Select from the following list of options: ");
                 Console.WriteLine("1. Small Pencil\r\n2. Big Pencil\r\n3. Custom Pencil\r\n4.Quit");
 
-                
+
 
 
                 while (!(int.TryParse(Console.ReadLine(), out newPencilOption)) || newPencilOption < 1 || newPencilOption > 4)
@@ -146,7 +141,7 @@ namespace PencilSimulation
             }
 
 
-            
+
             void SmallPencil()
             {
                 pencil = new Pencil(40, 5, 10);
@@ -175,7 +170,7 @@ namespace PencilSimulation
                 Console.WriteLine("Enter Tip Durability: ");
                 input = Console.ReadLine();
 
-               tip = ErrorHandle(input);
+                tip = ErrorHandle(input);
 
                 Console.WriteLine("Enter Eraser Durability: ");
                 input = Console.ReadLine();
@@ -205,7 +200,7 @@ namespace PencilSimulation
                     value = Console.ReadLine();
 
                     NaN = int.TryParse(value, out number);
-                    
+
 
                 }
 
@@ -221,6 +216,11 @@ namespace PencilSimulation
             }
         }
 
-        
+        private static void PencilActionMenu(out int optionSelect, out bool validOption)
+        {
+            Console.WriteLine("Now what would you like do now?\r\n1. Write\r\n2. Erase\r\n3. Edit\r\n4. Read\r\n5. Quit");
+            validOption = validOption = int.TryParse(Console.ReadLine(), out optionSelect);
+        }
+
     }
 }
