@@ -115,8 +115,7 @@ namespace PencilLib
                 {
                     sb[currentIndexInProcess] = replacementWord[i];
                         
-                }
-                else
+                }else
                 {
                     sb[currentIndexInProcess] = '@';
                 }

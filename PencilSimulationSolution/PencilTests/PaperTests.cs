@@ -212,6 +212,33 @@ namespace PencilSimulationTests
             Assert.AreEqual(expected, actual);
         }
 
+        /* Edit Method needs to follow Last In First Out as it makes the most sense, so make sure
+         * with multiple deletes that it does
+         */
+        [TestMethod]
+        public void EditFollowsDeleteInOrderOfLastToFirstDeleted()
+        {
+            paper.NewSheet();
+            paper.Prose(testInput);
+            string firstDelete = "is";
+            string secondDelete = "Test";
+            string thirdDelete = "This";
+            paper.Delete(firstDelete);
+            paper.Delete(secondDelete);
+            paper.Delete(thirdDelete);
+
+            paper.Edit(firstDelete);
+            paper.Edit(secondDelete);
+            paper.Edit(thirdDelete);
+
+            expected = "is Thi@ Test";
+
+            actual = paper.Content;
+
+            Assert.AreEqual(expected, actual);
+
+        }
+
         
     }
 }
