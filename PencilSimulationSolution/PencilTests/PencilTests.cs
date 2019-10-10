@@ -348,8 +348,13 @@ namespace PencilSimulationTests
             Assert.AreEqual(expected, actual);
         }
 
+
+        /*This test determines what happens if there is not enough eraser Durability left for the word
+         * returning the part of the word that is to be erased - basically the opposite of 
+         * when write runs out of durability
+         */
         [TestMethod]
-        public void EraseErasesBackwardFromEndOfInputAndLeavesWhiteSpaceOnWhat()
+        public void EraseErasesBackwardFromEndOfInputAndReturnsOnlyTheCharactersToBeErased()
         {
             int eraserWithTwoDurability = 2;
             Pencil pencil = new Pencil(tipDurability, length, eraserWithTwoDurability);
