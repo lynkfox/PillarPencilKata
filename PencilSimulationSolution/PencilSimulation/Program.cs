@@ -15,7 +15,8 @@ namespace PencilSimulation
             var pencil = new Pencil();
 
             Console.WriteLine("*****     Pencil Simulation 1.0     *****");
-            Console.Write("\n\r\n\r");
+            NewLine();
+            NewLine();
             Console.WriteLine("Select from the following list of options: ");
             Console.WriteLine("1. New Paper\r\n2. Quit");
 
@@ -57,6 +58,7 @@ namespace PencilSimulation
                         Erase();
                         break;
                     case 3: //Edit
+                        Edit();
                         break;
                     case 4: //Read
                         Read();
@@ -96,6 +98,7 @@ namespace PencilSimulation
              */
             void Quit()
             {
+                NewLine();
                 Console.WriteLine("Thank you for using Pencil Simulator 1.0. Goodbye!");
                 Environment.Exit(0);
             }
@@ -105,6 +108,7 @@ namespace PencilSimulation
 
             void NewPaper()
             {
+                NewLine();
                 paper.NewSheet();
                 Console.WriteLine("... ... ... New piece of Paper ready!");
                 NewPencil();
@@ -116,10 +120,10 @@ namespace PencilSimulation
              */
             void NewPencil()
             {
-                Console.Write("\r\n");
+                NewLine();
                 int newPencilOption;
                 Console.WriteLine("What Kind of Pencil would you like? ");
-                Console.Write("\n\r\n\r");
+                NewLine();
                 Console.WriteLine("Select from the following list of options: ");
                 Console.WriteLine("1. Small Pencil\r\n2. Big Pencil\r\n3. Custom Pencil\r\n4.Quit\r\n");
 
@@ -225,37 +229,63 @@ namespace PencilSimulation
                 Console.WriteLine("Invalid Selection. Please try again.");
             }
 
-            void Sharpen()
+            void NewLine()
             {
                 Console.Write("\r\n");
+            }
+
+            void Sharpen()
+            {
+                NewLine();
                 pencil.Sharpen();
                 Console.Write("... ... ... Pencil Sharpened! Tip durability is once again " + pencil.Tip+ ". You have "+pencil.Length+" length of pencil left. \r\n");
-                Console.Write("\r\n");
+                NewLine();
             }
 
             void Write()
             {
-                Console.Write("\r\n");
+                NewLine();
                 Console.WriteLine("What do you want to write on your paper?");
                 string input = Console.ReadLine();
                 paper.Prose(pencil.Write(input));
-                Console.Write("\r\n");
+                NewLine();
+                Read();
             }
 
             void Read()
             {
                 Console.Write("\r\n --- Your Paper -- \r\n");
                 Console.WriteLine(paper.Content);
-                Console.Write("\r\n");
+                NewLine();
             }
 
             void Erase()
             {
-                Console.Write("\r\n");
+                NewLine();
                 Console.WriteLine("What would you like to erase?");
                 string input = Console.ReadLine();
-                paper.Delete(pencil.Erase(input));
-                Console.Write("\r\n");
+                try
+                {
+                    paper.Delete(pencil.Erase(input));
+                }catch(Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+                
+                NewLine();
+                Read();
+            }
+
+            void Edit()
+            {
+                NewLine();
+                Console.WriteLine("What would you like to edit into the last empty space created?");
+                string input = Console.ReadLine();
+                paper.Edit(pencil.Write(input));
+                NewLine();
+                Read();
+
+
             }
         }
 
