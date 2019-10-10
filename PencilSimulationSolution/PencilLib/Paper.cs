@@ -42,18 +42,17 @@ namespace PencilLib
         {
             
 
-            if(!(this.Content is null))
+            
+            StringBuilder sb = new StringBuilder(writtenContent);
+            int contentLength = writtenContent.Length;
+            while (char.IsWhiteSpace(sb[contentLength - 1]))
             {
-                StringBuilder sb = new StringBuilder(this.Content);
-                int contentLength = this.Content.Length;
-                while (char.IsWhiteSpace(sb[contentLength - 1]))
-                {
-                    sb.Remove(contentLength - 1, 1);
-                    contentLength--;
+                sb.Remove(contentLength - 1, 1);
+                contentLength--;
 
-                }
-                this.Content = sb.ToString();
             }
+            writtenContent = sb.ToString();
+            
             
 
             
