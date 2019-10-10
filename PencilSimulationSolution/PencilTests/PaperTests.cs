@@ -162,8 +162,9 @@ namespace PencilSimulationTests
         {
             paper.NewSheet();
             paper.Prose(testInput);
-            paper.Delete(eraseThis);
             paper.Delete(wordToErase);
+            paper.Delete(eraseThis);
+            
 
             expected = "Word is a ABCD";
 
@@ -231,7 +232,7 @@ namespace PencilSimulationTests
             paper.Edit(secondDelete);
             paper.Edit(thirdDelete);
 
-            expected = "is Thi@ Test";
+            expected = "is   Thi@ Test";
 
             actual = paper.Content;
 

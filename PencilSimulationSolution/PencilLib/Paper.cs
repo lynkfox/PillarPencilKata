@@ -10,8 +10,8 @@ namespace PencilLib
 
 
         /*Internal Private Variables */
-        private Queue<int> indexOfDeletes = new Queue<int>();
-        private Queue<int> lengthOfDeletedWords = new Queue<int>();
+        private Stack<int> indexOfDeletes = new Stack<int>();
+        private Stack<int> lengthOfDeletedWords = new Stack<int>();
 
         /*External Public Variables */
 
@@ -73,8 +73,8 @@ namespace PencilLib
             if(indexOfLastOccurance != -1) //-1 being returned if not found
             {
                 this.Content = this.Content.Remove(indexOfLastOccurance, wordLength).Insert(indexOfLastOccurance, whiteSpaceReplace);
-                indexOfDeletes.Enqueue(indexOfLastOccurance);
-                lengthOfDeletedWords.Enqueue(wordLength);
+                indexOfDeletes.Push(indexOfLastOccurance);
+                lengthOfDeletedWords.Push(wordLength);
             }
             
         }
@@ -88,8 +88,8 @@ namespace PencilLib
         public void Edit(string replacementWord)
         {
             int replacementLength = replacementWord.Length;
-            int lengthOfNextWhiteSpace = lengthOfDeletedWords.Dequeue();
-            int startIndexOfDelete = indexOfDeletes.Dequeue();
+            int lengthOfNextWhiteSpace = lengthOfDeletedWords.Pop();
+            int startIndexOfDelete = indexOfDeletes.Pop();
             
             /*add White space to fill if the replacement word is less than what
              * is recorded of the last deleted space
