@@ -414,7 +414,7 @@ namespace PencilSimulationTests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(InvalidOperationException))]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
         public void ConstructorThrowsExceptionOnPencilWithNegEraser()
         {
             int negativeEraser = -1;
