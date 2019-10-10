@@ -17,6 +17,8 @@ namespace PencilSimulationTests
         string actual, expected;
 
       
+        /*Test to make sure the paper remembers what is written on it
+         */
 
         [TestMethod]
         public void ContentCanContainInformation()
@@ -31,6 +33,8 @@ namespace PencilSimulationTests
 
         }
 
+        /* Test to make sure Prose properly adds content to the Paper, with proper white space between content
+         */
         [TestMethod]
         public void ProseAddsToCurrentContent()
         {
@@ -49,6 +53,8 @@ namespace PencilSimulationTests
             
         }
 
+        /*Make sure that the first content doesn't have an extra whitespace starting
+         */
         [TestMethod]
         public void ProseProperlyAddsFirstProseWithoutWhitespace()
         {
@@ -59,6 +65,9 @@ namespace PencilSimulationTests
 
             Assert.AreEqual(expected, actual);
         }
+
+        /*Test that delete is removing words from the phrase and leaves a proper amount of white space
+         */
         [TestMethod]
         public void DeleteRemovesLastInstanceInContentAndLeavesWhiteSpace()
         {
@@ -73,6 +82,9 @@ namespace PencilSimulationTests
 
         }
 
+        /*Test to make sure that if there is multiple instance of the phrase to delete it only finds
+         * the last one
+         */
         [TestMethod]
         public void DeleteRemovesLastInstanceInContentIfDuplicates()
         {
@@ -87,6 +99,10 @@ namespace PencilSimulationTests
 
             Assert.AreEqual(expected, actual);
         }
+
+
+        /*Determine if the phrase to be Erased doesn't exist that the content isn't affected
+         */
 
         [TestMethod]
         public void EraseReturnSameStringIfNotInPaperContent()
@@ -104,6 +120,8 @@ namespace PencilSimulationTests
             Assert.AreEqual(expected, actual);
         }
 
+        /*Test that delete continues to go back and leaves white spaces as needed
+         */
         [TestMethod]
         public void DeleteMultipleUsesContinueToLeaveWhiteSpace()
         {
@@ -118,8 +136,11 @@ namespace PencilSimulationTests
             Assert.AreEqual(expected, actual);
         }
 
+
+        /* Using a Queue so make sure that Edit adds to the last thing deleted in instance of 2 deletes
+         */
         [TestMethod]
-        public void EditAddsWordToFirstWhiteSpaceInList()
+        public void EditAddsWordToFirstWhiteSpaceInQueue()
         {
             paper.NewSheet();
             paper.Prose(testInput);
@@ -134,6 +155,8 @@ namespace PencilSimulationTests
             Assert.AreEqual(expected, actual);
         }
 
+        /* Continue testing of Edit - same test as above basically
+         */
         [TestMethod]
         public void DeletesAndMultipleEditAtOnceReplaceInProperSpotsWithJustTwo()
         {
@@ -153,6 +176,8 @@ namespace PencilSimulationTests
 
         }
 
+        /* making sure that there is still proper white space left if edit is added
+         */
         [TestMethod]
         public void EditInWordThatIsSmallerThanWhiteSpaceAvailable()
         {
@@ -169,6 +194,8 @@ namespace PencilSimulationTests
             Assert.AreEqual(expected, actual);
         }
 
+        /* test if there is a longer word than the white space available
+         */
         [TestMethod]
         public void EditWordIsLongerThanDeletedSpaceReplaceCharactersAsNeeded()
         {
