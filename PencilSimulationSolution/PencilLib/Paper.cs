@@ -76,6 +76,11 @@ namespace PencilLib
          */
         public void Delete(string wordToErase)
         {
+
+            if(!this.Content.Contains(wordToErase))
+            {
+                throw new Exception("There is no place on your paper that has \"" + wordToErase+ "\" to be erased.");
+            }
             int wordLength = wordToErase.Length;
             string whiteSpaceReplace = "";
             int indexOfLastOccurance = this.Content.LastIndexOf(wordToErase);

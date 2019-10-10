@@ -102,7 +102,9 @@ namespace PencilSimulationTests
 
 
         /*Determine if the phrase to be Erased doesn't exist that the content isn't affected
-         */
+         *
+         * 
+         * This test is now Deprecated slightly, because of ErrorHandling being added. New test to follow.
 
         [TestMethod]
         public void EraseReturnSameStringIfNotInPaperContent()
@@ -119,6 +121,7 @@ namespace PencilSimulationTests
 
             Assert.AreEqual(expected, actual);
         }
+        */
 
         /*Test that delete continues to go back and leaves white spaces as needed
          */
@@ -293,15 +296,17 @@ namespace PencilSimulationTests
             
         }
 
+
+        /* Testing to make sure the proper exception message is thrown here.
+         */
         [TestMethod]
-        
         public void DeleteNotFindingValueOfDeleteReturnsExceptionMessageForDisplay()
         {
             paper.NewSheet();
             string notInInput = "ABCDE";
             paper.Prose(testInput);
 
-            expected = "There is no place on your paper that has that to be erased";
+            expected = "There is no place on your paper that has \"ABCDE\" to be erased.";
 
             try
             {
