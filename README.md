@@ -9,20 +9,20 @@ The Wrapper is a very simple, with very little error checking command prompt pro
 
 ## Build Wrapper
 
-dotnet build PencilSimulationSolution\PencilSimulation\PencilSimulation.csproj
+* dotnet build PencilSimulationSolution\PencilSimulation\PencilSimulation.csproj
 
 ## Run Wrapper
 
-dotnet run dotnet run \Debug\netcoreapp2.2\PencilSimulation.dll
+* dotnet run dotnet run \Debug\netcoreapp2.2\PencilSimulation.dll
 
-* assuming you let default dotnetbuild procede without argumenents. 
+*assuming you let default dotnetbuild procede without argumenents.*
 
 # Tests
 
 ## Build Tests
-dotnet build PencilTests\PencilSimulationTests.csproj
-dotnet build PencilLib\PencilLib.csproj
+* dotnet build PencilTests\PencilSimulationTests.csproj
+* dotnet build PencilLib\PencilLib.csproj
 
 ## Run Tests
 
-dotnet vstest PencilTests\bin\Debug\netcoreapp2.2\PencilSimulationTests.dll
+* dotnet vstest PencilTests\bin\Debug\netcoreapp2.2\PencilSimulationTests.dll
