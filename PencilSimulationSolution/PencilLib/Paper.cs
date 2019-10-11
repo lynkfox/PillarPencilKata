@@ -65,7 +65,7 @@ namespace PencilLib
             }
 
             int wordLength = wordToErase.Length;
-            string whiteSpaceReplace = "";
+            string whiteSpaceReplace;
             int indexOfLastOccurance = this.Content.LastIndexOf(wordToErase);
 
 
