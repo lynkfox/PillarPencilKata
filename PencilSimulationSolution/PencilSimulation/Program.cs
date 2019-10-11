@@ -203,7 +203,7 @@ namespace PencilSimulation
             /*Verifies for valid inputs for Pencil Constructor
              * 
              * Even though there are Exception Throws in Pencil, those are for realizing there is a problem
-             * while coding - this wraper should not force the user to deal with those exceptions for Pencil Constructors
+             * while coding - this wrapper should not force the user to deal with those exceptions for Pencil Constructors
              * instead making sure they are not thrown in the first place
              */
             int ErrorHandle(string value)
