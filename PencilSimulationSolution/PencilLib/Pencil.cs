@@ -74,20 +74,19 @@ namespace PencilLib
         {
             string outputPhrase = "";
 
+
+            /* Requirements for Kata do not state what to do if the letter is a Capital (2 points loss)
+            * and there is only 1 point of durability lost. 
+            * 
+            * After Discussing this with the "Client" it was returned to me to "Do what you think is best"
+            * 
+            * So the letter will be written, even if it costs more than the available points
+            * 
+            * Reasoning: better to fail upward - That is, better to produce expected results then leave the
+            * user wondering why it did not work.
+            */
             foreach (char letter in word)
             {
-
-                /* Requirements for Kata do not state what to do if the letter is a Capital (2 points loss)
-                    * and there is only 1 point of durability lost. 
-                    * 
-                    * After Discussing this with the "Client" it was returned to me to "Do what you think is best"
-                    * 
-                    * So the letter will be written, even if it costs more than the available points
-                    * 
-                    * Reasoning: better to fail upward - That is, better to produce expected results then leave the
-                    * user wondering why it did not work.
-                    */
-
 
                 if (this.Tip > 0)
                 {
