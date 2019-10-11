@@ -157,6 +157,21 @@ namespace PencilSimulationTests
             Assert.AreEqual(expectedTip, actualTip);
         }
 
+        [TestMethod]
+        public void WriteWithZeroDurabilityReturnsProperNumberOfWhiteSpace()
+        {
+            Pencil pencil = new Pencil();
+            pencil.Tip = 0;
+            string expected = "    "; //T E S T - 4 letters, 4 white space
+
+            string actual = pencil.Write(testInput);
+
+            Assert.AreEqual(expected, actual);
+
+
+
+        }
+
 
         /* Pencil Sharpen  Tests */
 
