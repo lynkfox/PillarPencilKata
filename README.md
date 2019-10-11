@@ -15,7 +15,7 @@ The Wrapper is a very simple, with very little error checking command prompt pro
 
 * dotnet run dotnet run \Debug\netcoreapp2.2\PencilSimulation.dll
 
-*assuming you let default dotnetbuild procede without argumenents.*
+*assuming you let default dotnet build procede without arguments.*
 
 # Tests
 
