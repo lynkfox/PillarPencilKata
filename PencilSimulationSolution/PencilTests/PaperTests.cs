@@ -16,10 +16,6 @@ namespace PencilSimulationTests
 
         string actual, expected;
 
-      
-        /*Test to make sure the paper remembers what is written on it
-         */
-
         [TestMethod]
         public void ContentCanContainInformation()
         {
@@ -27,47 +23,42 @@ namespace PencilSimulationTests
             paper.NewSheet();
             paper.Content = testInput;
             expected = testInput;
+
             actual = paper.Content;
 
             Assert.AreEqual(expected, actual);
 
         }
 
-        /* Test to make sure Prose properly adds content to the Paper, with proper white space between content
-         */
+
         [TestMethod]
         public void ProseAddsToCurrentContent()
         {
 
 
             paper.NewSheet();
-
             paper.Content = testInput;
             expected = testInput + " " + testInput;
 
             paper.Prose(testInput);
-
             actual = paper.Content;
 
             Assert.AreEqual(expected, actual);
             
         }
 
-        /*Make sure that the first content doesn't have an extra whitespace starting
-         */
         [TestMethod]
         public void ProseProperlyAddsFirstProseWithoutWhitespace()
         {
             paper.NewSheet();
             paper.Prose(testInput);
             expected = testInput;
+
             actual = paper.Content;
 
             Assert.AreEqual(expected, actual);
         }
 
-        /*Test that delete is removing words from the phrase and leaves a proper amount of white space
-         */
         [TestMethod]
         public void DeleteRemovesLastInstanceInContentAndLeavesWhiteSpace()
         {
@@ -82,9 +73,6 @@ namespace PencilSimulationTests
 
         }
 
-        /*Test to make sure that if there is multiple instance of the phrase to delete it only finds
-         * the last one
-         */
         [TestMethod]
         public void DeleteRemovesLastInstanceInContentIfDuplicates()
         {
@@ -101,30 +89,6 @@ namespace PencilSimulationTests
         }
 
 
-        /*Determine if the phrase to be Erased doesn't exist that the content isn't affected
-         *
-         * 
-         * This test is now Deprecated slightly, because of ErrorHandling being added. New test to follow.
-
-        [TestMethod]
-        public void EraseReturnSameStringIfNotInPaperContent()
-        {
-            paper.NewSheet();
-            paper.Prose(testInput);
-            string wordToEraseNotInContent = "NotHere";
-
-            expected = testInput;
-
-
-            paper.Delete(wordToEraseNotInContent);
-            actual = paper.Content;
-
-            Assert.AreEqual(expected, actual);
-        }
-        */
-
-        /*Test that delete continues to go back and leaves white spaces as needed
-         */
         [TestMethod]
         public void DeleteMultipleUsesContinueToLeaveWhiteSpace()
         {
@@ -140,26 +104,20 @@ namespace PencilSimulationTests
         }
 
 
-        /* Using a Queue so make sure that Edit adds to the last thing deleted in instance of 2 deletes
-         */
         [TestMethod]
         public void EditAddsWordToFirstWhiteSpaceInQueue()
         {
             paper.NewSheet();
             paper.Prose(testInput);
-            
             paper.Delete(eraseThis);
-
             expected = "Word is a Test";
 
             paper.Edit("Word");
-
             actual = paper.Content;
+
             Assert.AreEqual(expected, actual);
         }
 
-        /* Continue testing of Edit - same test as above basically
-         */
         [TestMethod]
         public void DeletesAndMultipleEditAtOnceReplaceInProperSpotsWithJustTwo()
         {
@@ -167,58 +125,44 @@ namespace PencilSimulationTests
             paper.Prose(testInput);
             paper.Delete(wordToErase);
             paper.Delete(eraseThis);
-            
-
             expected = "Word is a ABCD";
 
             paper.Edit("Word");
             paper.Edit("ABCD");
-
             actual = paper.Content;
 
             Assert.AreEqual(expected, actual);
 
         }
 
-        /* making sure that there is still proper white space left if edit is added
-         */
         [TestMethod]
         public void EditInWordThatIsSmallerThanWhiteSpaceAvailable()
         {
             paper.NewSheet();
             paper.Prose(testInput);
             paper.Delete(eraseThis);
-            
             expected = "A    is a Test";
 
             paper.Edit("A");
-
             actual = paper.Content;
 
             Assert.AreEqual(expected, actual);
         }
 
-        /* test if there is a longer word than the white space available
-         */
         [TestMethod]
         public void EditWordIsLongerThanDeletedSpaceReplaceCharactersAsNeeded()
         {
             paper.NewSheet();
             paper.Prose(testInput);
             paper.Delete(eraseThis);
-
             expected = "ABCDE@s a Test";
 
             paper.Edit("ABCDEF");
-
             actual = paper.Content;
 
             Assert.AreEqual(expected, actual);
         }
 
-        /* Edit Method needs to follow Last In First Out as it makes the most sense, so make sure
-         * with multiple deletes that it does
-         */
         [TestMethod]
         public void EditFollowsDeleteInOrderOfLastToFirstDeleted()
         {
@@ -244,12 +188,6 @@ namespace PencilSimulationTests
         }
 
 
-        /*This test is for the combination of Pencil.Write and Paper.Edit - 
-         * 
-         * pencil.write will return white space if there is not enough durability. But no one would want
-         * to leave that blank white space there, so if a phrase comes in with any whitespace at the end,
-         * we want to ensure that it does not enter  paper.content
-         */
         [TestMethod]
         public void ProseWillNotIncludeTrailingWhitespaceAddedToContent()
         {
@@ -277,10 +215,6 @@ namespace PencilSimulationTests
 
         }
 
-        /*Error Handling Tests*/
-        /* If there is no white space in the middle of content, then simply add the Edit to to the
-         * end of Content
-         */
         [TestMethod]
         public void EditWithNoWhiteSpaceAddsToEndOfContent()
         {
@@ -288,7 +222,6 @@ namespace PencilSimulationTests
             expected = testInput;
 
             paper.Edit(testInput);
-
             actual = paper.Content;
 
             Assert.AreEqual(expected, actual);
@@ -297,15 +230,12 @@ namespace PencilSimulationTests
         }
 
 
-        /* Testing to make sure the proper exception message is thrown here.
-         */
         [TestMethod]
         public void DeleteNotFindingValueOfDeleteReturnsExceptionMessageForDisplay()
         {
             paper.NewSheet();
             string notInInput = "ABCDE";
             paper.Prose(testInput);
-
             expected = "There is no place on your paper that has \"ABCDE\" to be erased.";
 
             try
@@ -320,9 +250,6 @@ namespace PencilSimulationTests
 
         }
 
-        /*New test to repeat what depreciated test used to test for
-         * 
-         */
 
         [TestMethod]
         public void DeleteIfItDoesNotFindWordDoesNotModifyContent()
@@ -339,7 +266,6 @@ namespace PencilSimulationTests
             {
                 //Doing nothing with exception;
             }
-
             actual = paper.Content;
 
             Assert.AreEqual(expected, actual);
@@ -353,7 +279,6 @@ namespace PencilSimulationTests
             string nullString = null;
 
             paper.Prose(nullString);
-
             actual = paper.Content;
 
             Assert.AreEqual(expected, actual);
@@ -369,7 +294,6 @@ namespace PencilSimulationTests
             expected = "This is a T  t";
 
             paper.Delete(notFullWordDelete);
-
             actual = paper.Content;
 
             Assert.AreEqual(expected, actual);
