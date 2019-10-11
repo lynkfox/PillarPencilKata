@@ -5,28 +5,25 @@ namespace PencilLib
 {
     public class Pencil
     {
-        /* CONST default vaules of Pencil
+        /* default vaules of Pencil
          */
         private const int LENGTH = 40;
         private const int TIP = 20;
         private const int ERASER = 60;
 
 
-
-        /* Private Internal variables
-         */
         private int maxDurability;
 
 
 
-        /* Public Variables
+        /* In Production these should really be ReadOnly, but I've left them public for the test classes
+         * at this time.
          */
         public int Tip { get; set; }
         public int Length { get; set; }
         public int Eraser { get; set; }
 
 
-        /* Constructors */
         public Pencil() : this(TIP, LENGTH, ERASER)
         {
         }
@@ -73,12 +70,6 @@ namespace PencilLib
         }
 
 
-        /* Function : Reduces the Tip Durability by the cost of the input. 
-         * 
-         * Returns the word for use later.
-         * 
-         * If the tip does not have enough durability, return a word that has enough white space for each letter.
-         */
         public string Write(string word)
         {
             string outputPhrase = "";
@@ -101,19 +92,9 @@ namespace PencilLib
                 if (this.Tip > 0)
                 {
                     outputPhrase += letter;
-
-                    if (char.IsUpper(letter))
-                    {
-
-                        this.Tip -= 2;
-
-                    }
-                    else if (letter != ' ') //should cover all lower case and symbols.
-                    {
-
-                        this.Tip -= 1;
-                    }
-                }else
+                    ReduceTipDurability(letter);
+                }
+                else
                 {
                     outputPhrase += " ";
                 }
@@ -122,13 +103,6 @@ namespace PencilLib
                 
             }
             
-            
-            /*This is a nice little safety valve, due to current understanding of requirements.
-             * 
-             * if there is a capital letter (2pts) attempted to be wrote with just 1 durability pt left, it 
-             * currently still writes, and will be at -1 durability afterward. This fixes that.
-             */
-
             if (this.Tip < 0)
             {
                 this.Tip = 0;
@@ -138,15 +112,8 @@ namespace PencilLib
             return outputPhrase;
         }
 
+      
 
-        /* Function - Returns Pencil to max Sharpness while reducing Length.
-         * 
-         * If Length == 0 this function simply does not sharpen the pencil anymore.
-         * 
-         * This can be assumed to be a nub of a pencil, that is just Tip+Eraser with nothing left
-         * to give if sharpening continues. Once this pencil runs out of durability there is no
-         * choice but to "purchase an additional pencil"
-         */
         public void Sharpen()
         {
             if(this.Length > 0)
@@ -154,100 +121,59 @@ namespace PencilLib
                 this.Length -= 1;
                 Tip = maxDurability;
             }
-
-            
         }
-
-
-        /* Depreciated function
-         * 
-         * Function : Determines the Durability loss of input for Erasing a word based on the following criteria:
-         * 
-         * Letter (Capital or Lower) - 1pt
-         * White Space - 0pt
-         * All other Characters - 1pt
-         *
-         
-        private int EraserDurabilityLoss(string input)
-        {
-            int durabilityPoints = 0;
-            foreach(char letter in input)
-            {
-                if (letter != ' ')
-                {
-                    durabilityPoints++;
-                }
-            }
-            return durabilityPoints;
-        }
-        */
-
 
         public string Erase(string erasedWord)
         {
-            StringBuilder sb = new StringBuilder(erasedWord);
-            int erasedLength = erasedWord.Length;
+            
+            
 
             if (this.Eraser > 0)
             {
-                for(int i = erasedLength; i>0; i--)
-                {
-                    if(this.Eraser == 0)
-                    {
-                        sb.Remove(0, i);
-                        i = 0;
-                    }
-                    else if(!char.IsWhiteSpace(sb[i-1]))
-                    {
-                        
-                        this.Eraser--;
-                        
-                        
-                    }
-                }
-                return sb.ToString(); ;
+                
+                return CharactersToBeErased(erasedWord);
 
-
-            } else
+            }
+            else
             {
                 return "";
             }
             
         }
-    }
 
-
-    /* DEPRECIATED - No longer needed 
-     * 
-     * (working it into .Write() was more effecient for determining white space after tip is gone)
-     * 
-     * Function: Determines the Durability Cost of Writing using the following requriements:
-     * 
-     * Capital Letter - 2pts
-     * Lower Case Letter - 1pt
-     * White Space = 0pts
-     * 
-     * Other Characters = 1pt;
-     * 
-     *
-    public int TipDurabilityLoss(string input)
-    {
-        int totalDurabilityCost = 0;
-        foreach(char letter in input)
+        private string CharactersToBeErased(string erasedWord)
         {
-            if(char.IsUpper(letter))
+            StringBuilder sb = new StringBuilder(erasedWord);
+            int erasedLength = erasedWord.Length;
+            for (int i = erasedLength; i > 0; i--)
             {
-                //Capital Letters increase durability cost by 2
-                totalDurabilityCost += 2;
-            }else if (letter != ' ' )
-            {
-                // do nothing if it is a white space, but otherwise increase durability cost by 1
-                totalDurabilityCost++;
+                if (this.Eraser == 0)
+                {
+                    sb.Remove(0, i);
+                    i = 0;
+                }
+                else if (!char.IsWhiteSpace(sb[i - 1]))
+                {
+
+                    this.Eraser--;
+                }
             }
+            return sb.ToString();
         }
 
-        return totalDurabilityCost;
-    }
+        private void ReduceTipDurability(char letter)
+        {
+            if (char.IsUpper(letter))
+            {
 
-        */
+                this.Tip -= 2;
+
+            }
+            else if (letter != ' ') //should cover all lower case and symbols.
+            {
+
+                this.Tip -= 1;
+            }
+        }
+    }
 }
