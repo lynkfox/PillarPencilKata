@@ -6,29 +6,20 @@ namespace PencilLib
 {
     public class Paper
     {
-        /*Constants*/
-
-
-        /*Internal Private Variables */
+        
         private Stack<int> indexOfDeletes = new Stack<int>();
         private Stack<int> lengthOfDeletedWords = new Stack<int>();
 
-        /*External Public Variables */
-
+        
         public string Content { get; set; }
 
-        /*Constructors*/
+        
         public Paper()
         {
 
         }
 
 
-        /* This function sets the Paper to a New Sheet. 
-         * 
-         * Kind of a misnomer, but if we want to save the paper working on should be done in a
-         * new object
-         */
         public void NewSheet()
         {
             this.Content = null;
@@ -36,30 +27,24 @@ namespace PencilLib
             lengthOfDeletedWords.Clear();
         }
 
-        /*This function adds new content to the Page, at the end of existing content
-         */
+
         public void Prose(string writtenContent)
         {
-            
+            //Trim exess white space from the end of the string
            if(!string.IsNullOrEmpty(writtenContent))
            {
                 StringBuilder sb = new StringBuilder(writtenContent);
-                int contentLength = writtenContent.Length;
-                while (char.IsWhiteSpace(sb[contentLength - 1]))
+                int workingIndex = writtenContent.Length-1;
+                while (char.IsWhiteSpace(sb[workingIndex]))
                 {
-                    sb.Remove(contentLength - 1, 1);
-                    contentLength--;
+                    sb.Remove(workingIndex, 1);
+                    workingIndex--;
 
                 }
                 writtenContent = sb.ToString();
            }
             
-            
-            
-            
-
-            
-
+           //Making sure there is always a space between new content written, but not for first content
             if(string.IsNullOrEmpty(this.Content) || this.Content == " ")
             {
                 this.Content += writtenContent;
@@ -71,45 +56,30 @@ namespace PencilLib
             
         }
 
-        /* This function removes the last instance of the input from the current content, leaving
-         * a white space behind of the same length.
-         * 
-         * it then adds that length of white space and the location of it in the content to a 
-         * set of queues to be found later for edit
-         */
         public void Delete(string wordToErase)
         {
 
-            if(!this.Content.Contains(wordToErase))
+            if (!this.Content.Contains(wordToErase))
             {
-                throw new Exception("There is no place on your paper that has \"" + wordToErase+ "\" to be erased.");
+                throw new Exception("There is no place on your paper that has \"" + wordToErase + "\" to be erased.");
             }
+
             int wordLength = wordToErase.Length;
             string whiteSpaceReplace = "";
             int indexOfLastOccurance = this.Content.LastIndexOf(wordToErase);
 
-            /*Generate enough whitespace to replace the word
-             */
-            for(int i=0; i< wordLength; i++)
-            {
-                whiteSpaceReplace += " ";
-            }
 
-            if(indexOfLastOccurance != -1) //-1 being returned if not found
+            whiteSpaceReplace = WhiteSpaceNeeded(wordLength);
+
+            if (indexOfLastOccurance != -1) //-1 -> Word is not found with string.LastIndexOf
             {
                 this.Content = this.Content.Remove(indexOfLastOccurance, wordLength).Insert(indexOfLastOccurance, whiteSpaceReplace);
-                indexOfDeletes.Push(indexOfLastOccurance);
-                lengthOfDeletedWords.Push(wordLength);
+                SaveWhiteSpaceOfLastDeletedWord(wordLength, indexOfLastOccurance);
             }
-            
+
         }
-
-
-        /* Edit follows the Queue philosophy of editing.
-         * 
-         * It fills in the Last White Space created, and moving back in order they are created
-         * 
-         */
+        
+ 
         public void Edit(string replacementWord)
         {
 
@@ -124,43 +94,55 @@ namespace PencilLib
                 int lengthOfNextWhiteSpace = lengthOfDeletedWords.Pop();
                 int startIndexOfDelete = indexOfDeletes.Pop();
 
-                /*add White space to fill if the replacement word is less than what
-                 * is recorded of the last deleted space
-                 */
-                while (replacementLength < lengthOfNextWhiteSpace)
+                if(replacementLength < lengthOfNextWhiteSpace)
                 {
-                    replacementWord += " ";
-                    replacementLength++;
+                    int whiteSpaceNeededToFillSameSpace = lengthOfNextWhiteSpace - replacementLength;
+                    replacementWord += WhiteSpaceNeeded(whiteSpaceNeededToFillSameSpace);
                 }
+              
 
 
-                StringBuilder sb = new StringBuilder(this.Content);
+                StringBuilder contentStringBuilder = new StringBuilder(this.Content);
 
                 for (int i = 0; i < replacementLength; i++)
                 {
-                    int currentIndexInProcess = i + startIndexOfDelete;
+                    int currentIndexInContent = i + startIndexOfDelete;
 
                     if (i < lengthOfNextWhiteSpace)
                     {
-                        sb[currentIndexInProcess] = replacementWord[i];
+                        contentStringBuilder[currentIndexInContent] = replacementWord[i];
                     }
-                    else if (char.IsWhiteSpace(sb[currentIndexInProcess]))
+                    else if (char.IsWhiteSpace(contentStringBuilder[currentIndexInContent]))
                     {
-                        sb[currentIndexInProcess] = replacementWord[i];
+                        contentStringBuilder[currentIndexInContent] = replacementWord[i];
 
                     }
                     else
                     {
-                        sb[currentIndexInProcess] = '@';
+                        contentStringBuilder[currentIndexInContent] = '@';
                     }
                 }
-                this.Content = sb.ToString();
+                this.Content = contentStringBuilder.ToString();
             }
-            
-                
-            
-                
-            
+
+
+        }
+
+        private void SaveWhiteSpaceOfLastDeletedWord(int wordLength, int indexOfLastOccurance)
+        {
+            indexOfDeletes.Push(indexOfLastOccurance);
+            lengthOfDeletedWords.Push(wordLength);
+        }
+
+        private static string WhiteSpaceNeeded(int wordLength)
+        {
+            string whiteSpaceNeeded = "";
+            for (int i = 0; i < wordLength; i++)
+            {
+                whiteSpaceNeeded += " ";
+            }
+
+            return whiteSpaceNeeded;
         }
     }
 }
