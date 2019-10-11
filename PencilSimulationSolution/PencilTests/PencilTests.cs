@@ -172,6 +172,25 @@ namespace PencilSimulationTests
 
         }
 
+        [TestMethod]
+        public void WriteCapitalLetterWithOnePointDurabilityReturnsCapitalLetterAnd0Durability()
+        {
+            Pencil pencil = new Pencil(1);
+            string expectedString = "T";
+            expected = 0;
+
+            
+
+            string actualString = pencil.Write("T");
+            actual = pencil.Tip;
+
+            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(expectedString, actualString);
+
+
+
+        }
+
 
         /* Pencil Sharpen  Tests */
 
