@@ -35,6 +35,7 @@ namespace PencilLib
            {
                 StringBuilder sb = new StringBuilder(writtenContent);
                 int workingIndex = writtenContent.Length-1;
+
                 while (char.IsWhiteSpace(sb[workingIndex]))
                 {
                     sb.Remove(workingIndex, 1);
@@ -87,7 +88,6 @@ namespace PencilLib
             {
                 Prose(replacementWord);
                 
-
             }else
             {
                 int replacementLength = replacementWord.Length;
@@ -102,7 +102,7 @@ namespace PencilLib
               
 
 
-                StringBuilder contentStringBuilder = new StringBuilder(this.Content);
+                StringBuilder contentSB = new StringBuilder(this.Content);
 
                 for (int i = 0; i < replacementLength; i++)
                 {
@@ -110,19 +110,18 @@ namespace PencilLib
 
                     if (i < lengthOfNextWhiteSpace)
                     {
-                        contentStringBuilder[currentIndexInContent] = replacementWord[i];
+                        contentSB[currentIndexInContent] = replacementWord[i];
                     }
-                    else if (char.IsWhiteSpace(contentStringBuilder[currentIndexInContent]))
+                    else if (char.IsWhiteSpace(contentSB[currentIndexInContent]))
                     {
-                        contentStringBuilder[currentIndexInContent] = replacementWord[i];
-
+                        contentSB[currentIndexInContent] = replacementWord[i];
                     }
-                    else
+                    else //if letter is not whitespace, replace with :
                     {
-                        contentStringBuilder[currentIndexInContent] = '@';
+                        contentSB[currentIndexInContent] = '@';
                     }
                 }
-                this.Content = contentStringBuilder.ToString();
+                this.Content = contentSB.ToString();
             }
 
 
