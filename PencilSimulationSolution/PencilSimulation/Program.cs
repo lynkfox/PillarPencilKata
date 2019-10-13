@@ -10,9 +10,12 @@ namespace PencilSimulation
         static void Main(string[] args)
         {
             int optionSelect;
+            bool validOption;
 
             var paper = new Paper();
             var pencil = new Pencil();
+
+
 
             Console.WriteLine("*****     Pencil Simulation 1.0     *****");
             NewLine();
@@ -20,14 +23,13 @@ namespace PencilSimulation
             Console.WriteLine("Select from the following list of options: ");
             Console.WriteLine("1. New Paper\r\n2. Quit");
 
-            bool validOption = int.TryParse(Console.ReadLine(), out optionSelect);
-
+            InitialMenuOptions(out optionSelect, out validOption);
 
             while (!validOption || optionSelect < 1 || optionSelect > 2)
             {
                 WriteInvalidInput();
                 Console.WriteLine("1. New Paper\r\n2. Quit");
-                validOption = int.TryParse(Console.ReadLine(), out optionSelect);
+                InitialMenuOptions(out optionSelect, out validOption);
             }
 
             switch (optionSelect)
@@ -94,17 +96,12 @@ namespace PencilSimulation
             /* Local Functions 
              */
 
-            /* Quit
-             */
             void Quit()
             {
                 NewLine();
                 Console.WriteLine("Thank you for using Pencil Simulator 1.0. Goodbye!");
                 Environment.Exit(0);
             }
-
-            /*gives up a  new sheet of paper
-             */
 
             void NewPaper()
             {
@@ -113,11 +110,7 @@ namespace PencilSimulation
                 Console.WriteLine("... ... ... New piece of Paper ready!");
                 NewPencil();
             }
-
-
-
-            /* Gives a menu to select a small, big, or custom sized pencil
-             */
+         
             void NewPencil()
             {
                 NewLine();
@@ -154,8 +147,6 @@ namespace PencilSimulation
 
 
             }
-
-
 
             void SmallPencil()
             {
@@ -200,12 +191,6 @@ namespace PencilSimulation
 
             }
 
-            /*Verifies for valid inputs for Pencil Constructor
-             * 
-             * Even though there are Exception Throws in Pencil, those are for realizing there is a problem
-             * while coding - this wrapper should not force the user to deal with those exceptions for Pencil Constructors
-             * instead making sure they are not thrown in the first place
-             */
             int ErrorHandle(string value)
             {
                 bool NaN = int.TryParse(value, out int number);
@@ -216,7 +201,6 @@ namespace PencilSimulation
                     value = Console.ReadLine();
 
                     NaN = int.TryParse(value, out number);
-
 
                 }
 
@@ -287,6 +271,11 @@ namespace PencilSimulation
 
 
             }
+        }
+
+        private static void InitialMenuOptions(out int optionSelect, out bool validOption)
+        {
+            validOption = int.TryParse(Console.ReadLine(), out optionSelect);
         }
 
         private static void PencilActionMenu(out int optionSelect, out bool validOption)
