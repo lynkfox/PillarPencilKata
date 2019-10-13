@@ -87,7 +87,6 @@ namespace PencilLib
             */
             foreach (char letter in word)
             {
-
                 if (this.Tip > 0)
                 {
                     outputPhrase += letter;
@@ -97,9 +96,6 @@ namespace PencilLib
                 {
                     outputPhrase += " ";
                 }
-                
-
-                
             }
             
             if (this.Tip < 0)
@@ -125,13 +121,9 @@ namespace PencilLib
         public string Erase(string erasedWord)
         {
             
-            
-
             if (this.Eraser > 0)
             {
-                
                 return CharactersToBeErased(erasedWord);
-
             }
             else
             {
@@ -156,6 +148,7 @@ namespace PencilLib
 
                     this.Eraser--;
                 }
+                //else if it is a whitespace, do nothing
             }
             return sb.ToString();
         }
@@ -164,15 +157,13 @@ namespace PencilLib
         {
             if (char.IsUpper(letter))
             {
-
                 this.Tip -= 2;
-
             }
-            else if (letter != ' ') //should cover all lower case and symbols.
+            else if (!char.IsWhiteSpace(letter))
             {
-
                 this.Tip -= 1;
             }
+            //else letter is a WhiteSpace, so do nothing.
         }
     }
 }
