@@ -6,14 +6,14 @@ namespace PencilLib
 {
     public class Paper
     {
-        
+
         private Stack<int> indexOfDeletes = new Stack<int>();
         private Stack<int> lengthOfDeletedWords = new Stack<int>();
 
-        
+
         public string Content { get; set; }
 
-        
+
         public Paper()
         {
 
@@ -31,10 +31,10 @@ namespace PencilLib
         public void Prose(string writtenContent)
         {
             //Trim exess white space from the end of the string
-           if(!string.IsNullOrEmpty(writtenContent))
-           {
+            if (!string.IsNullOrEmpty(writtenContent))
+            {
                 StringBuilder sb = new StringBuilder(writtenContent);
-                int workingIndex = writtenContent.Length-1;
+                int workingIndex = writtenContent.Length - 1;
 
                 while (char.IsWhiteSpace(sb[workingIndex]))
                 {
@@ -43,18 +43,19 @@ namespace PencilLib
 
                 }
                 writtenContent = sb.ToString();
-           }
-            
-           //Making sure there is always a space between new content written, but not for first content
-            if(string.IsNullOrEmpty(this.Content) || this.Content == " ")
+            }
+
+            //Making sure there is always a space between new content written, but not for first content
+            if (string.IsNullOrEmpty(this.Content) || this.Content == " ")
             {
                 this.Content += writtenContent;
-            }else
+            }
+            else
             {
                 this.Content += " " + writtenContent;
             }
 
-            
+
         }
 
         public void Delete(string wordToErase)
@@ -79,27 +80,28 @@ namespace PencilLib
             }
 
         }
-        
- 
+
+
         public void Edit(string replacementWord)
         {
 
-            if(indexOfDeletes.Count == 0 || indexOfDeletes is null)
+            if (indexOfDeletes.Count == 0 || indexOfDeletes is null)
             {
                 Prose(replacementWord);
-                
-            }else
+
+            }
+            else
             {
                 int replacementLength = replacementWord.Length;
                 int lengthOfNextWhiteSpace = lengthOfDeletedWords.Pop();
                 int startIndexOfDelete = indexOfDeletes.Pop();
 
-                if(replacementLength < lengthOfNextWhiteSpace)
+                if (replacementLength < lengthOfNextWhiteSpace)
                 {
                     int whiteSpaceNeededToFillSameSpace = lengthOfNextWhiteSpace - replacementLength;
                     replacementWord += WhiteSpaceNeeded(whiteSpaceNeededToFillSameSpace);
                 }
-              
+
 
 
                 StringBuilder contentSB = new StringBuilder(this.Content);

@@ -32,7 +32,7 @@ namespace PencilLib
         {
         }
 
-        public Pencil(int tipDurability, int length) : this(tipDurability,length, ERASER)
+        public Pencil(int tipDurability, int length) : this(tipDurability, length, ERASER)
         {
         }
 
@@ -48,11 +48,12 @@ namespace PencilLib
                 this.Tip = this.maxDurability;
             }
 
-            
-            if(length <0)
+
+            if (length < 0)
             {
-                throw new ArgumentOutOfRangeException("PencilLengthNegative","Pencil Cannot Have Negitive Length");
-            }else
+                throw new ArgumentOutOfRangeException("PencilLengthNegative", "Pencil Cannot Have Negitive Length");
+            }
+            else
             {
                 this.Length = length;
             }
@@ -66,7 +67,7 @@ namespace PencilLib
                 this.Eraser = eraserDurability;
             }
 
-            
+
         }
 
 
@@ -97,21 +98,21 @@ namespace PencilLib
                     outputPhrase += " ";
                 }
             }
-            
+
             if (this.Tip < 0)
             {
                 this.Tip = 0;
             }
 
-            
+
             return outputPhrase;
         }
 
-      
+
 
         public void Sharpen()
         {
-            if(this.Length > 0)
+            if (this.Length > 0)
             {
                 this.Length -= 1;
                 Tip = maxDurability;
@@ -120,7 +121,7 @@ namespace PencilLib
 
         public string Erase(string erasedWord)
         {
-            
+
             if (this.Eraser > 0)
             {
                 return CharactersToBeErased(erasedWord);
@@ -129,7 +130,7 @@ namespace PencilLib
             {
                 return "";
             }
-            
+
         }
 
         private string CharactersToBeErased(string erasedWord)
