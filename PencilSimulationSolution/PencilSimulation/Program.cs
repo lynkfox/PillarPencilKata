@@ -126,7 +126,7 @@ namespace PencilSimulation
                 while (!(int.TryParse(Console.ReadLine(), out newPencilOption)) || newPencilOption < 1 || newPencilOption > 4)
                 {
                     Console.WriteLine("Invalid Selection. Please try again.");
-                    Console.WriteLine("1. Small Pencil\r\n2. Big Pencil\r\n3. Custom Pencil\r\n4.Quit");
+                    Console.WriteLine("1. Small Pencil\r\n2. Big Pencil\r\n3. Custom Pencil\r\n4. Quit");
                 }
 
                 switch (newPencilOption)
