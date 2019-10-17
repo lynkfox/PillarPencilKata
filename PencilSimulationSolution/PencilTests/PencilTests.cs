@@ -298,7 +298,7 @@ namespace PencilSimulationTests
         [TestMethod]
         public void EraseDoesNotLooseDurabilityOnWhiteSpace()
         {
-            int eraserWith15Durability = 15; // More than enough durability to get through the testPhrase
+            int eraserWith15Durability = 15; 
             Pencil pencil = new Pencil(tipDurability20, length500, eraserWith15Durability);
             expectedInt = 3;
 
