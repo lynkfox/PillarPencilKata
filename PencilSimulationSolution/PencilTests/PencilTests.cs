@@ -153,7 +153,7 @@ namespace PencilSimulationTests
         public void SharpenReturnsToMaxValue()
         {
             Pencil pencil = new Pencil(tipDurability20, length500);
-            expectedInt = tipDurability20; // the starting tipDurability is 20.
+            expectedInt = tipDurability20; 
 
             pencil.Sharpen();
             actualInt = pencil.Tip;
@@ -162,18 +162,24 @@ namespace PencilSimulationTests
         }
 
         [TestMethod]
-        public void SharpenReturnsToMaxValueWithRandomDurabilityAfterWrite()
+        public void SharpenReturnsToMaxValueWithRangeOfDurabilityAfterWrite()
         {
+            for (expectedInt = 1; expectedInt < 99999; expectedInt += 11)
+            {
+                SharpenOneValue(expectedInt);
+            }
 
-            Random random = new Random();
-            expectedInt = random.Next(0, 100);
-            Pencil randomPencil = new Pencil(expectedInt);
+        }
 
-            randomPencil.Write(singleWord5toWrite4toErase);
-            randomPencil.Sharpen();
-            actualInt = randomPencil.Tip;
+        private void SharpenOneValue(int pencilTip)
+        {
+            Pencil pencil = new Pencil(pencilTip);
+            pencil.Write(phrase14toWrite12toErasewithWhitespace);
+            pencil.Sharpen();
+            actualInt = pencil.Tip;
 
-            Assert.AreEqual(expectedInt, actualInt);
+            Assert.AreEqual(pencilTip, actualInt);
+
         }
 
         [TestMethod]
