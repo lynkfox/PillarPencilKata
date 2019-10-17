@@ -118,39 +118,13 @@ namespace PencilLib
             }
             else
             {
-                int replacementLength = replacementWord.Length;
-                int lengthOfNextWhiteSpace = lengthOfDeletedWords.Pop();
-                int startIndexOfDelete = indexOfDeletes.Pop();
+                int lengthOfNextWhiteSpace = lengthOfDeletedWords.Peek();
 
                 replacementWord = AddWhiteSpaceToReplacementWordIfNeeded(replacementWord, lengthOfNextWhiteSpace);
 
-                
+                this.Content = AddEditToLastWhiteSpaceInContent(replacementWord);
 
-
-
-                StringBuilder contentSB = new StringBuilder(this.Content);
-
-                for (int i = 0; i < replacementLength; i++)
-                {
-                    int currentIndexInContent = i + startIndexOfDelete;
-
-                    if (i < lengthOfNextWhiteSpace)
-                    {
-                        contentSB[currentIndexInContent] = replacementWord[i];
-                    }
-                    else if (char.IsWhiteSpace(contentSB[currentIndexInContent]))
-                    {
-                        contentSB[currentIndexInContent] = replacementWord[i];
-                    }
-                    else //if letter is not whitespace, replace with :
-                    {
-                        contentSB[currentIndexInContent] = '@';
-                    }
-                }
-                this.Content = contentSB.ToString();
             }
-
-
         }
 
         private string AddWhiteSpaceToReplacementWordIfNeeded(string replacement, int lengthNeeded)
@@ -162,6 +136,33 @@ namespace PencilLib
             }
 
             return replacement;
+        }
+
+        private string AddEditToLastWhiteSpaceInContent(string replacement)
+        {
+            int replacementLength = replacement.Length;
+            int lengthOfNextWhiteSpace = lengthOfDeletedWords.Pop();
+            int startIndexOfDelete = indexOfDeletes.Pop();
+            StringBuilder contentSB = new StringBuilder(this.Content);
+
+            for (int i = 0; i < replacementLength; i++)
+            {
+                int currentIndexInContent = i + startIndexOfDelete;
+
+                if (i < lengthOfNextWhiteSpace)
+                {
+                    contentSB[currentIndexInContent] = replacement[i];
+                }
+                else if (char.IsWhiteSpace(contentSB[currentIndexInContent]))
+                {
+                    contentSB[currentIndexInContent] = replacement[i];
+                }
+                else //if letter is not whitespace, replace with :
+                {
+                    contentSB[currentIndexInContent] = '@';
+                }
+            }
+            return contentSB.ToString();
         }
 
         private void SaveWhiteSpaceOfLastDeletedWord(int wordLength, int indexOfLastOccurance)
