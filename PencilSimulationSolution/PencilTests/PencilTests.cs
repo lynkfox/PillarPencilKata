@@ -7,17 +7,20 @@ namespace PencilSimulationTests
     [TestClass]
     public class PencilTests
     {
-        public int length = 500;
-        public int tipDurability = 20;
-        public int eraser = 10;
+        public int length500 = 500;
+        public int tipDurability20 = 20;
+        public int tipDurability1 = 1;
+        public int eraserDurability10 = 10;
+
+        public string oneDurabilityWrite = "a";
 
         public string singleWord5toWrite4toErase = "Test";
-        public int tipDurabilityAfterSingle = 15;
-        public int eraserDurabilityAfterSingle = 6;
+        public int tipDurabilityAfterSingle15 = 15;
+        public int eraserDurabilityAfterSingle6 = 6;
 
         public string phrase14toWrite12toErasewithWhitespace = "This is Phrase";
-        public int tipDurabilityAfterPhrase = 6;
-        public int eraserDurabilityAfterPhrase = 0;
+        public int tipDurabilityAfterPhrase6 = 6;
+        public int eraserDurabilityAfterPhrase0 = 0;
 
         int expectedInt, actualInt;
         string expectedString, actualString;
@@ -29,8 +32,8 @@ namespace PencilSimulationTests
         [TestMethod]
         public void TipDurabilityIs20()
         {
-            Pencil pencil = new Pencil(tipDurability, length);
-            expectedInt = tipDurability;
+            Pencil pencil = new Pencil(tipDurability20, length500);
+            expectedInt = tipDurability20;
 
             actualInt = pencil.Tip;
 
@@ -41,8 +44,8 @@ namespace PencilSimulationTests
         [TestMethod]
         public void WriteWordReducesTipDurability()
         {
-            Pencil pencil = new Pencil(tipDurability, length);
-            expectedInt = tipDurabilityAfterPhrase;
+            Pencil pencil = new Pencil(tipDurability20, length500);
+            expectedInt = tipDurabilityAfterPhrase6;
             pencil.Write(phrase14toWrite12toErasewithWhitespace);
             actualInt = pencil.Tip;
 
@@ -57,7 +60,7 @@ namespace PencilSimulationTests
         [TestMethod]
         public void WriteReturnsString()
         {
-            Pencil pencil = new Pencil(tipDurability, length);
+            Pencil pencil = new Pencil(tipDurability20, length500);
             expectedString = singleWord5toWrite4toErase;
 
             actualString = pencil.Write(singleWord5toWrite4toErase);
@@ -70,12 +73,12 @@ namespace PencilSimulationTests
         [TestMethod]
         public void WriteStopsAt0Durabilility()
         {
-            Pencil pencil = new Pencil(tipDurability, length, eraser);
+            Pencil pencil = new Pencil(tipDurability20, length500, eraserDurability10);
             expectedInt = 0;
 
-            // tip durability is 20. testPhrase costs 14. Run twice
-            pencil.Write(phrase14toWrite12toErasewithWhitespace);  // expected 6 durability left
-            pencil.Write(phrase14toWrite12toErasewithWhitespace); // expected 0 durability, as 6-14 is less than 0
+            
+            pencil.Write(phrase14toWrite12toErasewithWhitespace);  
+            pencil.Write(phrase14toWrite12toErasewithWhitespace); 
             actualInt = pencil.Tip;
 
             Assert.AreEqual(expectedInt, actualInt);
@@ -89,21 +92,15 @@ namespace PencilSimulationTests
             expectedString = "T   ";
 
             actualString = pencilLowTip.Write(singleWord5toWrite4toErase);
-
-            // test input is 5 durability. First letter is a capital, requires 2 durability.
-            // expected should be "T   " (3 white spaces)
-
             
             Assert.AreEqual(expectedString, actualString);
         }
 
 
-        /* This test is practically the same as above, but on a larger scale
-         */
         [TestMethod]
         public void WriteAdjustsDurabilityCorrectilyForWhiteSpaceWithMoreLettersThanDurabilityLeft()
         {
-            Pencil pencil = new Pencil(tipDurability);
+            Pencil pencil = new Pencil(tipDurability20);
             string longPhrase = "This Phrase Is More Than Twenty Durability"; //43 total durability
             expectedString = "This Phrase Is More                       "; //20 written durability, 26 white spaces (3 no durability white spaces)
             int expectedTip = 0;
@@ -118,13 +115,13 @@ namespace PencilSimulationTests
         [TestMethod]
         public void WriteWithZeroDurabilityReturnsProperNumberOfWhiteSpace()
         {
-            Pencil pencil = new Pencil();
-            pencil.Tip = 0;
-            string expected = "    "; //T E S T - 4 letters, 4 white space
+            Pencil pencil = new Pencil(tipDurability1);
+            pencil.Write(oneDurabilityWrite);
+            expectedString = "    "; //T E S T - 4 letters, 4 white space
 
-            string actual = pencil.Write(singleWord5toWrite4toErase);
+            actualString = pencil.Write(singleWord5toWrite4toErase);
 
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(expectedString, actualString);
 
 
 
@@ -155,8 +152,8 @@ namespace PencilSimulationTests
         [TestMethod]
         public void SharpenReturnsToMaxValue()
         {
-            Pencil pencil = new Pencil(tipDurability, length);
-            expectedInt = tipDurability; // the starting tipDurability is 20.
+            Pencil pencil = new Pencil(tipDurability20, length500);
+            expectedInt = tipDurability20; // the starting tipDurability is 20.
 
             pencil.Sharpen();
             actualInt = pencil.Tip;
@@ -182,8 +179,8 @@ namespace PencilSimulationTests
         [TestMethod]
         public void LengthCanBeReturnedAsInitialized()
         {
-            Pencil lengthPencil = new Pencil(tipDurability, length);
-            expectedInt = length;
+            Pencil lengthPencil = new Pencil(tipDurability20, length500);
+            expectedInt = length500;
 
             actualInt = lengthPencil.Length;
 
@@ -194,8 +191,8 @@ namespace PencilSimulationTests
         public void SharpenReducesPencilLengthBy1()
         {
             
-            Pencil lengthPencil = new Pencil(tipDurability, length);
-            expectedInt = length - 1;
+            Pencil lengthPencil = new Pencil(tipDurability20, length500);
+            expectedInt = length500 - 1;
 
             lengthPencil.Sharpen();
             actualInt = lengthPencil.Length;
@@ -212,7 +209,7 @@ namespace PencilSimulationTests
         {
             int zeroPencilLength = 0; 
             
-            Pencil pencil = new Pencil(tipDurability, zeroPencilLength, eraser);
+            Pencil pencil = new Pencil(tipDurability20, zeroPencilLength, eraserDurability10);
             pencil.Write(singleWord5toWrite4toErase); //Starting durability is 20, testInput costs 5 durability
             expectedInt = 15;
 
@@ -233,8 +230,8 @@ namespace PencilSimulationTests
         public void EraserReturnsDurability()
         {
             
-            Pencil pencil = new Pencil(tipDurability, length, eraser);
-            expectedInt = eraser;
+            Pencil pencil = new Pencil(tipDurability20, length500, eraserDurability10);
+            expectedInt = eraserDurability10;
 
             actualInt = pencil.Eraser;
 
@@ -257,7 +254,7 @@ namespace PencilSimulationTests
         public void EraserIsZeroReturnNothingToBeErased()
         {
             int zeroEraserDurability = 0;
-            Pencil pencil = new Pencil(tipDurability, length, zeroEraserDurability);
+            Pencil pencil = new Pencil(tipDurability20, length500, zeroEraserDurability);
             string expected = "";
 
             string actual = pencil.Erase(singleWord5toWrite4toErase);
@@ -270,7 +267,7 @@ namespace PencilSimulationTests
         [TestMethod]
         public void EraseProperlyRemovesDurabilityOfErasedItem()
         {
-            Pencil pencil = new Pencil(tipDurability, length, eraser);
+            Pencil pencil = new Pencil(tipDurability20, length500, eraserDurability10);
             expectedInt = 6; //10 eraser, Test is 4 cost, 6 remainder
 
             pencil.Erase(singleWord5toWrite4toErase);
@@ -284,7 +281,7 @@ namespace PencilSimulationTests
         public void EraseErasesBackwardFromEndOfInputAndReturnsOnlyTheCharactersToBeErased()
         {
             int eraserWithTwoDurability = 2;
-            Pencil pencil = new Pencil(tipDurability, length, eraserWithTwoDurability);
+            Pencil pencil = new Pencil(tipDurability20, length500, eraserWithTwoDurability);
             expectedString = "st"; 
             // Test has 4 durability, 2 durability eraser will erase s and t from the end
 
@@ -298,7 +295,7 @@ namespace PencilSimulationTests
         public void EraseDoesNotLooseDurabilityOnWhiteSpace()
         {
             int eraserWith15Durability = 15; // More than enough durability to get through the testPhrase
-            Pencil pencil = new Pencil(tipDurability, length, eraserWith15Durability);
+            Pencil pencil = new Pencil(tipDurability20, length500, eraserWith15Durability);
             expectedInt = 3;
 
             pencil.Erase(phrase14toWrite12toErasewithWhitespace);
@@ -317,7 +314,7 @@ namespace PencilSimulationTests
         {
             int negativeLength = -1;
 
-            Pencil pencil = new Pencil(tipDurability, negativeLength);
+            Pencil pencil = new Pencil(tipDurability20, negativeLength);
 
             //Assert Is Exception Thrown
         }
@@ -339,7 +336,7 @@ namespace PencilSimulationTests
         {
             int negativeEraser = -1;
 
-            Pencil pencil = new Pencil(tipDurability,length,negativeEraser);
+            Pencil pencil = new Pencil(tipDurability20,length500,negativeEraser);
 
             //Assert is Exception Thrown
         }
