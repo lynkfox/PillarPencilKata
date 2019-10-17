@@ -239,7 +239,7 @@ namespace PencilSimulation
             void Read()
             {
                 Console.Write("\r\n --- Your Paper -- \r\n");
-                Console.WriteLine(paper.Content);
+                Console.WriteLine(paper.Read());
                 NewLine();
             }
 

@@ -37,11 +37,12 @@ namespace PencilSimulationTests
 
 
             Paper paper = new Paper();
-            paper.Content = testInput;
+            paper.Prose(testInput);
+            paper.Prose(testInput);
             expected = testInput + " " + testInput;
 
             paper.Prose(testInput);
-            actual = paper.Content;
+            actual = paper.Read();
 
             Assert.AreEqual(expected, actual);
             
@@ -54,7 +55,7 @@ namespace PencilSimulationTests
             paper.Prose(testInput);
             expected = testInput;
 
-            actual = paper.Content;
+            actual = paper.Read();
 
             Assert.AreEqual(expected, actual);
         }
@@ -67,7 +68,7 @@ namespace PencilSimulationTests
             expected = testInputMinusTest;
 
             paper.Delete(wordToErase);
-            actual = paper.Content;
+            actual = paper.Read();
 
             Assert.AreEqual(expected, actual);
 
@@ -83,7 +84,7 @@ namespace PencilSimulationTests
             expected = "This is a Test     ";
 
             paper.Delete(wordToErase);
-            actual = paper.Content;
+            actual = paper.Read();
 
             Assert.AreEqual(expected, actual);
         }
@@ -98,7 +99,7 @@ namespace PencilSimulationTests
 
             paper.Delete(wordToErase);
             paper.Delete(eraseThis);
-            actual = paper.Content;
+            actual = paper.Read();
 
             Assert.AreEqual(expected, actual);
         }
@@ -113,7 +114,7 @@ namespace PencilSimulationTests
             expected = "Word is a Test";
 
             paper.Edit("Word");
-            actual = paper.Content;
+            actual = paper.Read();
 
             Assert.AreEqual(expected, actual);
         }
@@ -129,7 +130,7 @@ namespace PencilSimulationTests
 
             paper.Edit("Word");
             paper.Edit("ABCD");
-            actual = paper.Content;
+            actual = paper.Read();
 
             Assert.AreEqual(expected, actual);
 
@@ -144,7 +145,7 @@ namespace PencilSimulationTests
             expected = "A    is a Test";
 
             paper.Edit("A");
-            actual = paper.Content;
+            actual = paper.Read();
 
             Assert.AreEqual(expected, actual);
         }
@@ -158,7 +159,7 @@ namespace PencilSimulationTests
             expected = "ABCDE@s a Test";
 
             paper.Edit("ABCDEF");
-            actual = paper.Content;
+            actual = paper.Read();
 
             Assert.AreEqual(expected, actual);
         }
@@ -181,7 +182,7 @@ namespace PencilSimulationTests
 
             expected = "is   Thi@ Test";
 
-            actual = paper.Content;
+            actual = paper.Read();
 
             Assert.AreEqual(expected, actual);
 
@@ -196,7 +197,7 @@ namespace PencilSimulationTests
             expected = "Test Phrase With White";
 
             paper.Prose(input);
-            actual = paper.Content;
+            actual = paper.Read();
 
             Assert.AreEqual(expected, actual);
         }
@@ -209,7 +210,7 @@ namespace PencilSimulationTests
             expected = input;
 
             paper.Prose(input);
-            actual = paper.Content;
+            actual = paper.Read();
 
             Assert.AreEqual(expected, actual);
 
@@ -222,7 +223,7 @@ namespace PencilSimulationTests
             expected = testInput;
 
             paper.Edit(testInput);
-            actual = paper.Content;
+            actual = paper.Read();
 
             Assert.AreEqual(expected, actual);
 
@@ -256,7 +257,7 @@ namespace PencilSimulationTests
         {
             Paper paper = new Paper();
             paper.Prose(testInput);
-            expected = paper.Content;
+            expected = paper.Read();
             string wordNotInContent = "ABCDE";
 
             try
@@ -266,7 +267,7 @@ namespace PencilSimulationTests
             {
                 //Doing nothing with exception;
             }
-            actual = paper.Content;
+            actual = paper.Read();
 
             Assert.AreEqual(expected, actual);
         }
@@ -279,7 +280,7 @@ namespace PencilSimulationTests
             string nullString = null;
 
             paper.Prose(nullString);
-            actual = paper.Content;
+            actual = paper.Read();
 
             Assert.AreEqual(expected, actual);
 
@@ -294,7 +295,7 @@ namespace PencilSimulationTests
             expected = "This is a T  t";
 
             paper.Delete(notFullWordDelete);
-            actual = paper.Content;
+            actual = paper.Read();
 
             Assert.AreEqual(expected, actual);
         }

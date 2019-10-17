@@ -11,7 +11,7 @@ namespace PencilLib
         private Stack<int> lengthOfDeletedWords = new Stack<int>();
 
 
-        public string Content { get; set; }
+        private string Content { get; set; }
 
 
         public Paper()
