@@ -38,7 +38,6 @@ namespace PencilSimulationTests
 
             Paper paper = new Paper();
             paper.Prose(testInput);
-            paper.Prose(testInput);
             expected = testInput + " " + testInput;
 
             paper.Prose(testInput);
