@@ -240,7 +240,7 @@ namespace PencilSimulationTests
             Paper paper = new Paper();
             string notInInput = "ABCDE";
             paper.Prose(testInput);
-            expected = "There is no place on your paper that has \"ABCDE\" to be erased.";
+            expected = "There is no place on your paper that has \""+ notInInput+"\" to be erased.";
 
             try
             {
