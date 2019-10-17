@@ -81,6 +81,11 @@ namespace PencilLib
             return this.Length;
         }
 
+        public int GetEraser()
+        {
+            return this.Eraser;
+        }
+
         public string Write(string word)
         {
             string outputPhrase = "";

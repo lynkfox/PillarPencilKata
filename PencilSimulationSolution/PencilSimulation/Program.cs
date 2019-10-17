@@ -222,7 +222,7 @@ namespace PencilSimulation
             {
                 NewLine();
                 pencil.Sharpen();
-                Console.Write("... ... ... Pencil Sharpened! Tip durability is once again " + pencil.Tip+ ". You have "+pencil.Length+" length of pencil left. \r\n");
+                Console.Write("... ... ... Pencil Sharpened! Tip durability is once again " + pencil.CheckTip()+ ". You have "+pencil.GetLength()+" length of pencil left. \r\n");
                 NewLine();
             }
 

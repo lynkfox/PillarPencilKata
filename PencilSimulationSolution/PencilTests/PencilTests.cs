@@ -237,8 +237,8 @@ namespace PencilSimulationTests
             expectedInt = eraserDurability10;
 
             actualInt = pencil.GetEraser();
-                
-            Assert.AreEqual(expectedInt,actualInt)
+
+            Assert.AreEqual(expectedInt, actualInt);
         }
 
         [TestMethod]
@@ -274,7 +274,7 @@ namespace PencilSimulationTests
             expectedInt = eraserDurabilityAfterSingle6;
 
             pencil.Erase(singleWord5toWrite4toErase);
-            actualInt = pencil.Eraser;
+            actualInt = pencil.GetEraser();
 
             Assert.AreEqual(expectedInt, actualInt);
         }
@@ -302,7 +302,7 @@ namespace PencilSimulationTests
             expectedInt = 3;
 
             pencil.Erase(phrase14toWrite12toErasewithWhitespace);
-            actualInt = pencil.Eraser;
+            actualInt = pencil.GetEraser();
 
             Assert.AreEqual(expectedInt, actualInt);
             
