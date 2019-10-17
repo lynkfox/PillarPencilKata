@@ -201,7 +201,7 @@ namespace PencilSimulationTests
             expectedInt = length500 - 1;
 
             lengthPencil.Sharpen();
-            actualInt = lengthPencil.Length;
+            actualInt = lengthPencil.GetLength();
             
 
             Assert.AreEqual(expectedInt, actualInt);
