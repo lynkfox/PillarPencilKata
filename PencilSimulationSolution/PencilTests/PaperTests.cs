@@ -12,6 +12,7 @@ namespace PencilSimulationTests
         public string testInputMinusTest = "This is a     "; //1 whitespace space, 4 white space for T E S T
         public string wordToErase = "Test";
         public string eraseThis = "This";
+        public string genericWordABCDEF = "ABCDEF";
         public Paper paper = new Paper();
 
         public string actual, expected;
@@ -158,10 +159,9 @@ namespace PencilSimulationTests
             Paper paper = new Paper();
             paper.Prose(testInput);
             paper.Delete(eraseThis);
-            string wordToEditIn = "ABCDEF";
             expected = "ABCDE@s a Test";
 
-            paper.Edit(wordToEditIn);
+            paper.Edit(genericWordABCDEF);
             actual = paper.Read();
 
             Assert.AreEqual(expected, actual);
@@ -238,13 +238,13 @@ namespace PencilSimulationTests
         public void DeleteNotFindingValueOfDeleteReturnsExceptionMessageForDisplay()
         {
             Paper paper = new Paper();
-            string notInInput = "ABCDE";
+           
             paper.Prose(testInput);
-            expected = "There is no place on your paper that has \""+ notInInput+"\" to be erased.";
+            expected = "There is no place on your paper that has \""+ genericWordABCDEF + "\" to be erased.";
 
             try
             {
-                paper.Delete(notInInput);
+                paper.Delete(genericWordABCDEF);
             }catch(Exception e)
             {
                 actual = e.Message;
@@ -261,11 +261,10 @@ namespace PencilSimulationTests
             Paper paper = new Paper();
             paper.Prose(testInput);
             expected = paper.Read();
-            string wordNotInContent = "ABCDE";
 
             try
             {
-                paper.Delete(wordNotInContent);
+                paper.Delete(genericWordABCDEF);
             }catch
             {
                 //Doing nothing with exception;
