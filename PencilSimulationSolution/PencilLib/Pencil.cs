@@ -101,22 +101,12 @@ namespace PencilLib
         public string Write(string word)
         {
 
-            return  ReduceTipDurabilityByInputAndReturn(word);
+            return  DullTipAndWriteWord(word);
 
         }
 
 
-        /* Requirements for Kata do not state what to do if the letter is a Capital (2 points loss)
-            * and there is only 1 point of durability lost. 
-            * 
-            * After Discussing this with the "Client" it was returned to me to "Do what you think is best"
-            * 
-            * So the letter will be written, even if it costs more than the available points
-            * 
-            * Reasoning: better to fail upward - That is, better to produce expected results then leave the
-            * user wondering why it did not work.
-            */
-        private string ReduceTipDurabilityByInputAndReturn(string input)
+        private string DullTipAndWriteWord(string input)
         {
             string output = "";
             foreach (char letter in input)
@@ -135,6 +125,19 @@ namespace PencilLib
             PreventNegativeTip();
 
             return output;
+        }
+
+        private void ReduceTipDurability(char letter)
+        {
+            if (char.IsUpper(letter))
+            {
+                this.Tip -= 2;
+            }
+            else if (!char.IsWhiteSpace(letter))
+            {
+                this.Tip -= 1;
+            }
+            //else letter is a WhiteSpace, so do nothing.
         }
 
         private void PreventNegativeTip()
@@ -190,17 +193,6 @@ namespace PencilLib
             return sb.ToString();
         }
 
-        private void ReduceTipDurability(char letter)
-        {
-            if (char.IsUpper(letter))
-            {
-                this.Tip -= 2;
-            }
-            else if (!char.IsWhiteSpace(letter))
-            {
-                this.Tip -= 1;
-            }
-            //else letter is a WhiteSpace, so do nothing.
-        }
+       
     }
 }
