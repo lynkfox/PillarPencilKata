@@ -79,18 +79,23 @@ namespace PencilLib
             ThrowExceptionIfWordNotFound(wordToErase);
 
             int wordLength = wordToErase.Length;
-            string whiteSpaceReplace;
             int indexOfLastOccurance = this.Content.LastIndexOf(wordToErase);
-
-
-            whiteSpaceReplace = WhiteSpaceNeeded(wordLength);
+            
 
             if (indexOfLastOccurance != -1) //-1 -> Word is not found with string.LastIndexOf
             {
-                this.Content = this.Content.Remove(indexOfLastOccurance, wordLength).Insert(indexOfLastOccurance, whiteSpaceReplace);
+                RemoveWordAndAddWhiteSpace(wordLength, indexOfLastOccurance);
                 SaveWhiteSpaceOfLastDeletedWord(wordLength, indexOfLastOccurance);
             }
 
+        }
+
+        private void RemoveWordAndAddWhiteSpace(int length, int index)
+        {
+            
+            string whiteSpaceReplace = WhiteSpaceNeeded(length);
+            this.Content = this.Content.Remove(index, length).Insert(index, whiteSpaceReplace);;
+            
         }
 
         private void ThrowExceptionIfWordNotFound(string word)
