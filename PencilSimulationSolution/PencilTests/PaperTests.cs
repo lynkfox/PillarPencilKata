@@ -143,9 +143,10 @@ namespace PencilSimulationTests
             Paper paper = new Paper();
             paper.Prose(testInput);
             paper.Delete(eraseThis);
+            string singleCharacterToEditIn = "A";
             expected = "A    is a Test";
 
-            paper.Edit("A");
+            paper.Edit(singleCharacterToEditIn);
             actual = paper.Read();
 
             Assert.AreEqual(expected, actual);
@@ -157,9 +158,10 @@ namespace PencilSimulationTests
             Paper paper = new Paper();
             paper.Prose(testInput);
             paper.Delete(eraseThis);
+            string wordToEditIn = "ABCDEF";
             expected = "ABCDE@s a Test";
 
-            paper.Edit("ABCDEF");
+            paper.Edit(wordToEditIn);
             actual = paper.Read();
 
             Assert.AreEqual(expected, actual);
