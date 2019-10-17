@@ -16,9 +16,6 @@ namespace PencilLib
 
 
 
-        /* In Production these should really be ReadOnly, but I've left them public for the test classes
-         * at this time.
-         */
         private int Tip { get; set; }
         private int Length { get; set; }
         private int Eraser { get; set; }
@@ -40,17 +37,33 @@ namespace PencilLib
 
         public Pencil(int tipDurability, int length, int eraserDurability)
         {
-            if (tipDurability <= 0)
+
+            SetTipDurability(tipDurability);
+            SetLength(length);
+            SetEraserDurability(eraserDurability);
+
+            
+
+            
+
+
+        }
+
+        private void SetTipDurability(int tip)
+        {
+            if (tip <= 0)
             {
                 throw new ArgumentOutOfRangeException("PencilTipLessThan1", "Pencil Cannot Have Zero or Negative Tip");
             }
             else
             {
-                this.maxDurability = tipDurability;
+                this.maxDurability = tip;
                 this.Tip = this.maxDurability;
             }
+        }
 
-
+        private void SetLength(int length)
+        {
             if (length < 0)
             {
                 throw new ArgumentOutOfRangeException("PencilLengthNegative", "Pencil Cannot Have Negitive Length");
@@ -59,18 +72,22 @@ namespace PencilLib
             {
                 this.Length = length;
             }
+        }
 
-            if (eraserDurability < 0)
+        private void SetEraserDurability(int eraser)
+        {
+            if (eraser < 0)
             {
                 throw new ArgumentOutOfRangeException("PencilEraserNegative", "Pencil Cannot Have Negative Eraser");
             }
             else
             {
-                this.Eraser = eraserDurability;
+                this.Eraser = eraser;
             }
-
-
         }
+
+
+
         public int CheckTip()
         {
             return this.Tip;
