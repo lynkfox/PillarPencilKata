@@ -20,7 +20,7 @@ namespace PencilLib
          * at this time.
          */
         private int Tip { get; set; }
-        public int Length { get; set; }
+        private int Length { get; set; }
         public int Eraser { get; set; }
 
 
@@ -74,6 +74,11 @@ namespace PencilLib
         public int CheckTip()
         {
             return this.Tip;
+        }
+
+        public int GetLength()
+        {
+            return this.Length;
         }
 
         public string Write(string word)

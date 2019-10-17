@@ -183,12 +183,12 @@ namespace PencilSimulationTests
         }
 
         [TestMethod]
-        public void LengthCanBeReturnedAsInitialized()
+        public void LengthCanBeCheckedWithGetLength()
         {
-            Pencil lengthPencil = new Pencil(tipDurability20, length500);
+            Pencil pencil = new Pencil(tipDurability20, length500);
             expectedInt = length500;
 
-            actualInt = lengthPencil.Length;
+            actualInt = pencil.GetLength();
 
             Assert.AreEqual(expectedInt, actualInt);
         }
