@@ -30,12 +30,12 @@ namespace PencilSimulationTests
          */
 
         [TestMethod]
-        public void TipDurabilityIs20()
+        public void TipCanBeRetrievedWithCheckTip()
         {
-            Pencil pencil = new Pencil(tipDurability20, length500);
+            Pencil pencil = new Pencil(tipDurability20);
             expectedInt = tipDurability20;
 
-            actualInt = pencil.Tip;
+            actualInt = pencil.CheckTip();
 
             Assert.AreEqual(expectedInt, actualInt);
         }

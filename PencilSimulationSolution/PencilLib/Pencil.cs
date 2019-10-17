@@ -19,10 +19,12 @@ namespace PencilLib
         /* In Production these should really be ReadOnly, but I've left them public for the test classes
          * at this time.
          */
-        public int Tip { get; set; }
+        private int Tip { get; set; }
         public int Length { get; set; }
         public int Eraser { get; set; }
 
+
+        
 
         public Pencil() : this(TIP, LENGTH, ERASER)
         {
