@@ -27,6 +27,11 @@ namespace PencilLib
             lengthOfDeletedWords.Clear();
         }
 
+        public string Read()
+        {
+            return this.Content;
+        }
+
 
         public void Prose(string writtenContent)
         {
