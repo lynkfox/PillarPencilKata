@@ -100,13 +100,11 @@ namespace PencilLib
 
         public string Write(string word)
         {
-
-            return  DullTipAndWriteWord(word);
-
+            return  DullTipAndCharactersToBeWritten(word);
         }
 
 
-        private string DullTipAndWriteWord(string input)
+        private string DullTipAndCharactersToBeWritten(string input)
         {
             string output = "";
             foreach (char letter in input)
@@ -159,6 +157,7 @@ namespace PencilLib
                 Tip = maxDurability;
             }
         }
+
 
 
 
