@@ -109,20 +109,20 @@ namespace PencilLib
 
 
 
-        public void Edit(string replacementWord)
+        public void Edit(string replacementString)
         {
 
             if (indexOfDeletes.Count == 0 || indexOfDeletes is null)
             {
-                Prose(replacementWord);
+                Prose(replacementString);
             }
             else
             {
                 int lengthOfNextWhiteSpace = lengthOfDeletedWords.Peek();
 
-                replacementWord = AddWhiteSpaceToReplacementWordIfNeeded(replacementWord, lengthOfNextWhiteSpace);
+                replacementString = AddWhiteSpaceToReplacementWordIfNeeded(replacementString, lengthOfNextWhiteSpace);
 
-                this.Content = AddEditToLastWhiteSpaceInContent(replacementWord);
+                this.Content = AddEditToLastWhiteSpaceInContent(replacementString);
 
             }
         }
