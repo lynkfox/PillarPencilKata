@@ -8,19 +8,19 @@ namespace PencilSimulationTests
     public class PaperTests
     {
 
-        string testInput = "This is a Test";
-        string testInputMinusTest = "This is a     "; //1 whitespace space, 4 white space for T E S T
-        string wordToErase= "Test";
-        string eraseThis = "This";
-        Paper paper = new Paper();
+        public string testInput = "This is a Test";
+        public string testInputMinusTest = "This is a     "; //1 whitespace space, 4 white space for T E S T
+        public string wordToErase = "Test";
+        public string eraseThis = "This";
+        public Paper paper = new Paper();
 
-        string actual, expected;
+        public string actual, expected;
 
         [TestMethod]
         public void ContentCanContainInformation()
         {
 
-            paper.NewSheet();
+            Paper paper = new Paper();
             paper.Content = testInput;
             expected = testInput;
 
