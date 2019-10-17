@@ -101,11 +101,8 @@ namespace PencilLib
         public string Write(string word)
         {
 
-            string wordToWrite = ReduceTipDurabilityByInput(word);
+            return  ReduceTipDurabilityByInputAndReturn(word);
 
-            PreventNegativeTip();
-
-            return wordToWrite;
         }
 
 
@@ -119,7 +116,7 @@ namespace PencilLib
             * Reasoning: better to fail upward - That is, better to produce expected results then leave the
             * user wondering why it did not work.
             */
-        private string ReduceTipDurabilityByInput(string input)
+        private string ReduceTipDurabilityByInputAndReturn(string input)
         {
             string output = "";
             foreach (char letter in input)
@@ -134,6 +131,8 @@ namespace PencilLib
                     output += " ";
                 }
             }
+
+            PreventNegativeTip();
 
             return output;
         }
