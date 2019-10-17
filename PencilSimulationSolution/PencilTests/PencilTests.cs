@@ -272,7 +272,7 @@ namespace PencilSimulationTests
         public void EraseProperlyRemovesDurabilityOfErasedItem()
         {
             Pencil pencil = new Pencil(tipDurability20, length500, eraserDurability10);
-            expectedInt = 6; //10 eraser, Test is 4 cost, 6 remainder
+            expectedInt = eraserDurabilityAfterSingle6;
 
             pencil.Erase(singleWord5toWrite4toErase);
             actualInt = pencil.Eraser;
