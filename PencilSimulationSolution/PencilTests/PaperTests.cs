@@ -17,18 +17,18 @@ namespace PencilSimulationTests
         public string actual, expected;
 
         [TestMethod]
-        public void ContentCanContainInformation()
+        public void ReadReturnsContentOfPaper()
         {
-
             Paper paper = new Paper();
-            paper.Content = testInput;
+            paper.Prose(testInput);
             expected = testInput;
 
-            actual = paper.Content;
+            actual = paper.Read();
 
             Assert.AreEqual(expected, actual);
-
         }
+
+
 
 
         [TestMethod]
