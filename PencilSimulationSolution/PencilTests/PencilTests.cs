@@ -231,15 +231,14 @@ namespace PencilSimulationTests
 
   
         [TestMethod]
-        public void EraserReturnsDurability()
+        public void EraserCanBeCheckedWithGetEraser()
         {
-            
             Pencil pencil = new Pencil(tipDurability20, length500, eraserDurability10);
             expectedInt = eraserDurability10;
 
-            actualInt = pencil.Eraser;
-
-            Assert.AreEqual(expectedInt, actualInt);
+            actualInt = pencil.GetEraser();
+                
+            Assert.AreEqual(expectedInt,actualInt)
         }
 
         [TestMethod]

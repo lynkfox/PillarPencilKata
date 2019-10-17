@@ -21,7 +21,7 @@ namespace PencilLib
          */
         private int Tip { get; set; }
         private int Length { get; set; }
-        public int Eraser { get; set; }
+        private int Eraser { get; set; }
 
 
         
