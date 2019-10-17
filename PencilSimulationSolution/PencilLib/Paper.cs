@@ -107,13 +107,14 @@ namespace PencilLib
         }
 
 
+
+
         public void Edit(string replacementWord)
         {
 
             if (indexOfDeletes.Count == 0 || indexOfDeletes is null)
             {
                 Prose(replacementWord);
-
             }
             else
             {
@@ -121,11 +122,9 @@ namespace PencilLib
                 int lengthOfNextWhiteSpace = lengthOfDeletedWords.Pop();
                 int startIndexOfDelete = indexOfDeletes.Pop();
 
-                if (replacementLength < lengthOfNextWhiteSpace)
-                {
-                    int whiteSpaceNeededToFillSameSpace = lengthOfNextWhiteSpace - replacementLength;
-                    replacementWord += WhiteSpaceNeeded(whiteSpaceNeededToFillSameSpace);
-                }
+                replacementWord = AddWhiteSpaceToReplacementWordIfNeeded(replacementWord, lengthOfNextWhiteSpace);
+
+                
 
 
 
@@ -152,6 +151,17 @@ namespace PencilLib
             }
 
 
+        }
+
+        private string AddWhiteSpaceToReplacementWordIfNeeded(string replacement, int lengthNeeded)
+        {
+            if (replacement.Length < lengthNeeded)
+            {
+                int whiteSpaceNeededToFillSameSpace = lengthNeeded - replacement.Length;
+                replacement += WhiteSpaceNeeded(whiteSpaceNeededToFillSameSpace);
+            }
+
+            return replacement;
         }
 
         private void SaveWhiteSpaceOfLastDeletedWord(int wordLength, int indexOfLastOccurance)
