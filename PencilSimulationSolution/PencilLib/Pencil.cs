@@ -81,7 +81,7 @@ namespace PencilLib
 
 
 
-        public int CheckTip()
+        public int GetTip()
         {
             return this.Tip;
         }
@@ -149,6 +149,8 @@ namespace PencilLib
         }
 
 
+
+
         public void Sharpen()
         {
             if (this.Length > 0)
@@ -157,6 +159,8 @@ namespace PencilLib
                 Tip = maxDurability;
             }
         }
+
+
 
         public string Erase(string erasedWord)
         {

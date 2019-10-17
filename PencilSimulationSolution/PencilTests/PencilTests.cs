@@ -35,7 +35,7 @@ namespace PencilSimulationTests
             Pencil pencil = new Pencil(tipDurability20);
             expectedInt = tipDurability20;
 
-            actualInt = pencil.CheckTip();
+            actualInt = pencil.GetTip();
 
             Assert.AreEqual(expectedInt, actualInt);
         }
@@ -47,7 +47,7 @@ namespace PencilSimulationTests
             Pencil pencil = new Pencil(tipDurability20, length500);
             expectedInt = tipDurabilityAfterPhrase6;
             pencil.Write(phrase14toWrite12toErasewithWhitespace);
-            actualInt = pencil.CheckTip();
+            actualInt = pencil.GetTip();
 
             Assert.AreEqual(expectedInt, actualInt);
         }
@@ -79,7 +79,7 @@ namespace PencilSimulationTests
             
             pencil.Write(phrase14toWrite12toErasewithWhitespace);  
             pencil.Write(phrase14toWrite12toErasewithWhitespace); 
-            actualInt = pencil.CheckTip();
+            actualInt = pencil.GetTip();
 
             Assert.AreEqual(expectedInt, actualInt);
         }
@@ -106,7 +106,7 @@ namespace PencilSimulationTests
             int expectedTip = 0;
 
             actualString = pencil.Write(longPhrase);
-            int actualTip = pencil.CheckTip();
+            int actualTip = pencil.GetTip();
 
             Assert.AreEqual(expectedString, actualString);
             Assert.AreEqual(expectedTip, actualTip);
@@ -137,7 +137,7 @@ namespace PencilSimulationTests
             
 
             actualString = pencil.Write("T");
-            actualInt = pencil.CheckTip();
+            actualInt = pencil.GetTip();
 
             Assert.AreEqual(expectedInt, actualInt);
             Assert.AreEqual(expectedString, actualString);
@@ -156,7 +156,7 @@ namespace PencilSimulationTests
             expectedInt = tipDurability20; 
 
             pencil.Sharpen();
-            actualInt = pencil.CheckTip();
+            actualInt = pencil.GetTip();
 
             Assert.AreEqual(expectedInt, actualInt);
         }
@@ -176,7 +176,7 @@ namespace PencilSimulationTests
             Pencil pencil = new Pencil(pencilTip);
             pencil.Write(phrase14toWrite12toErasewithWhitespace);
             pencil.Sharpen();
-            actualInt = pencil.CheckTip();
+            actualInt = pencil.GetTip();
 
             Assert.AreEqual(pencilTip, actualInt);
 
@@ -219,7 +219,7 @@ namespace PencilSimulationTests
 
             pencil.Sharpen();
 
-            actualInt = pencil.CheckTip();
+            actualInt = pencil.GetTip();
 
             Assert.AreEqual(expectedInt, actualInt);
         }
