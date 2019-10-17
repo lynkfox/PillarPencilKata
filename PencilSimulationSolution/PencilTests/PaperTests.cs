@@ -303,5 +303,19 @@ namespace PencilSimulationTests
         }
 
 
+        [TestMethod]
+        public void NewSheetCleansContentOut()
+        {
+            Paper paper = new Paper();
+            paper.Prose(testInput);
+            expected = null;
+
+            paper.NewSheet();
+
+            actual = paper.Read();
+
+            Assert.AreEqual(expected, actual);
+        }
+
     }
 }
