@@ -1,22 +1,23 @@
-using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using PencilLib;
+using System;
 
 namespace PencilSimulationTests
 {
     [TestClass]
     public class PencilTests
     {
-        public static int length = 500;
-        public static int tipDurability = 20;
-        public static int eraser = 10;
+        public int length = 500;
+        public int tipDurability = 20;
+        public int eraser = 10;
 
-        public static string testInput = "Test"; 
-        /* "Test" has a Durability cost of 5 to write, 4 to erase
-         */
-        public static string phraseInput = "This is Phrase"; 
-        /* "This is Phrase" has a Durability cost of 14 to write 12 to erase
-         */
+        public string singleWord5toWrite4toErase = "Test";
+        public int tipDurabilityAfterSingle = 15;
+        public int eraserDurabilityAfterSingle = 6;
+
+        public string phrase14toWrite12toErasewithWhitespace = "This is Phrase";
+        public int tipDurabilityAfterPhrase = 6;
+        public int eraserDurabilityAfterPhrase = 0;
 
         int expectedInt, actualInt;
         string expectedString, actualString;
@@ -37,18 +38,12 @@ namespace PencilSimulationTests
         }
 
         
-            /*  2pts per capital
-             *  1pt per rest of characters
-             *  0pt for whitespace
-             */
         [TestMethod]
         public void WriteWordReducesTipDurability()
         {
             Pencil pencil = new Pencil(tipDurability, length);
-            string phrase = "Run Run Run";
-            expectedInt = 8; //12 points for Run Run Run, 20-12 = 8.
-
-            pencil.Write(phrase);
+            expectedInt = tipDurabilityAfterPhrase;
+            pencil.Write(phrase14toWrite12toErasewithWhitespace);
             actualInt = pencil.Tip;
 
             Assert.AreEqual(expectedInt, actualInt);
@@ -63,9 +58,9 @@ namespace PencilSimulationTests
         public void WriteReturnsString()
         {
             Pencil pencil = new Pencil(tipDurability, length);
-            expectedString = testInput;
+            expectedString = singleWord5toWrite4toErase;
 
-            actualString = pencil.Write(testInput);
+            actualString = pencil.Write(singleWord5toWrite4toErase);
             
             Assert.AreEqual(expectedString, actualString);
 
@@ -79,8 +74,8 @@ namespace PencilSimulationTests
             expectedInt = 0;
 
             // tip durability is 20. testPhrase costs 14. Run twice
-            pencil.Write(phraseInput);  // expected 6 durability left
-            pencil.Write(phraseInput); // expected 0 durability, as 6-14 is less than 0
+            pencil.Write(phrase14toWrite12toErasewithWhitespace);  // expected 6 durability left
+            pencil.Write(phrase14toWrite12toErasewithWhitespace); // expected 0 durability, as 6-14 is less than 0
             actualInt = pencil.Tip;
 
             Assert.AreEqual(expectedInt, actualInt);
@@ -93,7 +88,7 @@ namespace PencilSimulationTests
             Pencil pencilLowTip = new Pencil(lowDurability);
             expectedString = "T   ";
 
-            actualString = pencilLowTip.Write(testInput);
+            actualString = pencilLowTip.Write(singleWord5toWrite4toErase);
 
             // test input is 5 durability. First letter is a capital, requires 2 durability.
             // expected should be "T   " (3 white spaces)
@@ -127,7 +122,7 @@ namespace PencilSimulationTests
             pencil.Tip = 0;
             string expected = "    "; //T E S T - 4 letters, 4 white space
 
-            string actual = pencil.Write(testInput);
+            string actual = pencil.Write(singleWord5toWrite4toErase);
 
             Assert.AreEqual(expected, actual);
 
@@ -177,7 +172,7 @@ namespace PencilSimulationTests
             expectedInt = random.Next(0, 100);
             Pencil randomPencil = new Pencil(expectedInt);
 
-            randomPencil.Write(testInput);
+            randomPencil.Write(singleWord5toWrite4toErase);
             randomPencil.Sharpen();
             actualInt = randomPencil.Tip;
 
@@ -218,7 +213,7 @@ namespace PencilSimulationTests
             int zeroPencilLength = 0; 
             
             Pencil pencil = new Pencil(tipDurability, zeroPencilLength, eraser);
-            pencil.Write(testInput); //Starting durability is 20, testInput costs 5 durability
+            pencil.Write(singleWord5toWrite4toErase); //Starting durability is 20, testInput costs 5 durability
             expectedInt = 15;
 
             pencil.Sharpen();
@@ -250,9 +245,9 @@ namespace PencilSimulationTests
         public void EraseReturnsTheWordThatNeedsToBeErased()
         {
             Pencil pencil = new Pencil();
-            expectedString = testInput;
+            expectedString = singleWord5toWrite4toErase;
 
-            actualString = pencil.Erase(testInput);
+            actualString = pencil.Erase(singleWord5toWrite4toErase);
 
             Assert.AreEqual(expectedString, actualString);
         }
@@ -265,7 +260,7 @@ namespace PencilSimulationTests
             Pencil pencil = new Pencil(tipDurability, length, zeroEraserDurability);
             string expected = "";
 
-            string actual = pencil.Erase(testInput);
+            string actual = pencil.Erase(singleWord5toWrite4toErase);
 
             Assert.AreEqual(expected, actual);
 
@@ -278,7 +273,7 @@ namespace PencilSimulationTests
             Pencil pencil = new Pencil(tipDurability, length, eraser);
             expectedInt = 6; //10 eraser, Test is 4 cost, 6 remainder
 
-            pencil.Erase(testInput);
+            pencil.Erase(singleWord5toWrite4toErase);
             actualInt = pencil.Eraser;
 
             Assert.AreEqual(expectedInt, actualInt);
@@ -293,7 +288,7 @@ namespace PencilSimulationTests
             expectedString = "st"; 
             // Test has 4 durability, 2 durability eraser will erase s and t from the end
 
-            actualString = pencil.Erase(testInput);
+            actualString = pencil.Erase(singleWord5toWrite4toErase);
 
             Assert.AreEqual(expectedString, actualString);
         }
@@ -306,7 +301,7 @@ namespace PencilSimulationTests
             Pencil pencil = new Pencil(tipDurability, length, eraserWith15Durability);
             expectedInt = 3;
 
-            pencil.Erase(phraseInput);
+            pencil.Erase(phrase14toWrite12toErasewithWhitespace);
             actualInt = pencil.Eraser;
 
             Assert.AreEqual(expectedInt, actualInt);
