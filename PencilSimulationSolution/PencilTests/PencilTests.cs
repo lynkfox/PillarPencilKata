@@ -207,17 +207,15 @@ namespace PencilSimulationTests
             Assert.AreEqual(expectedInt, actualInt);
         }
 
-        /*Objectivly this is a nub that is fully sharpened but has no length left so is OK
-             * in terms of Pencil
-             */
+
         [TestMethod]
         public void SharpenPencilWithZeroLengthDoesNotReturnTipToMaximum()
         {
             int zeroPencilLength = 0; 
             
             Pencil pencil = new Pencil(tipDurability20, zeroPencilLength, eraserDurability10);
-            pencil.Write(singleWord5toWrite4toErase); //Starting durability is 20, testInput costs 5 durability
-            expectedInt = 15;
+            pencil.Write(singleWord5toWrite4toErase); 
+            expectedInt = tipDurabilityAfterSingle15;
 
             pencil.Sharpen();
 
