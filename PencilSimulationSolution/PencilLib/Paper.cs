@@ -71,13 +71,12 @@ namespace PencilLib
             }
         }
 
+
+
         public void Delete(string wordToErase)
         {
 
-            if (!this.Content.Contains(wordToErase))
-            {
-                throw new Exception("There is no place on your paper that has \"" + wordToErase + "\" to be erased.");
-            }
+            ThrowExceptionIfWordNotFound(wordToErase);
 
             int wordLength = wordToErase.Length;
             string whiteSpaceReplace;
@@ -92,6 +91,14 @@ namespace PencilLib
                 SaveWhiteSpaceOfLastDeletedWord(wordLength, indexOfLastOccurance);
             }
 
+        }
+
+        private void ThrowExceptionIfWordNotFound(string word)
+        {
+            if (!this.Content.Contains(word))
+            {
+                throw new Exception("There is no place on your paper that has \"" + word + "\" to be erased.");
+            }
         }
 
 
