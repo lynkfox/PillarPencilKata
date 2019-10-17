@@ -16,13 +16,13 @@ namespace PencilLib
 
         public Paper()
         {
-
+            this.Content = "";
         }
 
 
         public void NewSheet()
         {
-            this.Content = null;
+            this.Content = "";
             indexOfDeletes.Clear();
             lengthOfDeletedWords.Clear();
         }
@@ -35,32 +35,40 @@ namespace PencilLib
 
         public void Prose(string writtenContent)
         {
-            //Trim exess white space from the end of the string
-            if (!string.IsNullOrEmpty(writtenContent))
+            if(!string.IsNullOrEmpty(writtenContent))
             {
-                StringBuilder sb = new StringBuilder(writtenContent);
-                int workingIndex = writtenContent.Length - 1;
+                string trimedToWrite = TrimExtraWhiteSpaceFromEndOfInputToWrite(writtenContent);
 
-                while (char.IsWhiteSpace(sb[workingIndex]))
-                {
-                    sb.Remove(workingIndex, 1);
-                    workingIndex--;
-
-                }
-                writtenContent = sb.ToString();
+                AddInputToContent(trimedToWrite);
             }
+        }
 
-            //Making sure there is always a space between new content written, but not for first content
+        private string TrimExtraWhiteSpaceFromEndOfInputToWrite(string input)
+        {
+           
+            StringBuilder sb = new StringBuilder(input);
+            int workingIndex = input.Length - 1;
+
+            while (char.IsWhiteSpace(sb[workingIndex]))
+            {
+                sb.Remove(workingIndex, 1);
+                workingIndex--;
+
+            }
+            return sb.ToString();
+            
+        }
+
+        private void AddInputToContent(string input)
+        {
             if (string.IsNullOrEmpty(this.Content) || this.Content == " ")
             {
-                this.Content += writtenContent;
+                this.Content += input;
             }
             else
             {
-                this.Content += " " + writtenContent;
+                this.Content += " " + input;
             }
-
-
         }
 
         public void Delete(string wordToErase)

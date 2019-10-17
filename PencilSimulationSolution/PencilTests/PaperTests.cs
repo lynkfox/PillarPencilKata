@@ -308,7 +308,7 @@ namespace PencilSimulationTests
         {
             Paper paper = new Paper();
             paper.Prose(testInput);
-            expected = null;
+            expected = "";
 
             paper.NewSheet();
 
