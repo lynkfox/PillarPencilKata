@@ -36,7 +36,7 @@ namespace PencilSimulationTests
         {
 
 
-            paper.NewSheet();
+            Paper paper = new Paper();
             paper.Content = testInput;
             expected = testInput + " " + testInput;
 
@@ -50,7 +50,7 @@ namespace PencilSimulationTests
         [TestMethod]
         public void ProseProperlyAddsFirstProseWithoutWhitespace()
         {
-            paper.NewSheet();
+            Paper paper = new Paper();
             paper.Prose(testInput);
             expected = testInput;
 
@@ -62,7 +62,7 @@ namespace PencilSimulationTests
         [TestMethod]
         public void DeleteRemovesLastInstanceInContentAndLeavesWhiteSpace()
         {
-            paper.NewSheet();
+            Paper paper = new Paper();
             paper.Prose(testInput);
             expected = testInputMinusTest;
 
@@ -76,7 +76,7 @@ namespace PencilSimulationTests
         [TestMethod]
         public void DeleteRemovesLastInstanceInContentIfDuplicates()
         {
-            paper.NewSheet();
+            Paper paper = new Paper();
             paper.Prose(testInput);
             string duplicateWord = wordToErase;
             paper.Prose(duplicateWord);
@@ -92,7 +92,7 @@ namespace PencilSimulationTests
         [TestMethod]
         public void DeleteMultipleUsesContinueToLeaveWhiteSpace()
         {
-            paper.NewSheet();
+            Paper paper = new Paper();
             paper.Prose(testInput);
             expected = "     is a     ";
 
@@ -107,7 +107,7 @@ namespace PencilSimulationTests
         [TestMethod]
         public void EditAddsWordToFirstWhiteSpaceInQueue()
         {
-            paper.NewSheet();
+            Paper paper = new Paper();
             paper.Prose(testInput);
             paper.Delete(eraseThis);
             expected = "Word is a Test";
@@ -121,7 +121,7 @@ namespace PencilSimulationTests
         [TestMethod]
         public void DeletesAndMultipleEditAtOnceReplaceInProperSpotsWithJustTwo()
         {
-            paper.NewSheet();
+            Paper paper = new Paper();
             paper.Prose(testInput);
             paper.Delete(wordToErase);
             paper.Delete(eraseThis);
@@ -138,7 +138,7 @@ namespace PencilSimulationTests
         [TestMethod]
         public void EditInWordThatIsSmallerThanWhiteSpaceAvailable()
         {
-            paper.NewSheet();
+            Paper paper = new Paper();
             paper.Prose(testInput);
             paper.Delete(eraseThis);
             expected = "A    is a Test";
@@ -152,7 +152,7 @@ namespace PencilSimulationTests
         [TestMethod]
         public void EditWordIsLongerThanDeletedSpaceReplaceCharactersAsNeeded()
         {
-            paper.NewSheet();
+            Paper paper = new Paper();
             paper.Prose(testInput);
             paper.Delete(eraseThis);
             expected = "ABCDE@s a Test";
@@ -166,7 +166,7 @@ namespace PencilSimulationTests
         [TestMethod]
         public void EditFollowsDeleteInOrderOfLastToFirstDeleted()
         {
-            paper.NewSheet();
+            Paper paper = new Paper();
             paper.Prose(testInput);
             string firstDelete = "is";
             string secondDelete = "Test";
@@ -191,7 +191,7 @@ namespace PencilSimulationTests
         [TestMethod]
         public void ProseWillNotIncludeTrailingWhitespaceAddedToContent()
         {
-            paper.NewSheet();
+            Paper paper = new Paper();
             string input = "Test Phrase With White    ";
             expected = "Test Phrase With White";
 
@@ -204,7 +204,7 @@ namespace PencilSimulationTests
         [TestMethod]
         public void ProseAcceptsFrontLoadedWhiteSpaceAddedToContent()
         {
-            paper.NewSheet();
+            Paper paper = new Paper();
             string input = "   Front Loaded White";
             expected = input;
 
@@ -218,7 +218,7 @@ namespace PencilSimulationTests
         [TestMethod]
         public void EditWithNoWhiteSpaceAddsToEndOfContent()
         {
-            paper.NewSheet();
+            Paper paper = new Paper();
             expected = testInput;
 
             paper.Edit(testInput);
@@ -233,7 +233,7 @@ namespace PencilSimulationTests
         [TestMethod]
         public void DeleteNotFindingValueOfDeleteReturnsExceptionMessageForDisplay()
         {
-            paper.NewSheet();
+            Paper paper = new Paper();
             string notInInput = "ABCDE";
             paper.Prose(testInput);
             expected = "There is no place on your paper that has \"ABCDE\" to be erased.";
@@ -254,7 +254,7 @@ namespace PencilSimulationTests
         [TestMethod]
         public void DeleteIfItDoesNotFindWordDoesNotModifyContent()
         {
-            paper.NewSheet();
+            Paper paper = new Paper();
             paper.Prose(testInput);
             expected = paper.Content;
             string wordNotInContent = "ABCDE";
@@ -274,7 +274,7 @@ namespace PencilSimulationTests
         [TestMethod]
         public void ProseWhenGivenNothingProperlyDoesNothingWrong()
         {
-            paper.NewSheet();
+            Paper paper = new Paper();
             expected = "";
             string nullString = null;
 
@@ -288,7 +288,7 @@ namespace PencilSimulationTests
         [TestMethod]
         public void DeleteWhenGivenSomeCharactersOfAWordDeletesThemAppropriately()
         {
-            paper.NewSheet();
+            Paper paper = new Paper();
             paper.Prose(testInput);
             string notFullWordDelete = "es";
             expected = "This is a T  t";
