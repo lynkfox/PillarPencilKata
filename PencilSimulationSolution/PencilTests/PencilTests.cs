@@ -259,11 +259,11 @@ namespace PencilSimulationTests
         {
             int zeroEraserDurability = 0;
             Pencil pencil = new Pencil(tipDurability20, length500, zeroEraserDurability);
-            string expected = "";
+            expectedString = "";
 
-            string actual = pencil.Erase(singleWord5toWrite4toErase);
+            actualString = pencil.Erase(singleWord5toWrite4toErase);
 
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(expectedString, actualString);
 
         }
 
