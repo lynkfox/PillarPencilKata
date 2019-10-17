@@ -125,10 +125,12 @@ namespace PencilSimulationTests
             paper.Prose(testInput);
             paper.Delete(wordToErase);
             paper.Delete(eraseThis);
+            string word = "Word";
+            string ABCD = "ABCD";
             expected = "Word is a ABCD";
 
-            paper.Edit("Word");
-            paper.Edit("ABCD");
+            paper.Edit(word);
+            paper.Edit(ABCD);
             actual = paper.Read();
 
             Assert.AreEqual(expected, actual);
