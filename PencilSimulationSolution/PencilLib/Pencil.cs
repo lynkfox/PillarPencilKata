@@ -71,7 +71,10 @@ namespace PencilLib
 
 
         }
-
+        public int CheckTip()
+        {
+            return this.Tip;
+        }
 
         public string Write(string word)
         {
